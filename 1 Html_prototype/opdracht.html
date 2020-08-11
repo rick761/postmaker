@@ -1,0 +1,335 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.3.45/css/materialdesignicons.min.css">
+    <title>Postmaker</title>
+    <link rel="stylesheet" href="stylesheet.css">
+
+    <style>
+
+    </style>
+</head>
+
+<body class="opdracht">
+
+    <!-- Toggled menu -->
+    <div class="bg-light collapse navbar-collapse" id="navbarNav">
+
+        <ul class="list-group-horizontal">
+            <li class="nav-item active">
+                <a class="nav-link disabled" href="#">
+                    <h1><a href="home.html">Postmaker</a></h1>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link disabled" href="#"> <span class="mdi mdi-android-messages"></span> Notificaties</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#"> <span class="mdi mdi-archive"></span> Archief</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#"> <span class="mdi mdi-finance"></span> Financien</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#"> <span class="mdi mdi-account"></span> Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="login.html"><span class="mdi mdi-exit-to-app"></span> log uit</a>
+            </li>
+            <li class="nav-item">
+                <span class="mdi mdi-account-supervisor"> </span><a id="contentaanvrager_profile" class="nav-link" href="#">(Contentaanvrager)</a>
+            </li>
+            <li class="nav-item float-right text-right">
+                <a href="#" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="h1 mdi mdi-minus"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="container ">
+
+        <!-- navigation -->
+        <nav>
+            <div class="float-right mt-2">
+                <h5 style="display:inline-block;padding-right:15px;">Opdracht</h5>
+                <a class="#" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="mdi mdi-menu"></span>
+                </a>
+            </div>
+            <h1><a href="home.html">Postmaker</a></h1>
+        </nav>
+
+        <!-- main wrapper -->
+        <main class="row">
+
+            <!--Left-->
+            <section class="col-6 align-self-start">
+
+                <div class="row">
+
+                    <!-- OPDRACHTOMSCHRIJVING -->
+                    <article class="col-12 pt-2 pb-2 ">
+                        <a class="toggleIcon" data-toggle="collapse" href="#main_left_1" role="button" aria-expanded="false" aria-controls="main_left_1"><span class="mdi mdi-menu-down"></span></a>
+                        <h5 style="display:inline-block;">Opdrachtomschrijving</h5>
+
+                        <div class="pt-3 pb-3 show collapse col-12" id="main_left_1">
+                            <ul class="indent-1">
+
+                                <li class="pt-3 pb-3 align-middle">
+                                    <div class="row">
+
+                                        <div class="col-3"> Titel</div>
+                                        <div class="col-9">
+                                            <input value="Ontwerpen 3" disabled=true />
+                                        </div>
+                                    </div>
+
+
+                                </li>
+
+                                <li class="pt-3 pb-3 align-middle">
+
+                                    <div class="row">
+                                        <div class="col-12 mb-3">Omschrijving</div>
+                                        <div class="col-12">
+                                            <textarea disabled="true" class="align-bottom"> test test testtesttestt estte ttesttesttes ttesttesttest test test test testtesttestt estte ttesttesttes ttesttesttest test test test testtesttestt estte ttesttesttes ttesttesttest test</textarea>
+
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li class="pt-3 pb-3 align-middle">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <img width="100%" src="img/200x200.svg">
+                                        </div>
+                                        <div class="col-4">
+                                            <img width="100%" src="img/200x200.svg">
+                                            <img width="100%" src="img/200x200.svg">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <hr class="indent-1 mt-3">
+                    </article>
+
+                    <!-- Contact -->
+                    <article class="col-12 pt-2 pb-2 ">
+                        <a class="toggleIcon" href="#main_left_2" data-toggle="collapse" href="#main_left_2" role="button" aria-expanded="false" aria-controls="main_left_2"><span class="mdi mdi-menu-down mdi-rotate-270"></span></a>
+                        <h5 style="display:inline-block;">Contact</h5>
+
+                        <div class="pt-3 pb-3 collapse show col-12" id="main_left_2">
+
+                            <ul class="indent-1">
+
+                                <li class="pt-3 pb-3 align-middle">
+                                    <div class="row">
+                                        <div class="col-3">Tel-nr</div>
+                                        <div class="col-9">
+                                            <input value="06 12 34 56 78" disabled=true />
+                                        </div>
+                                    </div>
+
+                                </li>
+
+                                <li class="pt-3 pb-3 align-middle">
+                                    <div class="row">
+                                        <div class="col-3">E-mail</div>
+                                        <div class="col-9">
+                                            <input value="a@b.c" disabled=true />
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+
+                        </div>
+
+                    </article>
+
+                </div>
+            </section>
+
+
+            <!--Right-->
+            <section class="col-6 align-self-start ">
+                <div class="row">
+
+                    <!-- Open Project 1 -->
+                    <article class="col-12 pt-2 pb-2 ">
+                        <a class="toggleIcon" data-toggle="collapse" href="#main_right_1" role="button" aria-expanded="false" aria-controls="main_right_1"><span class="mdi mdi-menu-down mdi-rotate-270"></span></a>
+                        <h5 style="display:inline-block;">Gegevens</h5>
+
+                        <div class="pt-3 pb-3 collapse show col-12" id="main_right_1">
+                            <ul class="indent-1">
+
+                                <li class="pt-3 pb-3 align-middle">
+                                    <div class="row">
+                                        <div class="col-3">Van</div>
+                                        <div class="col-9 text-right">
+                                            <!-- <input value="Rick" disabled=true /> -->
+                                            <a href="#" class="field_value_link">Rick</a>
+                                        </div>
+                                    </div>
+
+                                </li>
+
+                                <li class="pt-3 pb-3 align-middle">
+                                    <div class="row">
+                                        <div class="col-3">Vergoeding</div>
+                                        <div class="col-9">
+                                            <input value="150,00" disabled=true />
+                                        </div>
+                                    </div>
+
+                                </li>
+
+                                <li class="pt-3 pb-3 align-middle">
+                                    <div class="row">
+                                        <div class="col-3">Verwacht op</div>
+                                        <div class="col-9">
+                                            <input value=" 11/11/1111" disabled=true />
+                                        </div>
+                                    </div>
+
+                                </li>
+
+                                <li class="pt-3 pb-3 align-middle">
+                                    <div class="row">
+                                        <div class="col-6">Status Postmaker</div>
+                                        <div class="col-6">
+                                            <input value="In ontwikkeling" disabled=true />
+                                        </div>
+                                    </div>
+
+                                </li>
+
+                                <li class="pt-3 pb-3 align-middle">
+                                    <div class="row">
+                                        <div class="col-6">Status Contentaanvrager</div>
+                                        <div class="col-6">
+                                            <input value="Afwachten" disabled=true />
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+
+
+                        <hr class="indent-1 mt-3">
+
+                    </article>
+
+
+
+                    <!-- Open Project 2 -->
+                    <article class="col-12 pt-2 pb-2 ">
+                        <a class="toggleIcon" data-toggle="collapse" href="#main_right_2" role="button" aria-expanded="false" aria-controls="main_right_2"><span class="mdi mdi-menu-down mdi-rotate-270"></span></a>
+                        <h5 style="display:inline-block;">Acties</h5>
+
+
+                        <div class="pt-3 pb-3 collapse show col-12" id="main_right_2">
+                            <ul class="indent-1">
+
+                                <li class="pt-3 pb-3 align-middle">
+                                    <div class="row">
+                                        <div class="col-9">Lever resultaat op</div>
+                                        <div class="col-3 text-right">
+                                            <!-- <input value="Rick" disabled=true /> -->
+                                            <a href="#" class="field_value_link"> <span class="mdi mdi-arrow-up"></span> </a>
+                                        </div>
+                                    </div>
+
+                                </li>
+
+                                <li class="pt-3 pb-3 align-middle">
+                                    <div class="row">
+                                        <div class="col-9">Verander project status</div>
+                                        <div class="col-3 text-right">
+                                            <a href="#" class="field_value_link"> <span class="mdi mdi-arrow-down"></span> </a>
+                                        </div>
+                                    </div>
+
+                                </li>
+
+                                <li class="pt-3 pb-3 align-middle">
+                                    <div class="row chat">
+                                        <div class="col-12 mb-3">Chat</div>
+                                        <div class="col-12">
+                                            <div class="chatbox indent-1"></div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="mt-3 col-10">
+                                                    <input style="padding:0 15px; width:100%;" class=" indent-1 text-right" />
+                                                </div>
+                                                <div class=" mt-2 col-2 text-right">
+                                                    <a href="#" class="field_value_link"> <span class="mdi mdi-arrow-right"></span> </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                        </div>
+
+                    </article>
+
+                </div>
+            </section>
+
+
+
+        </main>
+    </div>
+
+    <!--scripts-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            $('.toggleIcon span').click(function() {
+                $(this).toggleClass('mdi-rotate-270');
+            });
+
+            //toggle profile change
+            var toggle = false;
+            $('#contentaanvrager_profile').click(function() {
+                toggle = !toggle;
+                console.log($('h5'))
+                    //Contentaanvrager
+                if (toggle) {
+                    this.text = "(Postmaker)";
+                    $('h5')[0].innerHTML = "In progressie"
+                    $('h5')[1].innerHTML = "Aangemaakt"
+                    $('hr.last').css('display', 'block');
+                    $('.new_opdracht').css('display', 'block');
+                }
+                //Postmaker
+                if (!toggle) {
+                    this.text = "(Contentaanvrager)";
+                    $('h5')[0].innerHTML = "To-do"
+                    $('h5')[1].innerHTML = "Open aanvragen"
+                    $('hr.last').css('display', 'none');
+                    $('.new_opdracht').css('display', 'none');
+                }
+
+                console.log(this);
+            })
+        });
+    </script>
+    <!--/scripts-->
+</body>
+
+</html>

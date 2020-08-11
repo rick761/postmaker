@@ -1,0 +1,260 @@
+* {
+    font-family: 500 13px / 20px ff-tisa-sans-web-pro, Arial, sans-serif;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1520px;
+    }
+}
+
+
+/* icons */
+
+
+/* icons */
+
+
+/* icons */
+
+.mdi {
+    font-size: 27px;
+}
+
+main .mdi {
+    font-size: 25px;
+}
+
+nav .mdi-menu {
+    font-size: 26px;
+    cursor: pointer;
+}
+
+
+/*general*/
+
+
+/*general*/
+
+
+/*general*/
+
+div,
+span {
+    font-size: 14px;
+}
+
+a {
+    color: #00b3ff;
+}
+
+nav h1 {
+    color: darkorange;
+    font-weight: 600;
+}
+
+nav {
+    /* border-bottom: 2px solid gray; */
+    padding-top: .5rem!important;
+    padding-bottom: 1.5rem!important;
+    margin-bottom: 1.5rem!important;
+}
+
+.indent-1 {
+    margin: 0 15px;
+}
+
+img {
+    margin-bottom: 15px;
+}
+
+
+/*menu*/
+
+
+/*menu*/
+
+
+/*menu*/
+
+#navbarnav {
+    left: 0;
+    z-index: 999;
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+#navbarnav ul {
+    /* height: 20vh; */
+}
+
+#navbarnav ul li {
+    margin: 0 0;
+    font-size: 20px;
+    text-align: center;
+    display: inline-block;
+    width: auto;
+}
+
+
+/* login  */
+
+
+/* login  */
+
+
+/* login  */
+
+.max-width {
+    width: 100%;
+}
+
+h1.title {
+    color: darkorange;
+    font-weight: 600;
+}
+
+.loginpage main {
+    margin-top: 30vh;
+}
+
+.formWrapper div {
+    border-bottom: 2px solid gray;
+}
+
+.formWrapper div.last,
+.formWrapper div.last div {
+    border-bottom: 0px;
+}
+
+.formWrapper div input {
+    border: 0;
+    border-right: 2px solid gray;
+    background-color: white !important;
+}
+
+.formWrapper div span {
+    min-height: 30px;
+}
+
+.form_field input:focus {
+    outline: 0;
+}
+
+
+/* home */
+
+
+/* home */
+
+
+/* home */
+
+hr {
+    border-top: 2px solid gray;
+    margin: 0 0 0 0;
+}
+
+article .title {
+    font-size: 22px;
+}
+
+article ul {
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+article ul li {
+    list-style-type: none;
+}
+
+
+/* opdracht */
+
+
+/* opdracht */
+
+
+/* opdracht */
+
+.opdracht [disabled=true] {
+    background: none;
+    outline: none;
+    border: none;
+    text-align: right;
+    width: 100%;
+    /* border-right: 2px solid gray; */
+    padding-right: 15px;
+}
+
+.opdracht textarea {
+    overflow: hidden;
+    height: auto;
+    resize: none;
+}
+
+.scroll::-webkit-scrollbar {
+    display: none !important;
+}
+
+.field_value_link {
+    /* /* border-right: 2px solid gray; */
+    padding-right: 15px;
+}
+
+.chatbox {
+    border: 2px solid gray;
+    height: 200px;
+}
+
+.chat input {
+    border: 0;
+    border-right: 2px solid gray;
+    background-color: white !important;
+}
+
+.chat input:focus {
+    outline: 0;
+}
+
+
+/*new_opdracht*/
+
+
+/*new_opdracht*/
+
+
+/*new_opdracht*/
+
+.new_opdracht input {
+    background: none;
+    outline: none;
+    border: none;
+    text-align: right;
+    width: 100%;
+    border-right: 2px solid gray;
+    padding-right: 15px;
+}
+
+.new_opdracht textarea {
+    background: none;
+    outline: none;
+    border: none;
+    text-align: right;
+    width: 100%;
+    border-right: 2px solid gray;
+    padding-right: 15px;
+}
+
+.new_opdracht input[type="checkbox"] {
+    width: auto;
+}
