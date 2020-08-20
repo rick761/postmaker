@@ -15,10 +15,35 @@ class OrdersController extends Controller
         $this->middleware('auth');
     }
 
-    public function get(){
-        $me = Auth::User();
+    public function get(){        
+        $id = Auth::Id();
+        $type = Auth::User()->type;
 
-        return $me->orders()->get();        
+        if($type == 'requester'){
+            return App\Order::where('user_id', $id)
+            ->whereIn('state', [
+                'create',
+                'open',
+                'progress',
+                'delivered',
+                'delivery_accepted',
+                'final_delivered',               
+            ])
+            ->with('order_files')
+            ->get();    
+        }    
+        if($type == 'postmaker'){
+            return App\Order::where('postmaker_id',$id)
+            ->whereIn('state', [                
+                'progress',
+                'delivered',
+                'delivery_accepted',
+                'final_delivered',                
+            ])
+            ->with('order_files')
+            ->get();
+        }
+
     }
 
     public function available(){        
@@ -38,9 +63,13 @@ class OrdersController extends Controller
                 return $query->where('postmaker_id', '=', $user_id );
             })
             ->with(['order_requests' => function($q) use ($user_id){
-                $q->where('order_requests.postmaker_id', '=', $user_id);
-            }]);  
-
+                $q->where(
+                    [
+                        'order_requests.postmaker_id' => $user_id
+                    ]
+                );
+            }])             
+            ->where([ 'state' => 'open']);
             return $orders->get();
         }
 
@@ -49,7 +78,29 @@ class OrdersController extends Controller
            ->where( [ 'state' => 'open', 'user_id' => Auth::id() ] )
            ->with('order_requests.postmaker')
            ->get();
-        }       
+        }      
+
+    }
+
+    public function archived(){
+        $id = Auth::Id();
+        $type = Auth::User()->type;
+
+        if($type == 'requester'){
+            return App\Order::where('user_id', $id)
+            ->whereIn('state', [
+                'quit','removed', 'recieved_payment','quit_postmaker'
+            ])
+            ->get();    
+        }    
+
+        if($type == 'postmaker'){
+            return App\Order::where('postmaker_id',$id)
+            ->whereIn('state', [                
+                'quit', 'recieved_payment','quit_postmaker'
+            ])
+            ->get();
+        }
 
     }
 

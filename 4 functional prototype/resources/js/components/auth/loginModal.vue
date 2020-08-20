@@ -46,11 +46,7 @@ export default {
         remember: 0
     }},
     created(){
-        // console.log(window.location.origin+'/login');
-        // console.log('remember UNAME',localStorage.getItem('username'))
-        // console.log('remember PWD',localStorage.getItem('password'))
-        // console.log('remembered ',localStorage.getItem('remember'))    
-        this.username = localStorage.getItem('username');
+         this.username = localStorage.getItem('username');
         this.password = localStorage.getItem('password');
         this.remember = localStorage.getItem('remember');
 

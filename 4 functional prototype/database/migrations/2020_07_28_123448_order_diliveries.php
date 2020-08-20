@@ -14,7 +14,10 @@ class OrderDiliveries extends Migration
            $table->uuid('order_id');  
 
            //fields
-           $table->string('name');                 
+           $table->string('title');   
+           $table->string('text');   
+           $table->enum('type',['pre','final'])->default('pre');    
+           $table->enum('rate',['bad','normal','good'])->nullable();                
 
            //extra       
            $table->foreign('order_id')->references('id')->on('orders');

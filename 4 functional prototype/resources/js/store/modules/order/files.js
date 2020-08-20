@@ -83,7 +83,7 @@ export default {
         deleteFile({ commit, dispatch, rootState }, id) {
             dispatch('api/get', 'order/files/delete/' + id, ROOT).then(() => {
                 var res = rootState.api.response;
-                console.log(res);
+
                 if (res) {
                     commit(DEL_ORDER_FILE, id);
                 }

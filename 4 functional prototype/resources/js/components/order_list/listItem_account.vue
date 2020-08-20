@@ -1,16 +1,22 @@
 <template>
-    <v-list-item >
-        <v-list-item-icon class="  ml-15">
-            <v-icon>mdi-account-circle-outline</v-icon>
-        </v-list-item-icon>                                    
-        <v-list-item-content>                                        
-            Test User                                     
-        </v-list-item-content> 
-    </v-list-item>
+    <span v-if="0"></span>
+    <!-- <v-list-item >
+        <a @click="loadUser">
+            <v-icon>mdi-account</v-icon>                                              
+            Test User                   
+            {{item}}                  
+        </a>
+    </v-list-item> -->
 </template>
 
 <script>
 export default {
-    
+    props:['item'],
+    methods:{
+        loadUser(){            
+            //:to="'/account/'+order.postmaker.id"
+            //this.$router.push('')
+        },
+    }
 }
 </script>

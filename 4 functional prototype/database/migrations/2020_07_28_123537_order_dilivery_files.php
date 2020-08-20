@@ -14,8 +14,9 @@ class OrderDiliveryFiles extends Migration
             $table->foreignId('order_delivery_id');  
  
             //fields
-            $table->string('url');                 
- 
+            $table->string('url')->default('');     
+            $table->boolean('is_invoice')->default(false);       
+
             //extra       
             $table->foreign('order_delivery_id')->references('id')->on('order_deliveries');
             $table->timestamps();

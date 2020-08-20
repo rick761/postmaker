@@ -9,12 +9,12 @@ use App;
 class UserController extends Controller
 {
     function get(Request $request, $id){
-        return App\User::with('user_images')->find($id);
+        return App\User::with('user_images')->withCount('user_likes')->find($id);
     }
 
 
     function profile(Request $request){
-        $me = App\User::with('user_images')->find(Auth::id());
+        $me = App\User::with('user_images')->withCount('user_likes')->find(Auth::id());
         $me = $me->makeVisible(['first_name', 'last_name', 'phone']);
         return $me;
     }

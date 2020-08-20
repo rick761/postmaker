@@ -1,6 +1,6 @@
 <template>
 
-        <v-card outlined>                  
+        <card>                  
 
             <v-card-subtitle>
 
@@ -9,12 +9,12 @@
                 <v-tooltip top color="primary">
                     <template v-slot:activator="{ on, attrs }">                    
                         <v-btn icon v-bind="attrs" v-on="on" class="float-right">
-                            <v-icon color="grey lighten-1">mdi-comment-question-outline</v-icon>
+                            <v-icon color="accent lighten-1">mdi-comment-question-outline</v-icon>
                         </v-btn>
                     </template>
                     <span>
                         De aanvullende informatie wordt <u>alleen</u> weergegeven aan de gekoppelde postmaker.<br> Instructies kunnen hier worden aangegeven.
-                    </span>
+                    </span>                    
                 </v-tooltip>
 
             </v-card-subtitle>
@@ -30,12 +30,14 @@
                         <v-text-field  
                             :value="description.title" 
                             @input="e=>updateDescription(i,'title',e)"                        
-                            :placeholder="'Titel veld '+(i+1)" 
+                            :placeholder="'Titel '+(i+1)" 
                         />
-                        <v-text-field                              
+                        
+                        <v-textarea  
+                            solo                            
                             :value="description.text" 
                             @input="e=>updateDescription(i,'text',e)"                        
-                            :placeholder="'Tekst veld '+(i+1)" 
+                            :placeholder="'Informatie'+(i+1)" 
                         />
 
                     </v-flex>
@@ -63,7 +65,7 @@
                 </v-btn>   
             </v-card-actions>
         
-        </v-card>
+        </card>
         
 </template>
 

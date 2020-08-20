@@ -11,7 +11,7 @@ class Order extends Model
     protected $keyType = 'string'; 
     public $incrementing = false;
     protected $guarded = ['created_at'];
-    protected $hidden = ['updated_at', 'user_id', 'postmaker_id'];
+    protected $hidden = ['updated_at', 'postmaker_id'];
 
     protected static function boot()
     {
@@ -48,5 +48,15 @@ class Order extends Model
         return $this->hasMany('App\OrderTag');
     }
 
+    public function order_deliveries(){
+        return $this->hasMany('App\OrderDelivery');
+    }
+    
+    public function order_messages(){
+        return $this->hasMany('App\OrderMessage');
+    }
+
+
+    
     
 }

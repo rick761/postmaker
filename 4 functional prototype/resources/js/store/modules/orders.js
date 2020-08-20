@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { SET_ORDERS, SET_AVAILABLE_ORDERS, SET_REQUESTED_ORDERS } from '../mutation-types';
+import { SET_ORDERS, SET_AVAILABLE_ORDERS, SET_REQUESTED_ORDERS, SET_ARCHIVED_ORDERS, ADD_SEARCH_KEYS_AVAILABLE_ORDERS } from '../mutation-types';
 import { ROOT } from '../constants';
 
 
@@ -18,32 +18,60 @@ export default {
         ],
         requested: [
 
-        ]
+        ],
+        archived: [
+
+        ],
     }),
     mutations: {
+
         [SET_ORDERS](state, payload) {
             state.list = payload
         },
+
         [SET_AVAILABLE_ORDERS](state, payload) {
-            state.open = payload
+            state.open = payload;
         },
+
+        [ADD_SEARCH_KEYS_AVAILABLE_ORDERS](state) {
+
+            for (var i in state.open) {
+                state.open[i]['search_key'] = [];
+
+                //add order tags
+                state.open[i].order_tags.forEach(order_tag => {
+                    state.open[i]['search_key'].push(order_tag.text);
+                });
+
+                //add display name                
+                state.open[i]['search_key'].push(state.open[i].user.display_name);
+
+            }
+
+
+        },
+
         [SET_REQUESTED_ORDERS](state, payload) {
             state.requested = payload
+        },
+
+        [SET_ARCHIVED_ORDERS](state, payload) {
+            state.archived = payload
         }
+
     },
     actions: {
 
         get({ dispatch, rootState, commit }) {
             dispatch('api/get', '/orders/get', ROOT).then(() => {
                 commit(SET_ORDERS, rootState.api.response)
-                    // console.log(rootState.api.response);
             })
         },
 
         getAvailable({ dispatch, rootState, commit, state }) {
             dispatch('api/get', '/orders/available', ROOT).then(() => {
                 commit(SET_AVAILABLE_ORDERS, rootState.api.response)
-                console.log(state.open);
+                commit(ADD_SEARCH_KEYS_AVAILABLE_ORDERS);
             });
         },
 
@@ -54,11 +82,21 @@ export default {
             });
         },
 
+        getArchived({ dispatch, commit, rootState }) {
+            dispatch('api/get', '/orders/archived', ROOT).then(() => {
+                commit(SET_ARCHIVED_ORDERS, rootState.api.response);
+                console.log(rootState.api.response);
+            });
+        },
+
         init({ dispatch }) {
             dispatch('get');
             dispatch('getAvailable');
             dispatch('getRequested');
-        }
+            dispatch('getArchived');
+        },
+
+
 
     },
 

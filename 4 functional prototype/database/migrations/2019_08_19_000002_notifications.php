@@ -17,6 +17,7 @@ class Notifications extends Migration
             $table->string('text');                   
             $table->string('url');    
             $table->boolean('read')->default(0); 
+            $table->boolean('removed')->default(0); 
 
             //extra
             $table->foreign('user_id')->references('id')->on('users');

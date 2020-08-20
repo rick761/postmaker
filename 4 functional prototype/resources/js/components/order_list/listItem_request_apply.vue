@@ -6,11 +6,12 @@
             <v-icon>mdi-comment</v-icon>                                       
         </v-list-item-icon>         
         <v-list-item-content class="mt-4 d-flex align-center mr-4" >     
-
+           
             <v-text-field
                 placeholder="Geen motivatie aangegeven"
                 dense rounded single-line filled disabled
-            >{{item.text}}</v-text-field>
+                :value="item.text"
+            ></v-text-field>
 
         </v-list-item-content>                                     
         <v-list-item-action class="mt-0">

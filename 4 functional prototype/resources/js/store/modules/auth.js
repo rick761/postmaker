@@ -29,16 +29,17 @@ export default {
             await dispatch('api/get', '/auth', ROOT).then(() => {
                 commit(SET_AUTH, rootState.api.response);
 
+
                 if (state.user.user_images) {
                     commit('images/' + SET_USER_IMAGES, state.user.user_images)
                 }
-                console.log(rootState.api.response);
+
             })
         },
 
         save({ state, dispatch, rootState }) {
             dispatch('api/post', { url: '/auth/update', data: state.user }, ROOT).then(() => {
-                //console.log(rootState.api.response)
+
             });
             dispatch('images/save');
         },

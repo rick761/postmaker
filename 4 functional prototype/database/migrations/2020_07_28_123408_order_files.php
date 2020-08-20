@@ -14,7 +14,7 @@ class OrderFiles extends Migration
             $table->uuid('order_id');  
 
             //fields
-            $table->string('url')->nullable();            
+            $table->string('url');           
 
             //extra       
             $table->foreign('order_id')->references('id')->on('orders');

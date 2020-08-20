@@ -1,6 +1,9 @@
 <template>
     <div> 
-        <v-card class="mx-auto mb-5" >
+        <card class="mx-auto mb-5" >
+            <v-card-subtitle>
+                <a @click="$router.go(-1)"> <v-icon>mdi-keyboard-backspace</v-icon> Terug</a>
+            </v-card-subtitle>
             <v-list-item>
                 
                 <v-list-item-avatar size="62" color="grey"  v-if="user && user.avatar">  
@@ -32,8 +35,8 @@
                 ></v-carousel-item>                                        
             </v-carousel>                         
 
-            <v-list-item style="display:none;">                                    
-                <v-list-item-title>
+            <v-list-item >                                    
+                <v-list-item-title style="display:none;">
                     <v-icon :color="medalColor('bronze')">mdi-podium-bronze</v-icon>
                     <v-icon :color="medalColor('silver')">mdi-podium-silver</v-icon>
                     <v-icon :color="medalColor('gold')">mdi-podium-gold</v-icon>
@@ -41,7 +44,7 @@
                 </v-list-item-title>                          
                 <v-list-item-subtitle class="text-right mt-3" >
                     <v-icon>mdi-thumb-up-outline</v-icon>
-                    25
+                    {{user.user_likes_count}}
                 </v-list-item-subtitle>
             </v-list-item>
 
@@ -105,7 +108,7 @@
                     <v-card-text v-else> Geen documenten om weer te geven. </v-card-text>  
                 </div>
             </v-expand-transition>
-        </v-card> 
+        </card> 
     </div>
 </template>
 

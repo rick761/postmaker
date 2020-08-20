@@ -1,26 +1,27 @@
 <template>
     <div>
-        <v-card v-if="images && images.length" outlined class="mb-5" >   
+        <card v-if="images && images.length" >   
             <v-carousel height=300>
                 <v-carousel-item                                
                     v-for="(item,i) in images"
                     :key="i"
-                    :src="'./storage/'+auth.id+'/order_files/'+order.id+'/'+item.url"
+                    :src="'./storage/'+order.user.id+'/order_files/'+order.id+'/'+item.url"
                     reverse-transition="fade-transition"
                     transition="fade-transition"
+                    @click="$store.dispatch('image/preview','/storage/'+order.user.id+'/order_files/'+order.id+'/'+item.url)"
                 ></v-carousel-item>
             </v-carousel>          
-        </v-card>
+        </card>
 
-        <v-card v-if="otherFiles && otherFiles.length" >
+        <card v-if="otherFiles && otherFiles.length" >
             <v-card-subtitle>Bestanden</v-card-subtitle>
             <v-card-text >
                 <p v-for="(item,i) in otherFiles" :key="i">
-                    <a :href="'./storage/'+auth.id+'/order_files/'+order.id+'/'+item.url">{{item.url}}</a>
+                    <a :href="'./storage/'+order.user.id+'/order_files/'+order.id+'/'+item.url">{{item.url}}</a>
                 </p>
                 
             </v-card-text>
-        </v-card>
+        </card>
 
     </div>
 </template>

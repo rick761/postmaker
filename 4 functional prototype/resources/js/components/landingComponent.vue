@@ -70,7 +70,7 @@ export default {
     }},
     methods:{
         register(){
-            console.log(window.location.href+'register');
+            // console.log(window.location.href+'register');
         },
         logoutActionUrl(){
             return window.location.origin+'/logout'; 

@@ -22,8 +22,7 @@ class Users extends Migration
             $table->string('last_name');
             $table->enum('type',['postmaker','requester','admin']);
             $table->string('avatar')->nullable();
-            $table->string('description')->nullable();
-            $table->string('likes')->nullable();;
+            $table->string('description')->nullable();           
             $table->string('display_name')->nullable();
             $table->string('company')->nullable();
             $table->string('website')->nullable();

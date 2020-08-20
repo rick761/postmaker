@@ -133,9 +133,7 @@ export default {
         password_c:     '',
         display_name: '',
     }},
-    created(){
-        console.log(window.location.origin+'/login');
-    },
+   
     methods:{
         registerActionUrl(){
             return window.location.origin+'/register';

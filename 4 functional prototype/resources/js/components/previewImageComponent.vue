@@ -5,18 +5,17 @@
       @click:outside="close"
       @keydown.esc="close"
     >           
-      <v-card style="overflow:hidden;">
+      <card style="overflow:hidden;">
 
         <v-card-title tile class="headline">
           {{title}}  
-          <v-spacer></v-spacer>
-          <v-btn text class="success"><v-icon>mdi-download</v-icon></v-btn>  
+          <v-spacer></v-spacer>          
           <v-btn @click="close" text class="error ml-3"> <v-icon>mdi-close</v-icon></v-btn>  
         </v-card-title>     
        
         <v-img  :src="url" />        
 
-      </v-card>
+      </card>
     </v-dialog>
   </div>
 </template>
@@ -36,6 +35,8 @@ import {mapState} from 'vuex';
             url: state => state.image.url,
             title: state => state.image.title,
         })
+
+        
     }
   }
 </script>

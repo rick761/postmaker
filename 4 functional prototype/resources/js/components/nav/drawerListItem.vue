@@ -2,6 +2,7 @@
     <v-list-item 
     link 
     :to="link"
+    style="color:white"
     >
         <v-list-item-icon>             
             <v-badge 
@@ -27,7 +28,11 @@
         <v-list-item-content>
 
             <v-list-item-title>
-                {{text}}
+                
+                {{text}} 
+                <span class="float-right"> 
+                    <slot />
+                </span>
             </v-list-item-title>
 
         </v-list-item-content>

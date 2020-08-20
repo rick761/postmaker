@@ -74,7 +74,7 @@ export default {
         valid:true
     }},
     methods:{
-        requestOrder(){            
+        requestOrder(){           
             if(this.$refs.form.validate()){
                 this.$store.dispatch('order/requests/requestOrder');   
             }

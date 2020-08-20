@@ -1,8 +1,7 @@
 <template>
     <div> 
-        <v-card outlined class="mb-1"><v-card-title><v-icon>mdi-eye</v-icon> &nbsp; Preview</v-card-title></v-card>
-
-            <v-card 
+        <card><v-card-title><v-icon>mdi-eye</v-icon> &nbsp; Preview</v-card-title></card>
+            <card 
             class="mx-auto mb-5"                    
         >
             <v-list-item>
@@ -41,9 +40,8 @@
                     <v-icon :color="medalColor('platinum')">mdi-podium</v-icon>
                 </v-list-item-title>                           -->
                 <v-list-item-subtitle class="text-right mt-3" >
-                    <v-icon>mdi-thumb-up-outline</v-icon>
-                    {{auth.likes}}
-                    <span v-if="!auth.likes">0</span>
+                    <v-icon>mdi-thumb-up-outline</v-icon>                    
+                    <span>{{auth.user_likes_count}}</span>
                 </v-list-item-subtitle>
             </v-list-item>
 
@@ -109,7 +107,7 @@
                     <v-card-text v-else> Geen gearchiveerde documenten om weer te geven. </v-card-text>  
                 </div>
             </v-expand-transition>
-        </v-card>
+        </card>
     </div>
 </template>
 

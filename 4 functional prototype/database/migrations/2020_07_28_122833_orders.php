@@ -22,7 +22,7 @@ class Orders extends Migration
             $table->date('deliver')->nullable();
             $table->string('type');
             $table->enum('state',
-                ['create','open','progress','delivered','delivery_accepted','recieved_payment','quit_postmaker','quit','removed']
+                ['create','open','progress','delivered','delivery_accepted','final_delivered','recieved_payment','quit_postmaker','quit','removed']
             )->default('create');
             
 

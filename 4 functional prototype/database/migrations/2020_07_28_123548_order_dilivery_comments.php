@@ -12,14 +12,14 @@ class OrderDiliveryComments extends Migration
              //key
              $table->id();            
              $table->foreignId('order_delivery_id');  
-  
-             //fields
-             $table->string('text');    
-             $table->enum('style',['primary','succes','warning','error']);                 
+             $table->uuid('user_id')->nullable();  
 
-  
+             //fields
+             $table->string('text');       
+
              //extra       
              $table->foreign('order_delivery_id')->references('id')->on('order_deliveries');
+             $table->foreign('user_id')->references('id')->on('users');
              $table->timestamps();
         });
     }
@@ -28,7 +28,8 @@ class OrderDiliveryComments extends Migration
     {
         Schema::table('order_delivery_comments',function (Blueprint $table) {
             $table->dropForeign(['order_delivery_id']);            
+            $table->dropForeign(['user_id']);            
         });
-        Schema::dropIfExists('order_delivery_id');
+        Schema::dropIfExists('order_delivery_comments');
     }    
 }

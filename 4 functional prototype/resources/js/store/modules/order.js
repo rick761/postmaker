@@ -12,9 +12,9 @@ import {
     SET_ORDER_PAGE,
     SET_ORDER_DESCRIPTION,
     SET_ORDER_TAGS,
-    SET_ORDER_REQUESTS,
-    UPDATE_FIELD_APPLY_ORDER_REQUESTS,
-    SET_ORDER_FILES
+    SET_DELIVERYS,
+    SET_ORDER_FILES,
+    SET_ORDER_MESSAGES
 } from '../mutation-types'
 import { ROOT } from '../constants';
 import router from '../../router/index'
@@ -24,6 +24,8 @@ import descriptions from './order/descriptions'
 import requests from './order/requests'
 import files from './order/files'
 import tags from './order/tags'
+import delivery from './order/delivery'
+import messages from './order/messages'
 
 Vue.use(Vuex);
 
@@ -110,15 +112,37 @@ export default {
             };
 
             //progress 
-            if (state.order_page_handler == 'progress') {
+            if (
+                state.order_page_handler == 'progress' ||
+                state.order_page_handler == 'delivered' ||
+                state.order_page_handler == 'quit_postmaker' ||
+                state.order_page_handler == 'delivery_accepted' ||
+                state.order_page_handler == 'final_delivered'
+            ) {
                 let userType = rootState.auth.user.type;
                 let newRoute = '/' + userType + '/order/' + state.data.id;
                 if (currentRoute != newRoute) {
+
                     router.push({
                         path: newRoute
                     })
                 }
             };
+
+            //archived
+            if (
+                state.order_page_handler == 'quit' ||
+                state.order_page_handler == 'removed' ||
+                state.order_page_handler == 'recieved_payment'
+            ) {
+                let newRoute = '/archive/order/' + state.data.id;
+                if (currentRoute != newRoute) {
+                    router.push({
+                        path: newRoute
+                    })
+                }
+
+            }
 
         },
 
@@ -129,7 +153,6 @@ export default {
 
             dispatch('api/get', '/order/get/' + orderId, ROOT).then(() => {
                 var response = rootState.api.response;
-                console.log('retrieved order', response);
 
                 if (!response) {
                     dispatch('orderPageHandler', 'exit');
@@ -137,12 +160,15 @@ export default {
                 };
 
                 commit(SET_ORDER, response);
+                console.log('THE RECIEVED ORDER: ', response);
 
                 //setters
                 commit('descriptions/' + SET_ORDER_DESCRIPTION, response.order_descriptions);
                 commit('files/' + SET_ORDER_FILES, response.order_files)
                 commit('tags/' + SET_ORDER_TAGS, response.order_tags);
-
+                commit('delivery/' + SET_DELIVERYS, response.order_deliveries);
+                commit('messages/' + SET_ORDER_MESSAGES, response.order_messages);
+                dispatch('requests/init', response);
                 dispatch('orderPageHandler', state.data.state);
 
             });
@@ -151,22 +177,20 @@ export default {
 
 
         async create({ state, commit, dispatch, rootState }) {
-
             await dispatch('api/post', { url: '/order/create', data: state.data }, ROOT).then(() => {
                 var newOrder = rootState.api.response;
                 commit(SET_ORDER, newOrder);
+
                 dispatch('update');
             });
-
         },
 
 
-
-        async update({ state, dispatch, rootState }) {
+        async update({ state, dispatch, rootState }, refresh = true) {
 
             await dispatch('api/post', { url: '/order/update', data: state.data }, ROOT).then(() => {
                 if (rootState.api.response) {
-                    router.push({ path: '/' + rootState.auth.user.type + '/orders' });
+                    router.push({ path: '/order/open/' + state.data.id });
                 }
             });
 
@@ -176,15 +200,11 @@ export default {
             dispatch('tags/save');
         },
 
-
-
         publish({ commit, dispatch }) {
             commit(SET_STATE, 'open');
             dispatch('orderPageHandler', 'open');
             dispatch('update');
         },
-
-
 
         edit({ state, commit, dispatch }) {
             commit(SET_STATE, 'create');
@@ -195,16 +215,79 @@ export default {
             });
         },
 
+        delivered({ commit, dispatch }) {
+            commit(SET_STATE, 'delivered');
+            dispatch('orderPageHandler', 'delivered');
+            dispatch('update');
+        },
 
-        startPostmaker({ commit, dispatch, rootState }) {
+        startPostmaker({ commit, dispatch, state }) {
+            commit(SET_STATE, 'progress');
+            dispatch('api/get', '/order/connect/postmaker/' + state.data.id, ROOT);
+            dispatch('orderPageHandler', 'progress');
+            dispatch('update');
+        },
+
+        remove({ commit, dispatch, rootState }, payload) {
+            var removeOrderFromOutside = (payload != '' && payload != null)
+            if (removeOrderFromOutside) {
+                dispatch('api/post', { data: { id: payload, state: 'removed' }, url: '/order/update' }, ROOT).then(() => {
+                    var res = rootState.api.response;
+                    if (res) {
+                        dispatch('orders/get', '', ROOT)
+                    }
+                });
+                return;
+            }
+
+            commit(SET_STATE, 'removed');
+            dispatch('orderPageHandler', 'removed');
+            dispatch('update');
+        },
+
+        quit_postmaker({ commit, dispatch }) {
+            commit(SET_STATE, 'quit_postmaker');
+            dispatch('orderPageHandler', 'quit_postmaker');
+            dispatch('update');
+        },
+
+        quit({ commit, dispatch }) {
+            commit(SET_STATE, 'quit');
+            dispatch('orderPageHandler', 'quit');
+            dispatch('update');
+        },
+
+        progress({ commit, dispatch }) {
             commit(SET_STATE, 'progress');
             dispatch('orderPageHandler', 'progress');
+            dispatch('update');
+        },
 
-            dispatch('update').then(() => {
-                dispatch('api/get', '/order/connect/postmaker/' + rootState.order.id, ROOT);
-                console.log('/order/connect/postmaker/' + rootState.order.id);
+        accept({ commit, dispatch }) {
+            commit(SET_STATE, 'delivery_accepted');
+            dispatch('orderPageHandler', 'delivery_accepted');
+            dispatch('update');
+        },
+
+        recieved_payment({ commit, dispatch }) {
+            commit(SET_STATE, 'recieved_payment');
+            dispatch('orderPageHandler', 'recieved_payment');
+            dispatch('update');
+        },
+
+        final_delivered({ commit, dispatch }) {
+            commit(SET_STATE, 'final_delivered');
+            dispatch('orderPageHandler', 'final_delivered');
+            dispatch('update');
+        },
+
+        like({ state, dispatch, rootState }) {
+            dispatch('api/get', `/order/like/${state.data.id}`, ROOT).then(() => {
+
             });
         }
+
+
 
 
     },
@@ -213,7 +296,9 @@ export default {
         descriptions,
         requests,
         files,
-        tags
+        tags,
+        delivery,
+        messages
     },
 
 }

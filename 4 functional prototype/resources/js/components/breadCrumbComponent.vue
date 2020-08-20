@@ -1,7 +1,7 @@
 <template> 
         <v-row>
             <v-col cols=12>
-                <v-card flat  outlined>
+                <card mb="mb-0">
 
                     <v-breadcrumbs 
                       v-if=" this.$route.path == '/' " 
@@ -9,19 +9,19 @@
                       large
                     />                    
 
-                    <v-breadcrumbs 
+                    <!-- <v-breadcrumbs 
                         v-else-if="special_crumb_exists && special_crumb_route" 
                         large
                         :items="[default_crumbs,special_crumb, current_crumb]"
-                    />
-
+                    /> -->
+<!--  v-else-if=" this.$route.path !== '/' "  -->
                     <v-breadcrumbs 
-                      v-else-if=" this.$route.path !== '/' " 
+                     v-else
                       :items="[default_crumbs, current_crumb ]" 
                       large 
                     />   
 
-                </v-card>  
+                </card>  
             </v-col>   
         </v-row>
 </template>

@@ -31,16 +31,15 @@ export default {
             var field = payload[1];
             var val = payload[2];
             state.list[row][field] = val;
-            console.log(payload, state.list);
+
         }
     },
     actions: {
         save({ state, dispatch, rootState }, payload) {
             var orderId = payload;
-            // console.log('pre-descriptions', payload, state.list)
 
             dispatch('api/post', { url: '/order/descriptions/save', data: { descriptions: state.list, orderId: orderId } }, ROOT).then(() => {
-                console.log('descriptions', rootState.api.response)
+
             });
 
 

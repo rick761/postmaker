@@ -2,49 +2,67 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::prefix('auth')->group(function () {
+    Route::get('/', 'UserController@profile');
+    Route::post('/update', 'UserController@updateProfile');
+    Route::post('/image/delete', 'UserController@deleteUserImage');
+});
 
-//auth
-Route::get('/auth', 'UserController@profile');
-Route::post('/auth/update', 'UserController@updateProfile');
-Route::post('/auth/image/delete', 'UserController@deleteUserImage');
+Route::prefix('notifications')->group(function () {        
+    Route::get('get', 'NotificationController@get'); 
+    Route::post('read', 'NotificationController@read'); 
+    Route::post('remove', 'NotificationController@remove'); 
+});    
 
-//user
 Route::get('/user/{id}','UserController@get');
-
-//file
 Route::post('/file/upload/{type}/{folder}', 'FileController@upload');
+Route::get('/home', 'HomeController@index')->name('home');
 
 //order
-Route::get('/order/get/{id}','OrderController@get');
-Route::post('/order/create', 'OrderController@create')->middleware('type:requester');
-Route::post('/order/update','OrderController@update');
-Route::get('/order/connect/postmaker/{orderId}','OrderController@connectPostmaker');
+Route::prefix('order')->group(function () {
+    Route::get('get/{id}','OrderController@get');
+    Route::post('create', 'OrderController@create')->middleware('type:requester');
+    Route::post('update','OrderController@update');
+    Route::get('connect/postmaker/{orderId}','OrderController@connectPostmaker');
+    Route::get('like/{orderId}','OrderController@like');
+   
+    Route::post('tags/save','Order\TagController@save')->middleware('type:requester');   
+    Route::post('descriptions/save','Order\DescriptionController@save')->middleware('type:requester');
+   
+    Route::prefix('request')->group(function () {
+        Route::post('put','Order\RequestController@put')->middleware('type:postmaker');
+        Route::post('withrawn','Order\RequestController@withrawn')->middleware('type:postmaker');
+        Route::post('deny','Order\RequestController@deny')->middleware('type:requester');
+        Route::post('accept','Order\RequestController@accept')->middleware('type:requester');
+        Route::post('withrawAll','Order\RequestController@withrawAll')->middleware('type:requester');
+    });
+    
+    Route::prefix('files')->group(function () {
+        Route::post('save','Order\FilesController@save')->middleware('type:requester');
+        Route::get('delete/{orderFileId}','Order\FilesController@delete')->middleware('type:requester');
+    });
 
-//order - Descriptions
-Route::post('/order/descriptions/save','Order\DescriptionController@save')->middleware('type:requester');
+   
+    Route::prefix('delivery')->group(function () {
+        Route::post('create','Order\DeliveryController@create')->middleware('type:postmaker');
+        Route::post('rate','Order\DeliveryController@rate')->middleware('type:requester');
+        
+        Route::post('final_create','Order\DeliveryController@final_create')->middleware('type:postmaker');
 
-//order - Requests
-Route::post('/order/request/put','Order\RequestController@put')->middleware('type:postmaker');
-Route::post('/order/request/withrawn','Order\RequestController@withrawn')->middleware('type:postmaker');
-Route::post('/order/request/deny','Order\RequestController@deny')->middleware('type:requester');
-Route::post('/order/request/accept','Order\RequestController@accept')->middleware('type:requester');
-Route::post('/order/request/withrawAll','Order\RequestController@withrawAll')->middleware('type:requester');
+        Route::prefix('comments')->group(function () {            
+            Route::get('get/{deliveryId}','Order\DeliveryCommentController@get');
+            Route::post('create','Order\DeliveryCommentController@create');
+        });
+    });
+});
 
-//Order - Files
-Route::post('/order/files/save','Order\FilesController@save')->middleware('type:requester');
-Route::get('/order/files/delete/{orderFileId}','Order\FilesController@delete')->middleware('type:requester');
+Route::prefix('orders')->group(function () {
+    Route::get('get','OrdersController@get');
+    Route::get('available','OrdersController@available');
+    Route::get('requested','OrdersController@requested');
+    Route::get('archived','OrdersController@archived');
+});
 
-//Order - Tags
-Route::post('/order/tags/save','Order\TagController@save')->middleware('type:requester');
-
-
-//orders
-Route::get('/orders/get','OrdersController@get');
-Route::get('/orders/available','OrdersController@available');
-Route::get('/orders/requested','OrdersController@requested');
-
-//alternative
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 

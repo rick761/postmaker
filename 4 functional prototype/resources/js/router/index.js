@@ -22,6 +22,7 @@ import Open from '../views/open';
 import profile from '../views/profile';
 import account from '../views/account';
 import settings from '../views/settings';
+import archivedOrder from '../views/archivedOrder';
 
 
 Vue.use(VueRouter);
@@ -54,6 +55,11 @@ const routes = [
         path: '/order/open/:orderId',
         name: 'Beschikbare opdracht',
         component: openOrder,
+    },
+    {
+        path: '/archive/order/:orderId',
+        name: 'Beschikbare opdracht',
+        component: archivedOrder,
     },
     {
         path: '/profile',

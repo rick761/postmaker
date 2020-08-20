@@ -1,39 +1,48 @@
 <template>    
         <v-row>              
 
-            <v-col cols=12>
-                <v-card outlined>
+            <!-- <v-col cols=12>
+                <card >
                     <v-card-text>Welkom {{ auth.type }} {{auth.first_name}} {{auth.last_name}}, <br> </v-card-text>
-                </v-card>
-            </v-col>       
+                </card>
+            </v-col>        -->
 
-            <v-col cols=4>
+            <v-col cols=4 v-if="activeProjects">
                 <v-sheet 
                     class="justify-center align-center white--text h2 d-flex "
-                    color="green lighten-3"
+                    color="primary lighten-1"
                     height="200"
-                 > 0 Projecten mee bezig 
-                 <br>                 
+                 > 
+                 <span v-if="activeProjects==1">{{activeProjects}} Actief project</span>
+                 <span v-else>{{activeProjects}} Actieve projecten</span>                   
                  </v-sheet>
             </v-col>
 
-            <v-col cols=4>
-                     <v-sheet
+            <v-col cols=4 v-if="unread_notifications">
+                <v-sheet                      
                     class="justify-center align-center  white--text d-flex h2"                    
-                    color="blue lighten-3"
+                    color="warning lighten-1"
                     height="200"
-                >0 berichten</v-sheet>
+                >{{unread_notifications}} Berichten</v-sheet>
+
+                <!-- <span class="info--text">info</span> -->
+                
             </v-col>
-            <v-col cols=4>
+            
+            <v-col cols=4 v-if="archivedProjects"> 
                      <v-sheet
-                    class="justify-center align-center white--text d-flex  h2"
-                    color="red lighten-3"
+                    class="justify-center align-center white--text d-flex  h2 pa-5"
+                    color="error lighten-1"
                     height="200"
-                >0 Acties vereist</v-sheet>
+                >
+                 <span v-if="archivedProjects==1">{{archivedProjects}} gearchiveerd project</span>
+                 <span v-else>{{archivedProjects}} gearchiveerde projecten</span>                 
+                </v-sheet>
             </v-col>   
 
             <v-col cols=12>
-                <v-btn x-large to="/open" class="primary"> <v-icon>mdi-magnify</v-icon> </v-btn>                 
+                <v-btn v-if="auth.type == 'postmaker'" x-large to="/open" class="primary"> <v-icon>mdi-magnify</v-icon> &nbsp; Zoek nieuwe projecten </v-btn>                 
+                <v-btn x-large :to="'/'+auth.type+'/orders'" class="secondary ml-3"> <v-icon>mdi-eye</v-icon> &nbsp; Mijn projecten </v-btn>     
                 <v-btn v-if="auth.type=='requester'" x-large to="/requester/order/new" class="success ml-3"> <v-icon>mdi-plus</v-icon> &nbsp; Nieuwe post aanmaken </v-btn>                    
             </v-col>          
 
@@ -43,12 +52,31 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapGetters} from 'vuex'
 export default {    
     computed:{
         ...mapState({                
             auth: state => state.auth.user,
+            archived: state => state.orders.archived,
+            active: state => state.orders.list,
+            notifications: state => state.notifications.list,
         }),
+
+        ...mapGetters({           
+            unread_notifications: 'notifications/UNREAD_NOTIFICATIONS',
+        }),
+
+        archivedProjects(){
+            if(this.archived){
+                return this.archived.length;
+            } return 0;
+        },
+
+        activeProjects(){
+            if(this.active){
+                return this.active.length;
+            } return 0;
+        }
     }
 }
 </script>

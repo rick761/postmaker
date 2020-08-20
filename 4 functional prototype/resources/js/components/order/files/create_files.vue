@@ -1,5 +1,5 @@
 <template>
-     <v-card outlined class="mb-5">
+     <card>
         <!--MOODBOARD-->
 
             <v-card-subtitle>
@@ -9,7 +9,7 @@
                 <v-tooltip color="primary" top>
                     <template v-slot:activator="{ on, attrs }">                    
                         <v-btn  icon v-bind="attrs" v-on="on" class="float-right">
-                            <v-icon color="grey lighten-1">mdi-comment-question-outline</v-icon>
+                            <v-icon color="accent lighten-1">mdi-comment-question-outline</v-icon>
                         </v-btn>
                     </template>
                     <span>
@@ -45,7 +45,7 @@
                                        
             </v-card-text>
         <!---->
-    </v-card>
+    </card>
 </template>
 
 <script>

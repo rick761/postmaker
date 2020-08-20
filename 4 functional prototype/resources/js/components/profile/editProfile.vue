@@ -1,5 +1,5 @@
 <template>
-    <v-card outlined flat class="mb-5">
+    <card>
        
         <v-card-title>
             {{auth.email}}
@@ -111,7 +111,7 @@
                 <v-btn class="success" @click="saveProfile" > &nbsp; Opslaan</v-btn>
             </v-card-actions>      
         </v-form>
-    </v-card>
+    </card>
 </template>
 
 <script>
@@ -225,7 +225,7 @@
 
             delImage(i){
                 this.$store.dispatch('api/post', {url:'/auth/image/delete', data: this.auth.user_images[i]}).then(()=>{
-                    console.log(this.$store.state.api);
+                    // console.log(this.$store.state.api);
                 });               
                 this.$store.commit('auth/images/DEL_USER_IMAGE', i);
             }

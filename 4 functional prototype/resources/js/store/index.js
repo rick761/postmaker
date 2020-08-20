@@ -9,7 +9,8 @@ import image from './modules/preview-image'
 import order from './modules/order'
 import orders from './modules/orders'
 import user from './modules/user'
-
+import modal from './modules/global-modal'
+import notifications from './modules/notifications'
 
 
 Vue.use(Vuex)
@@ -25,6 +26,8 @@ export default new Vuex.Store({
         order,
         orders,
         user,
+        modal,
+        notifications
 
     },
     strict: debug

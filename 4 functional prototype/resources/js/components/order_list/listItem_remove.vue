@@ -1,17 +1,25 @@
 <template>
     <!-- delete -->
-    <v-list-item >
-        <v-list-item-icon class="  ml-15">
-            <v-icon color="error" >mdi-delete</v-icon>
-        </v-list-item-icon>                                    
-        <v-list-item-content>                                        
-            Verwijder                                     
-        </v-list-item-content> 
+    <v-list-item >       
+        <a @click="deleteOrder" text left class="ml-15 text-left d-block" >            
+                <v-icon>mdi-delete</v-icon>   &nbsp;                                            
+                Verwijder                   
+        </a>
     </v-list-item> 
 </template>
 
 <script>
 export default {
-    
+    props:['item'],
+    methods:{
+        deleteOrder(){
+            this.$store.dispatch('modal/confirmAction',{
+                action: 'order/remove',
+                parameter : this.item.id,
+                //title: 'test',
+                //text: 'test'
+            })
+        }
+    }
 }
 </script>

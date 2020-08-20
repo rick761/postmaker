@@ -15,7 +15,7 @@ export default {
             if (!payload.folder) {
                 payload.folder = 'no extra folder';
             }
-            console.log(payload);
+
             //single file to array
             if (!(payload.files instanceof Array)) {
                 var _tmp = payload.files;
@@ -41,14 +41,14 @@ export default {
             await axios(config).then(
                 response => {
                     if (response.data.errors) {
-                        //console.log('errors', response)
+
                     }
                     if (!response.data.errors) {
-                        //console.log(response)
+
                     }
                 },
                 error => {
-                    //console.log('errors', response)
+
                 }
             );
 

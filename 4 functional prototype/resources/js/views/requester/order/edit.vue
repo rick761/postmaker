@@ -2,7 +2,7 @@
     <v-form ref="form" v-model="valid">  
         <v-row> 
             <v-col cols="6">                      
-            <v-card outlined class="mb-5">
+            <card>
                 <v-card-subtitle>Gegevens</v-card-subtitle>
                 <v-card-text>
                     <v-text-field  
@@ -71,14 +71,14 @@
                     </v-menu>
 
                 </v-card-text>           
-            </v-card>
+            </card>
 
             <create-order-descriptions-component />
 
             </v-col>
             <v-col cols=6>
 
-                <v-card outlined class="mb-5">
+                <card outlined class="mb-5">
                     <v-card-subtitle>Acties</v-card-subtitle>    
 
                     <!--CREATION DATE-->
@@ -125,17 +125,17 @@
                         <!---->
 
                     </v-card-actions>
-                </v-card>
+                </card>
 
 
-                <v-card outlined class="mb-5">
+                <card>
                     <v-card-subtitle>
                         Type & tags
 
                     <v-tooltip color="primary" top>
                         <template v-slot:activator="{ on, attrs }">                    
                             <v-btn  icon v-bind="attrs" v-on="on" class="float-right">
-                                <v-icon color="grey lighten-1">mdi-comment-question-outline</v-icon>
+                                <v-icon color="accent lighten-1">mdi-comment-question-outline</v-icon>
                             </v-btn>
                         </template>
                         <span>
@@ -162,7 +162,7 @@
                         <create-tags-component />                        
 
                     </v-card-text>
-                </v-card>
+                </card>
 
                <create-files-component />
                 

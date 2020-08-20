@@ -31,7 +31,6 @@ export default {
         save({ state, dispatch, rootState }) {
             dispatch('api/post', { url: '/order/tags/save', data: { tags: state.list, order_id: rootState.order.data.id } }, ROOT).then(() => {
                 var response = rootState.api.response;
-                console.log('RES', response);
             })
         },
     },

@@ -55,7 +55,9 @@ export default {
                 order_id: rootState.order.data.id,
                 apply: state.data
             };
+
             dispatch('api/post', { url: '/order/request/put', data: data }, ROOT).then(() => {
+
                 commit(SET_ORDER_REQUEST, rootState.api.response)
             });
         },

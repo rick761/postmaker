@@ -1,14 +1,10 @@
 <template>
-    <v-card outlined >  
-
+    <card mb="mb-0"  > 
         <v-card-text>
             {{title}}
         </v-card-text>
-
         <slot />
-
-
-    </v-card>
+    </card>
 </template>
 
 <script>

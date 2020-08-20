@@ -1,8 +1,9 @@
 <template>
     <div>
-        <v-card outlined class="mb-1">   
+        <card>   
             <v-card-title>Archief</v-card-title>
-        </v-card>                    
+        </card>   
+                         
         <v-expansion-panels >
             <v-expansion-panel
                 v-for="(item,i) in 1"
