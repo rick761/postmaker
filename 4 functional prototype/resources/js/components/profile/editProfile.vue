@@ -62,7 +62,7 @@
                 <v-row>
                     <v-col cols=6>  
                         <v-file-input v-model="avatar" label="Avatar"></v-file-input>                         
-                        <v-img 
+                        <v-img v-if="auth.avatar"
                          id="preview_avatar" 
                          alt="avatar" 
                          :src=" '/storage/' + auth.id + '/avatar/' + auth.avatar"

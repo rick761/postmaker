@@ -47,8 +47,7 @@ export default {
                     if(allowedExtension[i] == ext){
                         return file;
                     }
-                }
-                
+                }                
             })
         },
 

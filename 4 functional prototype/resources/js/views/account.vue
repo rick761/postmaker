@@ -78,6 +78,7 @@
                 <v-spacer></v-spacer>  
                 <v-btn text @click="preview_show = !preview_show" >{{preview_show ? 'Minder': 'Meer'}}</v-btn>             
                 <v-btn
+                    v-if="user.type == 'postmaker'"
                     icon
                     @click="preview_show = !preview_show"
                 >                    
@@ -86,27 +87,27 @@
             </v-card-actions>
 
             <v-expand-transition>
-                <div v-show="preview_show">                                                            
-                    <v-carousel height="200" v-if="project_show" >
-                        <v-carousel-item                                    
-                            v-for="(item,i) in [{
-                                    src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-                                },
-                                {
-                                    src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-                                },
-                                {
-                                    src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-                                },                                               
-                            ]"
-                            :key="i"
-                            :src="item.src"
-                            reverse-transition="fade-transition"
-                            transition="fade-transition"
-                        ></v-carousel-item>                                        
-                    </v-carousel>          
-                    <v-card-text v-else> Geen documenten om weer te geven. </v-card-text>  
-                </div>
+                 <v-card-text v-if="preview_show" > 
+                    <!-- Geen gearchiveerde documenten om weer te geven.   -->
+                    <v-row>
+                        <!-- <pre>{{useruser_show_deliverys}}</pre> -->
+                        <v-col
+                        v-for="(item,key) in user.user_show_deliverys"
+                        :key="key"
+                        cols="6"
+                        >
+                            <v-img
+                                class="d-flex align-center"
+                                dark
+                                height="200"
+                                :src="`./storage/${user.id}/order_delivery/${item.order_delivery_file.order_delivery.order_id}/${item.order_delivery_file.url}`"
+                                @click="$store.dispatch('image/preview',`./storage/${user.id}/order_delivery/${item.order_delivery_file.order_delivery.order_id}/${item.order_delivery_file.url}`)"
+                            />
+
+                        </v-col>                        
+                    </v-row>                    
+
+                </v-card-text>
             </v-expand-transition>
         </card> 
     </div>
@@ -135,6 +136,7 @@ export default {
     computed:{
         ...mapState({                
             user: state => state.user.data,
+            // user_show_deliverys : state => state.auth.archivedDelivery.data
         }),
     },
 
@@ -145,7 +147,7 @@ export default {
 
     
     data(){return{
-        preview_show:false,    
+        preview_show:true,    
         project_show:false,
     }}    
 }

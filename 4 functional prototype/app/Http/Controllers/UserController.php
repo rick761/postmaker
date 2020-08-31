@@ -8,19 +8,20 @@ use App;
 
 class UserController extends Controller
 {
+
     function get(Request $request, $id){
-        return App\User::with('user_images')->withCount('user_likes')->find($id);
+        return App\User::with(['user_images','user_show_deliverys.order_delivery_file.order_delivery'])->withCount('user_likes')->find($id);
     }
 
 
     function profile(Request $request){
-        $me = App\User::with('user_images')->withCount('user_likes')->find(Auth::id());
+        $me = App\User::with(['user_images','user_show_deliverys.order_delivery_file.order_delivery'])->withCount('user_likes')->find(Auth::id());
         $me = $me->makeVisible(['first_name', 'last_name', 'phone']);
         return $me;
     }
 
     function updateProfile(Request $request){        
-                          
+        
         if($request->user_images){                 
             $this->saveUserImages($request->user_images);    
         }             
@@ -29,7 +30,12 @@ class UserController extends Controller
         if($request->display_name){
             $getDisplayNameUser = App\User::where('display_name' , $request->display_name);
             $exists = $getDisplayNameUser->count();
-            $isMe = $getDisplayNameUser->first()->id == Auth::id();            
+            $isMe = 0;
+
+            if( !empty( $getDisplayNameUser->first() ) ){
+                $isMe = $getDisplayNameUser->first()->id == Auth::id();   
+            }         
+
             if($exists && !$isMe) return 'Naam is al in gebruik';
         }
        
@@ -43,7 +49,9 @@ class UserController extends Controller
         if($request->company){$me->company = $request->company;}
         if($request->website){$me->website = $request->website;}
         if($request->phone){$me->phone = $request->phone;}
-        return $me->save();                     
+        $me->save();
+
+        return;    
     }
 
     private function saveUserImages($list = null){    
@@ -61,14 +69,52 @@ class UserController extends Controller
         return $count;
     }
 
+
     public function deleteUserImage ( Request $request ){     
-
         $deletedRows = App\UserImage::where([ 'url' => $request->url, 'user_id' => Auth::id() ])->delete(); 
-
         return $deletedRows;
-
     }
 
-    // saveUserImages
+
+    public function setShowFiles(Request $request){       
+        $order_id = $request->order_id;
+        $order = App\Order::with('order_deliveries.order_delivery_files')->find($order_id);
+
+        //deleteOld
+        foreach($order->order_deliveries as $delivery){
+            foreach($delivery->order_delivery_files as $file){
+                $showing_deliveries = $file->user_show_deliverys()->where('user_id',Auth::id())->get();
+                foreach($showing_deliveries as $showing_delivery){
+                    $showing_delivery->delete();
+                }
+            }
+        }
+
+        //createNew      
+        foreach($request->delivery_files as $delivery_file){    
+            Auth::user()->user_show_deliverys()->firstOrCreate([
+                'order_delivery_file_id' => $delivery_file['id']
+            ]);
+        }
+
+        return Auth::user()->user_show_deliverys()->with('order_delivery_file.order_delivery')->get();
+    }
+
+    public function hideShowFiles (Request $request){ 
+        $order_id = $request->order_id;
+        $order = App\Order::with('order_deliveries.order_delivery_files')->find($order_id);
+        
+        foreach($order->order_deliveries as $delivery){
+            foreach($delivery->order_delivery_files as $file){
+                $showing_deliveries = $file->user_show_deliverys()->where('user_id',Auth::id())->get();
+                foreach($showing_deliveries as $showing_delivery){
+                    $showing_delivery->delete();
+                }
+            }
+        }
+
+    
+    }
+
 
 }

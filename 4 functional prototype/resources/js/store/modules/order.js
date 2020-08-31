@@ -150,9 +150,11 @@ export default {
 
         get({ state, dispatch, rootState, commit }, orderId = null) {
             if (!orderId) return; //order is already loaded or no id is given
+            commit('loader/TOGGLE_LOADER_SYSTEM_BAR_ON', null, ROOT);
 
             dispatch('api/get', '/order/get/' + orderId, ROOT).then(() => {
                 var response = rootState.api.response;
+                commit('loader/TOGGLE_LOADER_SYSTEM_BAR_OFF', null, ROOT);
 
                 if (!response) {
                     dispatch('orderPageHandler', 'exit');

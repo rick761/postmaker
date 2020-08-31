@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('users')->insert($users);     
         
-        factory(App\Order::class, 20)->create();
+        //factory(App\Order::class, 20)->create();
         
     }
 }

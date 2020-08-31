@@ -37,9 +37,7 @@
             :rules="[
                 v => !!v || 'Kies een bestand om op te leveren!',               
             ]"
-            v-model="invoice"  label="Factuur"></v-file-input>            
-
-            {{invoice}}, {{files}}
+            v-model="invoice"  label="Factuur"></v-file-input>        
             
 
             <v-checkbox 

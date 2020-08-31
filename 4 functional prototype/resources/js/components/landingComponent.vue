@@ -1,5 +1,7 @@
 <template>
-    <v-main dark fluid style="height:100%; background: url('https://picsum.photos/1920/1080?random')" >
+    <v-main dark fluid 
+    :style="`height:100%; background: url('./images/gallery/${Math.floor(Math.random() * 14)}.jpg') no-repeat top;background-size: cover; background-color:black;`" >
+    
         <v-container fluid>
 
             <v-app-bar dark color="transparent" flat>
@@ -33,10 +35,13 @@
                 </v-col>                
             </v-row>
             
-            <v-card dark>   
-                <v-card-title><v-icon x-large>mdi-tree-outline</v-icon>
+            <v-card dark>  
+                <v-img src="./images/landing/preview.png" />  
+
+                <!-- <v-card-title><v-icon x-large>mdi-tree-outline</v-icon>
                     Postmaker</v-card-title>
-                <v-card-text>                    
+                <v-card-text>   
+                                    
                     <v-row>
                         <v-col cols="12" md="4" >         
                             <v-skeleton-loader type="date-picker"></v-skeleton-loader>
@@ -49,7 +54,8 @@
                             <v-skeleton-loader class="mb-6" type="list-item-avatar, divider, list-item-three-line, card-heading, image, actions" ></v-skeleton-loader>               
                         </v-col>                    
                     </v-row>
-                </v-card-text>                
+                </v-card-text> -->
+
             </v-card>
         </v-container>       
         

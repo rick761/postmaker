@@ -1,10 +1,14 @@
 <template>
     <!-- delete -->
-    <v-list-item >       
-        <a @click="deleteOrder" text left class="ml-15 text-left d-block" >            
-                <v-icon>mdi-delete</v-icon>   &nbsp;                                            
-                Verwijder                   
-        </a>
+    <v-list-item  class="ml-15">        
+        <v-list-item-icon>
+            <v-icon color="primary">mdi-delete</v-icon> 
+        </v-list-item-icon>  
+        <v-list-item-content>
+            <a @click="deleteOrder" text left class="ml-5 text-left d-block" >  
+                    Verwijder                            
+            </a>
+        </v-list-item-content>
     </v-list-item> 
 </template>
 
@@ -14,12 +18,24 @@ export default {
     methods:{
         deleteOrder(){
             this.$store.dispatch('modal/confirmAction',{
-                action: 'order/remove',
-                parameter : this.item.id,
-                //title: 'test',
-                //text: 'test'
+                actions: [
+                    {                        
+                        action: 'api/post',
+                        parameter : { 
+                            url: 'order/update',
+                            data: {
+                                id: this.item.id, 
+                                state : 'removed'
+                            }
+                        }         
+                    },
+                    {
+                        action: 'orders/get',
+                        parameter: ''
+                    }
+                ]
             })
-        }
+        },
     }
 }
 </script>

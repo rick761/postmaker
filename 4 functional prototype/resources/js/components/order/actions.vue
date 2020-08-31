@@ -187,7 +187,7 @@ import { mapState } from 'vuex';
         canQuitPostmaker(){     return (this.order.state == 'progress' || this.order.state == 'delivered')                  && this.isPostmaker }, 
         canQuit(){              return (this.order.state == 'progress' || this.order.state == 'delivered')                  && this.isOwner },  
         canDeliveryAccept(){    return (this.order.state == 'progress' || this.order.state == 'delivered')                  && this.isOwner  },
-        canFinalDeliver(){      return (this.order.state == 'delivery_accepted')                                            && this.isPostmaker },                                   
+        canFinalDeliver(){      return (this.order.state == 'delivery_accepted'|| this.order.state == 'final_delivered')                                            && this.isPostmaker },                                   
         canRecievePayment(){    return (this.order.state == 'final_delivered' || this.order.state == 'delivery_accepted')   && this.isPostmaker },                               
         canContinuePostmaker(){ return (this.order.state == 'quit_postmaker')                                               && this.isPostmaker },
         canImprove(){           return (this.order.state == 'delivered')                                                    && this.isOwner }                              

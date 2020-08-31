@@ -14,4 +14,10 @@ class OrderDeliveryFile extends Model
     {
         return $this->belongsTo('App\OrderDelivery','order_delivery_id' );
     }
+
+    public function user_show_deliverys()
+    {
+        return $this->hasMany('App\UserShowDelivery');
+    }
+
 }

@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('auth')->group(function () {
     Route::get('/', 'UserController@profile');
     Route::post('/update', 'UserController@updateProfile');
-    Route::post('/image/delete', 'UserController@deleteUserImage');
+    Route::post('/image/delete', 'UserController@deleteUserImage');  
+    Route::post('/delivery/show', 'UserController@setShowFiles');     
+    Route::post('/delivery/hide', 'UserController@hideShowFiles');     
 });
 
 Route::prefix('notifications')->group(function () {        
@@ -28,7 +30,8 @@ Route::prefix('order')->group(function () {
    
     Route::post('tags/save','Order\TagController@save')->middleware('type:requester');   
     Route::post('descriptions/save','Order\DescriptionController@save')->middleware('type:requester');
-   
+    Route::post('message/send','Order\MessageController@send');
+
     Route::prefix('request')->group(function () {
         Route::post('put','Order\RequestController@put')->middleware('type:postmaker');
         Route::post('withrawn','Order\RequestController@withrawn')->middleware('type:postmaker');
@@ -61,6 +64,7 @@ Route::prefix('orders')->group(function () {
     Route::get('available','OrdersController@available');
     Route::get('requested','OrdersController@requested');
     Route::get('archived','OrdersController@archived');
+    Route::get('archived/successfull', 'OrdersController@archivedSuccess');
 });
 
 

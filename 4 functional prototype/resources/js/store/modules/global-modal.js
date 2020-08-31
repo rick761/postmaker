@@ -14,12 +14,12 @@ export default {
             text: 'Klik op oke om door te gaan.'
         },
         open: false,
-        action: '',
-        parameter: ''
+        actions: [],
     }),
     mutations: {
         [TOGGLE_GLOBAL_MODAL](state) {
             state.open = !state.open;
+            console.log(state.open);
         },
         [RESET_GLOBAL_MODAL](state) {
             state.data = {
@@ -28,18 +28,19 @@ export default {
             };
         },
         [SET_ACTION](state, payload) {
-            state.action = payload;
+            state.actions = payload;
         },
         [SET_PARAMETER](state, payload) {
             state.parameter = payload;
         },
         [CLEAR_ACTION](state) {
-            state.action = "";
-            state.parameter = "";
+            state.action = [];
+
             state.data = {
                 title: 'Weet u het zeker?',
                 text: 'Klik op ja om door te gaan.'
             };
+
         },
         [SET_FIELDS](state, payload) {
             var title = payload[0];
@@ -49,23 +50,24 @@ export default {
         }
     },
     actions: {
-        confirm({ commit, dispatch, state }) {
+        async confirm({ commit, dispatch, state, rootState }) {
             commit(TOGGLE_GLOBAL_MODAL);
-            dispatch(state.action, state.parameter, ROOT)
+
+            for (var i in state.actions) {
+                await dispatch(state.actions[i].action, state.actions[i].parameter, ROOT);
+            }
+
         },
         confirmAction({ commit }, payload) {
 
             commit(CLEAR_ACTION);
             commit(TOGGLE_GLOBAL_MODAL);
 
-            var action = payload.action;
-            var parameter = payload.parameter;
+            var actions = payload.actions;
             var title = payload.title;
             var text = payload.text;
 
-
-            commit(SET_ACTION, action);
-            commit(SET_PARAMETER, parameter);
+            commit(SET_ACTION, actions);
             commit(SET_FIELDS, [title, text]);
 
         }

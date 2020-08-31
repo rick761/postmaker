@@ -3,8 +3,9 @@
         <preview-image-component />        
         <drawer-component />
         <global-modal />        
+        <system-bar-component />
         
-        <v-main style="min-height: 100vh;" :style="{background: $vuetify.theme.currentTheme.background}"  >
+        <v-main style="min-height: 100vh; " :style="{background: $vuetify.theme.currentTheme.background}"  >
 
             <notification-component />            
 

@@ -4,6 +4,7 @@
            <order-info-component />                             
             <order-extra-description-component />
             <order-delivery-component />
+            <order-chatbox-component />   
         </v-col>  
 
         <v-col cols=4>     

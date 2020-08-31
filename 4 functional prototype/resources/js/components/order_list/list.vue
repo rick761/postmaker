@@ -1,5 +1,5 @@
 <template>
-    <card mb="mb-0"  > 
+    <card mb="mb-0" style="max-height:100vh; overflow-y:auto;" > 
         <v-card-text>
             {{title}}
         </v-card-text>

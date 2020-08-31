@@ -51,7 +51,7 @@ export default {
     created(){
          this.$store.dispatch('order/delivery/comments/get');
     },
-     updated(){
+    updated(){
        var container = document.getElementById("chat");
        container.scrollTop = container.scrollHeight;
     }

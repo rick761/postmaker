@@ -49,5 +49,9 @@ class User extends Authenticatable
         return $this->hasMany('App\UserLike', 'user_id');
     }
 
+    public function user_show_deliverys(){
+        return $this->hasMany('App\UserShowDelivery');
+    }
+
 
 }

@@ -5,14 +5,27 @@
             </v-col>
 
             <v-col cols="6">
-               <preview-profile-component />
-               <portfolio-profile-component class="d-none" />
+               <preview-profile-component />               
+            </v-col>                   
+
+            <v-col v-if="auth.type == 'postmaker'" >
+                <portfolio-profile-component />
             </v-col>
         </v-row>      
+
 </template>
 <script>
+import {mapState} from 'vuex'
 export default {
     data(){return{        
     }},
+    computed:{
+        ...mapState({
+            auth: state=>state.auth.user
+        }),
+    },
+    created(){
+        this.$store.dispatch('auth/archivedDelivery/getSuccessFullArchived')
+    }
 }
 </script>

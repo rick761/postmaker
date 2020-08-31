@@ -5,6 +5,7 @@
             <card>
                 <v-card-subtitle>Gegevens</v-card-subtitle>
                 <v-card-text>
+
                     <v-text-field  
                         class="mb-3"   
                         :rules="[reqRule,least10]"
@@ -42,9 +43,7 @@
                                 style="width: 60px"
                             ></v-text-field>
                         </template>
-                    </v-slider>               
-
-                    
+                    </v-slider>    
 
                     <v-menu
                         v-model="menu2"

@@ -7,7 +7,6 @@
             <order-chatbox-component />   
         </v-col>  
 
-
         <v-col cols=4>
             <order-actions-component />  
             <order-aside-component />  

@@ -104,5 +104,38 @@ class OrdersController extends Controller
 
     }
 
+    public function archivedSuccess(){
+        $id = Auth::Id();
+        $type = (Auth::User()->type == 'postmaker') ? 'postmaker_id' : 'user_id';
+
+        
+        $orders = App\Order::where($type, $id)
+        ->whereIn('state', [
+            'recieved_payment'
+        ])
+        ->get();           
+       
+
+        foreach($orders as $order){
+
+            $order->archivedSuccess = []; 
+
+            $order_deliveries = $order->order_deliveries()->get(); 
+            for($i=0; $i<count($order_deliveries);$i++){
+                $results =  $order_deliveries[$i]->order_delivery_files()
+                    ->where('is_invoice','0')    
+                    ->where('url','like', '%.jpg')                   
+                    ->orWhere('url','like', '%.png')                  
+                    ->get();
+
+                $order->archivedSuccess = array_merge($order->archivedSuccess,$results->toArray());
+            }
+            
+        }
+
+        return $orders;
+        
+    }
+
 
 }

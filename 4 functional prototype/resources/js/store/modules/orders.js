@@ -63,27 +63,38 @@ export default {
     actions: {
 
         get({ dispatch, rootState, commit }) {
+            commit('loader/TOGGLE_LOADER_SYSTEM_BAR_ON', null, ROOT);
+
             dispatch('api/get', '/orders/get', ROOT).then(() => {
+                commit('loader/TOGGLE_LOADER_SYSTEM_BAR_OFF', null, ROOT);
                 commit(SET_ORDERS, rootState.api.response)
             })
         },
 
         getAvailable({ dispatch, rootState, commit, state }) {
+            commit('loader/TOGGLE_LOADER_SYSTEM_BAR_ON', null, ROOT);
+
             dispatch('api/get', '/orders/available', ROOT).then(() => {
+                commit('loader/TOGGLE_LOADER_SYSTEM_BAR_OFF', null, ROOT);
                 commit(SET_AVAILABLE_ORDERS, rootState.api.response)
                 commit(ADD_SEARCH_KEYS_AVAILABLE_ORDERS);
             });
         },
 
         getRequested({ dispatch, commit, rootState }) {
+            commit('loader/TOGGLE_LOADER_SYSTEM_BAR_ON', null, ROOT);
+
             dispatch('api/get', '/orders/requested', ROOT).then(() => {
+                commit('loader/TOGGLE_LOADER_SYSTEM_BAR_OFF', null, ROOT);
                 commit(SET_REQUESTED_ORDERS, rootState.api.response);
-                // console.log(rootState.api.response);
             });
         },
 
         getArchived({ dispatch, commit, rootState }) {
+            commit('loader/TOGGLE_LOADER_SYSTEM_BAR_ON', null, ROOT);
+
             dispatch('api/get', '/orders/archived', ROOT).then(() => {
+                commit('loader/TOGGLE_LOADER_SYSTEM_BAR_OFF', null, ROOT);
                 commit(SET_ARCHIVED_ORDERS, rootState.api.response);
                 console.log(rootState.api.response);
             });

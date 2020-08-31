@@ -9,7 +9,7 @@
 
             <v-col cols=4 v-if="activeProjects">
                 <v-sheet 
-                    class="justify-center align-center white--text h2 d-flex "
+                    class="justify-center align-center px-10 white--text h2 d-flex "
                     color="primary lighten-1"
                     height="200"
                  > 
@@ -20,7 +20,7 @@
 
             <v-col cols=4 v-if="unread_notifications">
                 <v-sheet                      
-                    class="justify-center align-center  white--text d-flex h2"                    
+                    class="justify-center align-center px-10 white--text d-flex h2"                    
                     color="warning lighten-1"
                     height="200"
                 >{{unread_notifications}} Berichten</v-sheet>
@@ -31,12 +31,12 @@
             
             <v-col cols=4 v-if="archivedProjects"> 
                      <v-sheet
-                    class="justify-center align-center white--text d-flex  h2 pa-5"
+                    class="justify-center align-center white--text px-10 d-flex  h2 pa-5"
                     color="error lighten-1"
                     height="200"
                 >
-                 <span v-if="archivedProjects==1">{{archivedProjects}} gearchiveerd project</span>
-                 <span v-else>{{archivedProjects}} gearchiveerde projecten</span>                 
+                 <span v-if="archivedProjects==1">{{archivedProjects}} Gearchiveerd project</span>
+                 <span v-else>{{archivedProjects}} Gearchiveerde projecten</span>                 
                 </v-sheet>
             </v-col>   
 

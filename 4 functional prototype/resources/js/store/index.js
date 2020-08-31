@@ -11,6 +11,7 @@ import orders from './modules/orders'
 import user from './modules/user'
 import modal from './modules/global-modal'
 import notifications from './modules/notifications'
+import loader from './modules/loader'
 
 
 Vue.use(Vuex)
@@ -27,8 +28,8 @@ export default new Vuex.Store({
         orders,
         user,
         modal,
-        notifications
-
+        notifications,
+        loader
     },
     strict: debug
 })

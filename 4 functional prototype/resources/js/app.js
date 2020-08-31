@@ -13,6 +13,7 @@ Vue.component('landing-component', require('./components/LandingComponent.vue').
 Vue.component('breadcrumbComponent', require('./components/breadCrumbComponent.vue').default);
 Vue.component('previewImageComponent', require('./components/previewImageComponent.vue').default);
 Vue.component('notificationComponent', require('./components/notificationComponent.vue').default);
+Vue.component('systemBarComponent', require('./components/systemBarComponent.vue').default);
 
 //parts
 Vue.component('card', require('./components/parts/card.vue').default);
@@ -101,24 +102,24 @@ function getTheme() {
 
     var theme = {
         primary: '#bf3300', // menu color - primary button
-        complementary: '#008cbf', //accent        
-        analogous_1: '#00a069', //success
-        analogous_2: '#bf3300', //link color        
-        triadic_1: '#da0000', //error
-        triadic_2: '#ff6e3d', //warning
+        complementary: '#008cbf', //accent      
+        analogous_2: '#bf3300', //link color      
         bg_card: '#fff',
         bg: '#ECEFF1',
         bg_menu: '#008cbf' // menu color -
     };
 
+    var default_values = {
+        triadic_1: '#da0000', //error
+        triadic_2: '#ff6e3d', //warning
+        analogous_1: '#00a069', //success
+    };
+
     if ((localStorage.getItem('theme') == 'default_theme')) {
         theme = {
             primary: '#1976D2', // menu color - primary button
-            complementary: '#82B1FF', //accent        
-            analogous_1: '#4CAF50', //success
-            analogous_2: '#2196F3', //link color        
-            triadic_1: '#FF5252', //error
-            triadic_2: '#FFC107', //warning
+            complementary: '#82B1FF', //accent                    
+            analogous_2: '#2196F3', //link color                  
             bg_card: '#fff',
             bg: '#E0E0E0',
             bg_menu: '#1976D2' // menu color -
@@ -129,9 +130,6 @@ function getTheme() {
             primary: '#356859', // menu color - primary button
             complementary: '#FD5523', //accent   
             analogous_2: '#B9E4C9', //link color  
-            analogous_1: '#3C7968', //success
-            triadic_1: '#FF5722', //error
-            triadic_2: '#FF5722', //warning
             bg_card: '#F1F5DF',
             bg: '#FFFBE6',
             bg_menu: '#356859' // menu color -
@@ -140,11 +138,8 @@ function getTheme() {
     if ((localStorage.getItem('theme') == 'crane')) {
         theme = {
             primary: '#5D1049', // menu color - primary button
-            complementary: '#E30425', //accent    
-            analogous_1: '#67C95A', //success
-            analogous_2: '#720D5D', //link color  
-            triadic_1: '#E30425', //error
-            triadic_2: '#FD9726', //warning
+            complementary: '#E30425', //accent               
+            analogous_2: '#720D5D', //link color             
             bg_card: '#fff',
             bg: '#F0CCE2',
             bg_menu: '#5D1049' // menu color -
@@ -153,11 +148,8 @@ function getTheme() {
     if ((localStorage.getItem('theme') == 'fortnightly')) {
         theme = {
             primary: '#c2c2c2', // menu color - primary button
-            complementary: '#8355FB', //accent    
-            analogous_1: '#1DCF62', //success
-            analogous_2: '#000000', //link color  
-            triadic_1: '#F78CB3', //error
-            triadic_2: '#F78CB3', //warning
+            complementary: '#8355FB', //accent   
+            analogous_2: '#000000', //link color             
             bg_card: '#fff',
             bg: '#fff',
             bg_menu: '#c2c2c2' // menu color -
@@ -166,11 +158,8 @@ function getTheme() {
     if ((localStorage.getItem('theme') == 'owl')) {
         theme = {
             primary: '#0336FF', // menu color - primary button
-            complementary: '#FF0266', //accent    
-            analogous_1: '#00CFCA', //success
-            analogous_2: '#FF0266', //link color  
-            triadic_1: '#FF0266', //error
-            triadic_2: '#EF3C2C', //warning
+            complementary: '#FF0266', //accent             
+            analogous_2: '#FF0266', //link color              
             bg_card: '#fff',
             bg: '#FFDE03',
             bg_menu: '#0336FF' // menu color -
@@ -179,11 +168,8 @@ function getTheme() {
     if ((localStorage.getItem('theme') == 'rally')) {
         theme = {
             primary: '#33333D', //primary button
-            complementary: '#FFFFFF', //accent    
-            analogous_1: '#37EFBA', //success
+            complementary: '#FFFFFF', //accent   
             analogous_2: '#1EB980', //link color  
-            triadic_1: '#FF6859', //error
-            triadic_2: '#FFAC12', //warning
             bg_card: '#33333D',
             bg: '#33333D',
             bg_menu: '#72DEFF' // menu color -#
@@ -192,11 +178,8 @@ function getTheme() {
     if ((localStorage.getItem('theme') == 'reply')) {
         theme = {
             primary: '#FAAB1A', // menu color - primary button
-            complementary: '#FAAB1A', //accent    
-            analogous_1: '#191919', //success
-            analogous_2: '#6200EE', //link color  
-            triadic_1: '#191919', //error
-            triadic_2: '#191919', //warning
+            complementary: '#FAAB1A', //accent  
+            analogous_2: '#6200EE', //link color 
             bg_card: '#FEFEFE',
             bg: '#EDF0F2',
             bg_menu: '#344A55'
@@ -205,11 +188,8 @@ function getTheme() {
     if ((localStorage.getItem('theme') == 'shrine')) {
         theme = {
             primary: '#FEDBD0', // menu color - primary button
-            complementary: '#2D2D2D', //accent    
-            analogous_1: '#0336FF', //success
+            complementary: '#2D2D2D', //accent   
             analogous_2: '#000000', //link color  
-            triadic_1: '#FF3645', //error
-            triadic_2: '#FEDBD0', //warning
             bg_card: '#FFFFFF',
             bg: '#FFF0E8',
             bg_menu: '#FFDBCF'
@@ -218,28 +198,28 @@ function getTheme() {
 
     return {
         dark: {
-            // primary: theme.complementary, // primary variant
-            // secondary: theme.analogous_2, //secondary variant
-            // accent: theme.analogous_2, // primary variant
-            // error: theme.triadic_1,
-            // info: theme.analogous_2, //secondary variant
-            // success: theme.analogous_1, //secondary 
-            // warning: theme.triadic_2, //
-            // anchor: theme.primary, // primary variant
-            // //beegees
-            // background: theme.bg,
-            // background_menu: theme.bg_menu, //colors.deepPurple.accent3,
-            // background_card: theme.bg_card,
+            primary: theme.complementary, // primary variant
+            secondary: theme.analogous_2, //secondary variant
+            accent: theme.analogous_2, // primary variant
+            error: default_values.triadic_1,
+            info: theme.analogous_2, //secondary variant
+            success: default_values.analogous_1, //secondary 
+            warning: default_values.triadic_2, //
+            anchor: theme.primary, // primary variant
+            error: default_values.triadic_1,
+            success: default_values.analogous_1, //secondary 
+            warning: default_values.triadic_2, //
         },
         light: {
             primary: theme.complementary, // primary variant
             secondary: theme.analogous_2, //secondary variant
             accent: theme.analogous_2, // primary variant
-            error: theme.triadic_1,
+            error: default_values.triadic_1,
             info: theme.analogous_2, //secondary variant
-            success: theme.analogous_1, //secondary 
-            warning: theme.triadic_2, //
+            success: default_values.analogous_1, //secondary 
+            warning: default_values.triadic_2, //
             anchor: theme.primary, // primary variant
+
             //beegees
             background: theme.bg,
             background_menu: theme.bg_menu, //colors.deepPurple.accent3,

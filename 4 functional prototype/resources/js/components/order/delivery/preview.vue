@@ -20,7 +20,7 @@
             </v-list-item-subtitle>
         </v-list-item-content>
 
-        <v-list-item-icon class="ml-5">
+        <v-list-item-icon class="ml-5" v-if="item.order_delivery_comments">
             <v-icon color="primary">mdi-message-text</v-icon> {{item.order_delivery_comments.length}}
         </v-list-item-icon>
 
@@ -28,7 +28,7 @@
             <v-icon  color="primary">mdi-file</v-icon> {{nrOfFiles}}
         </v-list-item-icon>
 
-        <v-list-item-icon class="ml-5" v-if="item.type != 'final'">
+        <v-list-item-icon class="ml-5" >
             <v-icon  color="error" v-if="item.rate == 'bad'">mdi-thumb-down</v-icon>
             <v-icon  color="warning" v-if="item.rate == 'normal'">mdi-thumbs-up-down</v-icon>
             <v-icon  color="success" v-if="item.rate == 'good'">mdi-thumb-up</v-icon>

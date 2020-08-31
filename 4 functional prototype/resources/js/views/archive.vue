@@ -2,25 +2,27 @@
         <v-row>
                         
             <v-col cols=4>
-                <v-sheet
-                    class="justify-center align-center white--text h2 d-flex "
+                <v-sheet v-if=" recieved_payment.length > 0"
+                    class="justify-center align-center white--text h2 px-10 d-flex "
                     color="primary lighten-1"
                     height="200"
-                 > 1 afgerond </v-sheet>
+                 > {{ recieved_payment.length }}  Afgerond </v-sheet>
             </v-col>
-            <v-col cols=4>
+
+             <v-col cols=4 v-if="(quit_postmaker.length ) > 0">
                      <v-sheet
-                    class="justify-center align-center  white--text d-flex h2"                    
-                    color="warning lighten-1"
-                    height="200"
-                >2 euro omzet</v-sheet>
-            </v-col>
-            <v-col cols=4>
-                     <v-sheet
-                    class="justify-center align-center white--text d-flex  h2"
+                    class="justify-center align-center white--text d-flex px-10 h2"
                     color="error lighten-1"
                     height="200"
-                >3 Gestopt</v-sheet>
+                >{{ quit_postmaker.length }} Gestopt door postmaker </v-sheet>
+            </v-col>
+            
+            <v-col cols=4 v-if="( quit.length + removed.length ) > 0">
+                     <v-sheet
+                    class="justify-center align-center white--text d-flex px-10  h2"
+                    color="error lighten-1"
+                    height="200"
+                >{{ quit.length + removed.length}} Gestopt / verwijderd</v-sheet>
             </v-col>
 
             <v-col cols=12>
@@ -29,10 +31,10 @@
                         <order-open-list-item-component :item="item"  />   
                         <order-account-list-item-component :item="item" />
                     </order-list-item-component>  
+                    <v-card-text v-if="recieved_payment.length == 0">
+                        Er zijn geen succcesvol afgeronde opdrachten.
+                    </v-card-text>   
                 </order-list-component>     
-                <v-card-text v-if="recieved_payment.length == 0">
-                    Er zijn geen succcesvol afgeronde opdrachten.
-                </v-card-text>             
             </v-col>
 
             <v-col cols=4 v-if="quit.length">                
@@ -59,6 +61,7 @@
 
                 <order-list-component title="Verwijderd">
                     <order-list-item-component v-for="(item,key) in removed" :item="item" :key="key" >
+                        <order-open-list-item-component :item="item"  /> 
                         <order-account-list-item-component :item="item" />
                     </order-list-item-component>  
                 </order-list-component>  

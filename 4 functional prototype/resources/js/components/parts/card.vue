@@ -16,7 +16,7 @@ export default {
     props:{
         height: { default: 'auto' },
         mb: { default: 'mb-5' },
-        noflex: {default: 0}
+        noflex: {  default: 0  }
     },
     computed: {
         getClass(){            

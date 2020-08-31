@@ -1,31 +1,23 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import Pusher from 'pusher-js';
+import router from '../../router/index'
 import { PUSHER_APP_KEY, PUSHER_APP_CLUSTER } from '../constants'
 import {
     SET_NOTIFICATIONS,
     SET_NOTIFICATION,
     SET_READ,
     TOGGLE_NOTIFICATION_MODAL,
-    OPEN_NOTIFICATION_MODAL
+    OPEN_NOTIFICATION_MODAL,
+    REMOVE_NOTIFICATION
 } from '../mutation-types';
-
-
-const root = { root: true };
+import { ROOT } from '../constants';
 
 Vue.use(Vuex);
-
 // Enable pusher logging - don't include this in production
-
 Pusher.logToConsole = true;
 const pusher = new Pusher(PUSHER_APP_KEY, {
     cluster: PUSHER_APP_CLUSTER,
-    // authEndpoint: `/broadcasting/auth`,
-    // auth: {
-    //     // headers: {
-    //     //     Authorization: `Bearer ${localStorage.getItem('token')}`
-    //     // }
-    // }
 });
 
 
@@ -54,6 +46,16 @@ export default {
         },
         [OPEN_NOTIFICATION_MODAL](state) {
             state.modal = 1
+        },
+        [REMOVE_NOTIFICATION](state, payload) {
+            for (var i in state.list) {
+                var item = state.list[i];
+                if (item.id == payload.id) {
+                    state.list.splice(i, 1);
+                }
+            }
+            // console.log('notif-state', state);
+            // console.log('notif-payload', payload);
         }
 
     },
@@ -67,13 +69,23 @@ export default {
         init({ commit, dispatch, rootState }) {
             var authUserid = rootState.auth.user.id;
             pusher.subscribe(`notification-channel.${authUserid}`).bind('App\\Events\\NewNotification', function(data) {
+
+                var orderId = data.notification.url.split('/')[data.notification.url.split('/').length - 1];
+                var isCurrentOrder = orderId == rootState.order.data.id;
+                var hasOrderInRoute = router.currentRoute.path.split('/').filter(item => item == 'order').length;
+
+                if (hasOrderInRoute && isCurrentOrder) {
+                    dispatch('order/messages/recieveFromNotifications', data.notification, ROOT);
+                }
+
                 commit(SET_NOTIFICATION, data.notification);
                 commit(OPEN_NOTIFICATION_MODAL);
             });
 
-            dispatch('api/get', 'notifications/get', root).then(() => {
+            dispatch('api/get', 'notifications/get', ROOT).then(() => {
                 var response = rootState.api.response;
                 commit(SET_NOTIFICATIONS, response);
+
                 if (response[0] && response[0].read == 0) {
                     commit(OPEN_NOTIFICATION_MODAL);
                 }
@@ -82,12 +94,12 @@ export default {
 
         read({ commit, dispatch }, payload) {
             commit('SET_READ', payload);
-            dispatch('api/post', { url: 'notifications/read', data: payload }, root);
+            dispatch('api/post', { url: 'notifications/read', data: payload }, ROOT);
         },
 
-        remove({ dispatch, rootState }, payload) {
-            console.log(payload);
-            dispatch('api/post', { url: 'notifications/remove', data: payload }, root).then(() => {
+        remove({ dispatch, rootState, commit }, payload) {
+            commit(REMOVE_NOTIFICATION, payload);
+            dispatch('api/post', { url: 'notifications/remove', data: payload }, ROOT).then(() => {
                 var response = rootState.api.response;;
                 console.log(response);
             });

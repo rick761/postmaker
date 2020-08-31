@@ -53,13 +53,13 @@ import {mapState} from 'vuex';
         })
     },
     methods: {
+      
+      success(){       
+        this.$store.dispatch('modal/confirm');        
+      },
       handleInput () {
         this.$store.commit('modal/TOGGLE_GLOBAL_MODAL');
       },
-      success(){
-        this.handleInput();
-        this.$store.dispatch('modal/confirm');        
-      }
     },   
   }
 </script>

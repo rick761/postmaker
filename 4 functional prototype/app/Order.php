@@ -11,7 +11,7 @@ class Order extends Model
     protected $keyType = 'string'; 
     public $incrementing = false;
     protected $guarded = ['created_at'];
-    protected $hidden = ['updated_at', 'postmaker_id'];
+    protected $hidden = ['updated_at'];
 
     protected static function boot()
     {
