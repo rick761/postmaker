@@ -47,7 +47,7 @@ class OrdersController extends Controller
     }
 
     public function available(){        
-        return App\order::where('state','open')
+        return App\Order::where('state','open')
         ->with(['user','order_files','order_tags'])
         ->get();    
     }

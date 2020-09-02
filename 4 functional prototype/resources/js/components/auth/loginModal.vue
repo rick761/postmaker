@@ -2,7 +2,7 @@
     <v-dialog v-model="value" persistent absolute max-width="600px" @click:outside="closeDialog">       
         <form method="POST" autocomplete="off" :action="loginActionUrl()">        
             <input type="hidden" name="_token" v-bind:value="csrf">   
-            <v-card>
+            <card>
                 <v-card-title>Aanmelden</v-card-title>
                 <v-card-text>                     
                       
@@ -21,9 +21,10 @@
                         Wachtwoord vergeten?
                     </v-btn>
 
-                    <v-btn @click="postmakerAcc()">postmaker</v-btn>
-                    <v-btn @click="requesterAcc()">requester</v-btn>
+                    
 
+                    
+                    
                 </v-card-text>
 
                 <v-card-actions>                
@@ -32,8 +33,32 @@
                         Aanmelden
                     </v-btn>        
                 </v-card-actions>
-            </v-card>
-        </form>        
+
+                <v-card-text style="opacity: 0.3">
+                    <h3>Test gebruikers</h3>
+                    <v-row>
+                        <v-col>
+                            <p>Postmakers:</p>
+
+                            <v-btn  color="secondary" block @click="postmakerAcc(1)">Piet Pieterse</v-btn><br>
+                            <v-btn  color="secondary" block @click="postmakerAcc(2)">Henk de Jong</v-btn><br>
+                            <v-btn   color="secondary" block @click="postmakerAcc(3)">Will Smit</v-btn><br>
+                            <v-btn   color="secondary" block @click="postmakerAcc(4)">Henk de Jong</v-btn><br>
+
+                        </v-col>
+                        <v-col>
+                            <p>Content aanvragers:</p>
+
+                            <v-btn   color="secondary" block @click="requesterAcc(1)">Jan Jansen</v-btn><br>
+                            <v-btn   color="secondary" block @click="requesterAcc(2)">Willem van de Berg</v-btn><br>
+                            <v-btn   color="secondary" block @click="requesterAcc(3)">Pieter Post</v-btn><br>
+                            <v-btn   color="secondary" block @click="requesterAcc(4)">Freek de Bruin</v-btn><br>
+
+                        </v-col>                        
+                    </v-row>
+                </v-card-text>
+            </card>
+        </form>                 
     </v-dialog>
 </template>
  
@@ -72,12 +97,12 @@ export default {
                 localStorage.setItem("remember", 0);
             }
         },
-        postmakerAcc(){
-            this.username = 'postmaker@postmaker.nl'
+        postmakerAcc(nr){
+            this.username = 'postmaker'+nr+'@postmaker.nl'
             this.password = 'postmaker'
         },
-        requesterAcc(){
-            this.username = 'requester@requester.nl'
+        requesterAcc(nr){
+            this.username = 'requester'+nr+'@requester.nl'
             this.password = 'requester'
         }
     }
