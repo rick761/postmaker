@@ -44,7 +44,7 @@
                         </v-img>
 
                     </template>
-                        <span >Aanmelden of registreren</span>
+                        <v-icon>mdi-arrow-up</v-icon>
                     </v-tooltip>
 
                    
