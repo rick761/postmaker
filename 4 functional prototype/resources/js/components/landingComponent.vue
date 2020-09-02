@@ -20,14 +20,14 @@
             </v-app-bar>
             
 
-            <v-row style="min-height:40vh" align="end"  >                
+            <v-row class="mb-5" style="min-height:40vh" align="end"  >                
                 <v-col cols=12  class="white--text h1 mx-auto text-center">
                     Aanvragen en produceren van content.
                     <br>
                     <v-btn v-if="guest" @click="loginModal = !loginModal" x-large tile class="ma-5 success">
                         <v-icon>mdi-login</v-icon> &nbsp; Aanmelden
                     </v-btn>                     
-                    <v-btn v-if="!guest" x-large class="ma-5 info" @click="goHome">
+                    <v-btn v-if="!guest" x-large class="ma-5  info" @click="goHome">
                         <v-icon>mdi-tree-outline</v-icon> &nbsp; Naar postmaker
                     </v-btn>
                     <br>
@@ -36,8 +36,19 @@
             </v-row>
             
             <v-card dark>  
-                <v-img src="./images/landing/preview.png" />  
+                <v-tooltip top>
+                    <template v-slot:activator="{ on, attrs }">
 
+                         <v-img  v-on="on"  v-bind="attrs" id="preview_postmaker" src="./images/landing/preview.png" >  
+                            <div class="v-skeleton-loader__image v-skeleton-loader__bone"></div>
+                        </v-img>
+
+                    </template>
+                        <span >Aanmelden of registreren</span>
+                    </v-tooltip>
+
+                   
+               
                 <!-- <v-card-title><v-icon x-large>mdi-tree-outline</v-icon>
                     Postmaker</v-card-title>
                 <v-card-text>   
@@ -87,3 +98,24 @@ export default {
     }
 }
 </script>
+
+<style  scoped>
+.v-skeleton-loader__image {
+    height:100% !important;
+    opacity:0.9;
+}
+.v-skeleton-loader__bone:after {
+    -webkit-animation: loading 1.5s infinite;
+    animation: loading 1.5s infinite;
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(-100%);
+    z-index: 1;
+    background: linear-gradient(90deg,hsla(0,0%,100%,0),hsla(0,0%,100%,.3),hsla(0,0%,100%,0));
+
+}
+</style>
