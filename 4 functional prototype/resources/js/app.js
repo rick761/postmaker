@@ -19,6 +19,7 @@ Vue.component('systemBarComponent', require('./components/systemBarComponent.vue
 Vue.component('card', require('./components/parts/card.vue').default);
 Vue.component('modal', require('./components/parts/modal.vue').default);
 Vue.component('global-modal', require('./components/parts/global_modal.vue').default);
+Vue.component('feedback', require('./components/parts/feedback.vue').default);
 
 //COMPONENT - auth
 Vue.component('login-modal-component', require('./components/auth/loginModal.vue').default);

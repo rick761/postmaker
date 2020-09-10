@@ -23,12 +23,19 @@ import profile from '../views/profile';
 import account from '../views/account';
 import settings from '../views/settings';
 import archivedOrder from '../views/archivedOrder';
+import adminPanel from '../views/admin'
 
 
 Vue.use(VueRouter);
 
 const routes = [
     /* general */
+
+    {
+        path: '/admin/panel',
+        name: 'Admin panel',
+        component: adminPanel,
+    },
     {
         path: '/',
         name: 'Home',
@@ -76,7 +83,6 @@ const routes = [
         name: 'Instellingen',
         component: settings,
     },
-
 
 
     /**postmaker**/

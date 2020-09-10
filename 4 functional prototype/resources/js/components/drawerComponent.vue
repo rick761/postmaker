@@ -19,19 +19,21 @@
 
             <drawer-list-item link="/" icon="mdi-briefcase-variant" text="Home " ></drawer-list-item>            
             
+            <!---->
+            <drawer-list-item    v-if="isAdmin" link="/admin/panel" icon="mdi-home-group" text="Beheer " > </drawer-list-item>            
+
             <!--REQUESTER-->
-            <v-list-item v-if="isAdmin">Requester</v-list-item>
-            <drawer-list-item    v-if="isRequester || isAdmin" link="/requester/orders" icon="mdi-home-group" text="Opdrachten " > {{nrOfmyOrders}}  </drawer-list-item>            
-            <drawer-list-item    v-if="isRequester || isAdmin" link="/requester/requested" icon="mdi-routes-clock" text="Aanvragen" >   {{nrOfRequests}}  </drawer-list-item>            
+            
+            <drawer-list-item    v-if="isRequester" link="/requester/orders" icon="mdi-home-group" text="Opdrachten " > {{nrOfmyOrders}}  </drawer-list-item>            
+            <drawer-list-item    v-if="isRequester" link="/requester/requested" icon="mdi-routes-clock" text="Aanvragen" >   {{nrOfRequests}}  </drawer-list-item>            
 
 
-            <!--POSTMAKER-->
-            <v-list-item v-if="isAdmin" >Postmaker</v-list-item>
-            <drawer-list-item  v-if="isPostmaker|| isAdmin" link="/postmaker/orders" icon="mdi-home-group" text="Opdrachten" >{{nrOfmyOrders}}  </drawer-list-item>
-            <drawer-list-item  v-if="isPostmaker|| isAdmin" link="/postmaker/requested" icon="mdi-routes-clock" text="Aanvragen" >  {{nrOfRequests}} </drawer-list-item>
+            <!--POSTMAKER-->            
+            <drawer-list-item  v-if="isPostmaker" link="/postmaker/orders" icon="mdi-home-group" text="Opdrachten" >{{nrOfmyOrders}}  </drawer-list-item>
+            <drawer-list-item  v-if="isPostmaker" link="/postmaker/requested" icon="mdi-routes-clock" text="Aanvragen" >  {{nrOfRequests}} </drawer-list-item>
 
             <!--GENERAL-->           
-    	    <drawer-list-item link="/archive" icon="mdi-buffer" text="Archief" > {{nrOfArchivedOrders}}  </drawer-list-item>
+    	    <drawer-list-item link="/archive" v-if="isPostmaker || isPostmaker" icon="mdi-buffer" text="Archief" > {{nrOfArchivedOrders}}  </drawer-list-item>
         
         <v-divider></v-divider>     
 

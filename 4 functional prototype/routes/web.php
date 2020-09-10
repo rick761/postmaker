@@ -82,3 +82,6 @@ Route::get('/error',function(){
 Route::get('/public_path', function () {
     return url('/storage/');
 });
+
+Route::post('/send/feedback','FeedbackController@create');
+Route::get('/get/feedback','FeedbackController@get')->middleware('type:admin');

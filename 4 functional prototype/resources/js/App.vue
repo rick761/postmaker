@@ -10,31 +10,24 @@
             <notification-component />            
 
             <v-row>
-                <v-col cols=11>
-                    <v-container fluid>                        
-                        <breadcrumbComponent /> 
-                        <router-view></router-view> 
-                    </v-container>
-                </v-col>
+                
 
                 <!--icons right-->
-                <v-col cols=1 class="mt-5 text-right pr-8" >              
+                <v-col cols=12 class="text-right pr-8" >    
 
-                    <v-btn :href="LandingsPageUrl()" color="primary" icon>
+                    <v-btn :href="LandingsPageUrl()" class="float-right" color="primary" icon>
                         <v-icon>mdi-file-move-outline</v-icon>
                     </v-btn>
-
-                    <br>
-
-                    <form id="logout-form" :action="logoutActionUrl()" method="POST" >
+                    
+                    <form class="float-right" id="logout-form" :action="logoutActionUrl()" method="POST" >
                         <input type="hidden" name="_token" v-bind:value="csrf">   
                         <!-- <v-btn type="submit" text><v-icon>mdi-logout</v-icon> &nbsp; Uitloggen</v-btn>  -->
                         <v-btn type="submit" color="warning" icon>
                             <v-icon>mdi-logout-variant</v-icon>
                         </v-btn>
-                    </form>                    
-                    
-                    <v-btn color="secondary" @click="$store.commit('notifications/TOGGLE_NOTIFICATION_MODAL');" icon>
+                    </form>    
+
+                    <v-btn class="float-right" color="secondary" @click="$store.commit('notifications/TOGGLE_NOTIFICATION_MODAL');" icon>
                         <v-badge 
                                 v-if="unread_notifications"
                                 :content="unread_notifications"
@@ -43,8 +36,17 @@
                         </v-badge>          
                         <v-icon v-else>mdi-message-outline</v-icon>           
                     </v-btn>
-
                 </v-col>
+
+                <feedback />
+
+                <v-col cols=12>
+                    <v-container fluid>                        
+                        <breadcrumbComponent /> 
+                        <router-view></router-view> 
+                    </v-container>    
+                </v-col>
+
             </v-row> 
         </v-main>
         
@@ -54,15 +56,17 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapState} from 'vuex'
 export default {    
     props:['csrf','auth'],
 
     data(){return{
-        prevRoute:null,
+        prevRoute:null,        
     }},
 
-    computed:{
+    
+
+    computed:{       
         ...mapGetters({           
             unread_notifications: 'notifications/UNREAD_NOTIFICATIONS',
         }),
@@ -74,27 +78,25 @@ export default {
         },
         LandingsPageUrl(){
             return window.location.origin;
-        }
+        },
+        
     },
 
     created(){        
         this.$store.commit('auth/SET_AUTH', JSON.parse(this.auth));       
         this.$store.dispatch('orders/init');   
-        this.$store.dispatch('notifications/init');                              
+        this.$store.dispatch('notifications/init'); 
+        
     },    
-
-    
      
 }
 </script>
 
 <style >
-
 .v-avatar img{    
     border-radius: 0 !important;
     height: auto !important;
 }
-
 a:hover{
     text-decoration: none;
 }

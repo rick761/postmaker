@@ -4,6 +4,8 @@
     
         <v-container fluid>
 
+            <feedback />
+
             <v-app-bar dark color="transparent" flat>
                 <v-toolbar-title >
                     <v-icon x-large>mdi-tree-outline</v-icon>
