@@ -33,7 +33,7 @@
             <drawer-list-item  v-if="isPostmaker" link="/postmaker/requested" icon="mdi-routes-clock" text="Aanvragen" >  {{nrOfRequests}} </drawer-list-item>
 
             <!--GENERAL-->           
-    	    <drawer-list-item link="/archive" v-if="isPostmaker || isPostmaker" icon="mdi-buffer" text="Archief" > {{nrOfArchivedOrders}}  </drawer-list-item>
+    	    <drawer-list-item link="/archive" v-if="isPostmaker || isRequester" icon="mdi-buffer" text="Archief" > {{nrOfArchivedOrders}}  </drawer-list-item>
         
         <v-divider></v-divider>     
 

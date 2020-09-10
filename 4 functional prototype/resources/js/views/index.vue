@@ -7,7 +7,7 @@
                 </card>
             </v-col>        -->
 
-            <v-col cols=4 v-if="activeProjects">
+            <v-col cols=12 sm=4 v-if="activeProjects">
                 <v-sheet 
                     class="justify-center align-center px-10 white--text h2 d-flex "
                     color="primary lighten-1"
@@ -18,7 +18,7 @@
                  </v-sheet>
             </v-col>
 
-            <v-col cols=4 v-if="unread_notifications">
+            <v-col cols=12 sm=4 v-if="unread_notifications">
                 <v-sheet                      
                     class="justify-center align-center px-10 white--text d-flex h2"                    
                     color="warning lighten-1"
@@ -29,7 +29,7 @@
                 
             </v-col>
             
-            <v-col cols=4 v-if="archivedProjects"> 
+            <v-col cols=12 sm=4 v-if="archivedProjects"> 
                      <v-sheet
                     class="justify-center align-center white--text px-10 d-flex  h2 pa-5"
                     color="error lighten-1"
