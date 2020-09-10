@@ -1,6 +1,6 @@
 
 <template>
-    <v-navigation-drawer :style="{background: $vuetify.theme.currentTheme.background_menu}"  dark permanent :mini-variant="mini" v-if="show" app>
+    <v-navigation-drawer absolute :style="{background: $vuetify.theme.currentTheme.background_menu}" dark permanent :mini-variant="mini" v-if="show" app>
        
         <v-list-item class="px-2 mt-2">
             <v-list-item-avatar @click.stop="mini = false">
@@ -103,6 +103,11 @@
             },
             isRequester(){
                 return this.auth.type == 'requester';
+            }
+        },
+        created(){
+            if(this.$vuetify.breakpoint.name == 'xs'){
+                this.mini = true;
             }
         }
         

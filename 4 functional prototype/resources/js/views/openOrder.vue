@@ -1,6 +1,6 @@
 <template>    
     <v-row>
-        <v-col cols=8>             
+        <v-col cols="12" md="8">           
            <order-info-component />                    
             <order-request-order-component v-if="!isOwner && isPostmaker" />    
 
@@ -15,7 +15,7 @@
 
         </v-col>  
 
-        <v-col cols=4>     
+        <v-col cols="12" md="4">     
             <order-actions-component />    
             <order-aside-component />
             <order-files-moodboard-component />                 

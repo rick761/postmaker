@@ -41,9 +41,27 @@
             </v-col>   
 
             <v-col cols=12>
-                <v-btn v-if="auth.type == 'postmaker'" x-large to="/open" class="primary"> <v-icon>mdi-magnify</v-icon> &nbsp; Zoek nieuwe projecten </v-btn>                 
-                <v-btn x-large :to="'/'+auth.type+'/orders'" class="secondary ml-3"> <v-icon>mdi-eye</v-icon> &nbsp; Mijn projecten </v-btn>     
-                <v-btn v-if="auth.type=='requester'" x-large to="/requester/order/new" class="success ml-3"> <v-icon>mdi-plus</v-icon> &nbsp; Nieuwe post aanmaken </v-btn>                    
+                <v-btn     
+                    
+                    :block="(this.$vuetify.breakpoint.name == 'xs')"            
+                    v-if="auth.type == 'postmaker'" x-large to="/open" class="primary mr-3  mb-2"
+                >
+                    <v-icon>mdi-magnify</v-icon> &nbsp; Zoek nieuwe projecten 
+                </v-btn>                 
+                <v-btn 
+                    
+                    :block="(this.$vuetify.breakpoint.name == 'xs')"  
+                    x-large :to="'/'+auth.type+'/orders'" class="secondary mr-3 mb-2"
+                >
+                    <v-icon>mdi-eye</v-icon> &nbsp; Mijn projecten 
+                </v-btn>     
+                <v-btn 
+                    
+                    :block="(this.$vuetify.breakpoint.name == 'xs')" 
+                    v-if="auth.type=='requester'" x-large to="/requester/order/new" class="success mr-3 mb-2" 
+                >
+                    <v-icon>mdi-plus</v-icon> &nbsp; Nieuwe post aanmaken 
+                </v-btn>                    
             </v-col>          
 
         </v-row>    

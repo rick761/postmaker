@@ -96,7 +96,7 @@ export default {
             dispatch('api/get', '/orders/archived', ROOT).then(() => {
                 commit('loader/TOGGLE_LOADER_SYSTEM_BAR_OFF', null, ROOT);
                 commit(SET_ARCHIVED_ORDERS, rootState.api.response);
-                console.log(rootState.api.response);
+
             });
         },
 

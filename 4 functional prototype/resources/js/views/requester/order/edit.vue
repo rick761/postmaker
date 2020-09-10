@@ -1,7 +1,7 @@
 <template>
     <v-form ref="form" v-model="valid">  
         <v-row> 
-            <v-col cols="6">                      
+            <v-col cols="12" md="6">                      
             <card>
                 <v-card-subtitle>Gegevens</v-card-subtitle>
                 <v-card-text>
@@ -75,7 +75,7 @@
             <create-order-descriptions-component />
 
             </v-col>
-            <v-col cols=6>
+            <v-col cols="12" md="6">
 
                 <card outlined class="mb-5">
                     <v-card-subtitle>Acties</v-card-subtitle>    

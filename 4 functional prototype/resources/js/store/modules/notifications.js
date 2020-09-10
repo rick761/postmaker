@@ -15,7 +15,7 @@ import { ROOT } from '../constants';
 
 Vue.use(Vuex);
 // Enable pusher logging - don't include this in production
-Pusher.logToConsole = true;
+Pusher.logToConsole = false;
 const pusher = new Pusher(PUSHER_APP_KEY, {
     cluster: PUSHER_APP_CLUSTER,
 });

@@ -1,5 +1,6 @@
 <template>
-    <div style="margin-top: 10vh; position:absolute; right:0; margin-right:10px; z-index:9999;">
+    <div style="margin: 10vh 0 5vh; position:absolute; right:0; margin-right:10px; z-index:9999;" :class="{ 'bottom-0' : (this.$vuetify.breakpoint.name == 'xs')}">
+
             <modal title="Te volgens instructies"  width="1024" v-model="instructions_modal">
                 
                 <v-container>                    
@@ -54,7 +55,7 @@
                             Feedback Formulier
                         </v-card-subtitle>
                         <v-card-text> 
-                            
+
                             <v-select     
                                 style="clear:both;"
                                 class="mb-3"                                                                     
@@ -276,6 +277,13 @@ export default {
     created(){
         this.modal_current_step = localStorage.getItem('modal_current_step');
         this.$forceUpdate();
+        
     }    
 }
 </script>
+
+<style scoped>
+    .bottom{
+
+    }
+</style>

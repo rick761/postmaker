@@ -25,7 +25,7 @@ export default {
     actions: {
         async post({ commit }, payload) {
             commit(CLEAR_API_RESPONSE);
-            console.log('api-call', payload);
+
             var config = {
                 method: 'post',
                 url: payload.url,

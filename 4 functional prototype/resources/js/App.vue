@@ -8,7 +8,7 @@
         <v-main style="min-height: 100vh; " :style="{background: $vuetify.theme.currentTheme.background}"  >
 
             <notification-component />            
-
+            
             <v-row>
                 
 
@@ -62,9 +62,7 @@ export default {
 
     data(){return{
         prevRoute:null,        
-    }},
-
-    
+    }},   
 
     computed:{       
         ...mapGetters({           
@@ -86,6 +84,8 @@ export default {
         this.$store.commit('auth/SET_AUTH', JSON.parse(this.auth));       
         this.$store.dispatch('orders/init');   
         this.$store.dispatch('notifications/init'); 
+
+        
         
     },    
      
@@ -103,10 +103,16 @@ a:hover{
 .v-list{
     background: auto !important;
 }
+.v-btn{
+    overflow: hidden;
+}
 .v-dialog--fullscreen {    
     height: 90vh !important;  
     bottom: 0 !important;
     top: auto !important;
     box-shadow: 0 1px 999px #000;
+}
+.bottom-0{
+    bottom:0;
 }
 </style>

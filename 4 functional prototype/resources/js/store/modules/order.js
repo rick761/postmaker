@@ -162,7 +162,7 @@ export default {
                 };
 
                 commit(SET_ORDER, response);
-                console.log('THE RECIEVED ORDER: ', response);
+
 
                 //setters
                 commit('descriptions/' + SET_ORDER_DESCRIPTION, response.order_descriptions);
