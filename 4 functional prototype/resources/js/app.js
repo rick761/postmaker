@@ -168,11 +168,11 @@ function getTheme() {
     }
     if ((localStorage.getItem('theme') == 'rally')) {
         theme = {
-            primary: '#33333D', //primary button
-            complementary: '#FFFFFF', //accent   
+            primary: '#005D57', //primary button
+            complementary: '#FF6859', //accent   
             analogous_2: '#1EB980', //link color  
-            bg_card: '#33333D',
-            bg: '#33333D',
+            bg_card: '#fff',
+            bg: '#424250',
             bg_menu: '#72DEFF' // menu color -#
         };
     }
