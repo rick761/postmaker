@@ -4,6 +4,7 @@
                 
                 <card v-if="data">
                     <v-card-title>
+                        <h5>Ontvangen feedback</h5>
                         <v-spacer></v-spacer>
                         <v-text-field
                             v-model="search"

@@ -1,10 +1,10 @@
 <template>      
         <v-row>
-            <v-col cols="6">                
+            <v-col cols="12" md="6">                
                 <edit-profile-component />                
             </v-col>
 
-            <v-col cols="6">
+            <v-col cols="12" md="6">
                <preview-profile-component />               
             </v-col>                   
 
