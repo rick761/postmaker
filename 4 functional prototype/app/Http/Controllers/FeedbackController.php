@@ -10,7 +10,7 @@ class FeedbackController extends Controller
         public function create(Request $request){   
             $item = new FeedbackForm;               
             $item->version = $request->version;
-            $item->story = $request->version; 
+            $item->story = $request->story; 
             $item->rate = $request->rate;
             if(!isset($item->feedback)){$item->feedback = $request->feedback;}
             if(!isset($item->notation)){$item->notation = $request->notation;}
