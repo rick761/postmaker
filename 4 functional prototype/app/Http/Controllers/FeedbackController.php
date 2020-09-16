@@ -12,8 +12,8 @@ class FeedbackController extends Controller
             $item->version = $request->version;
             $item->story = $request->version; 
             $item->rate = $request->version;
-            if(isset($item->feedback)){$item->feedback = $request->feedback;}
-            if(isset($item->notation)){$item->notation = $request->notation;}
+            if(!isset($item->feedback)){$item->feedback = $request->feedback;}
+            if(!isset($item->notation)){$item->notation = $request->notation;}
             $item->save();
 
             return $item;      
