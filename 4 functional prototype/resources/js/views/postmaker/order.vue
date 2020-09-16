@@ -16,8 +16,7 @@
         
         <order-delivery-final-component />
         <order-delivery-open-component />        
-        <order-delivery-new-component />       
-         
+        <order-delivery-new-component />
     </v-row>    
 </template>
 

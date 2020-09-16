@@ -22,7 +22,6 @@
             ...mapState({
                 descriptions: state => state.order.descriptions.list
             })
-        }
-        
+        }        
     }
 </script>

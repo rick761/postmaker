@@ -4,19 +4,39 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+
 use App;
+use App\User;
+use App\UserImage;
+use App\Order;
 
 class UserController extends Controller
 {
 
     function get(Request $request, $id){
-        return App\User::with(['user_images','user_show_deliverys.order_delivery_file.order_delivery'])->withCount('user_likes')->find($id);
+        return User::with([
+                'user_images',
+                'user_show_deliverys.order_delivery_file.order_delivery'
+            ])
+            ->withCount('user_likes')
+            ->find($id);
     }
 
 
     function profile(Request $request){
-        $me = App\User::with(['user_images','user_show_deliverys.order_delivery_file.order_delivery'])->withCount('user_likes')->find(Auth::id());
-        $me = $me->makeVisible(['first_name', 'last_name', 'phone']);
+        $me = User::with([
+            'user_images',
+            'user_show_deliverys.order_delivery_file.order_delivery'
+        ])
+        ->withCount('user_likes')
+        ->find(Auth::id());
+
+        $me = $me->makeVisible([
+            'first_name', 
+            'last_name',
+            'phone'
+        ]);
+
         return $me;
     }
 
@@ -28,7 +48,7 @@ class UserController extends Controller
 
         //validate display name;
         if($request->display_name){
-            $getDisplayNameUser = App\User::where('display_name' , $request->display_name);
+            $getDisplayNameUser = User::where('display_name' , $request->display_name);
             $exists = $getDisplayNameUser->count();
             $isMe = 0;
 
@@ -50,18 +70,21 @@ class UserController extends Controller
         if($request->website){$me->website = $request->website;}
         if($request->phone){$me->phone = $request->phone;}
         $me->save();
-
-        return;    
     }
 
-    private function saveUserImages($list = null){    
-
+    private function saveUserImages($list = null){   
         $me = Auth::User();
-        $count = 0;        
+        $count = 0;      
+
         foreach($list as $user_image){     
-            $exists = App\UserImage::where( ['user_id' => Auth::id(), 'url'=> $user_image['url'] ] )->count();      
+
+            $exists = UserImage::where([
+                'user_id' => Auth::id(), 
+                'url'=> $user_image['url'] 
+            ])->count();      
+
             if(!$exists){
-                $image = new App\UserImage($user_image);   
+                $image = new UserImage($user_image);   
                 $me->user_images()->save($image);
                 $count++;
             }                
@@ -71,14 +94,18 @@ class UserController extends Controller
 
 
     public function deleteUserImage ( Request $request ){     
-        $deletedRows = App\UserImage::where([ 'url' => $request->url, 'user_id' => Auth::id() ])->delete(); 
+        $deletedRows = UserImage::where([
+            'url' => $request->url, 
+            'user_id' => Auth::id() 
+        ])->delete(); 
+
         return $deletedRows;
     }
 
 
     public function setShowFiles(Request $request){       
         $order_id = $request->order_id;
-        $order = App\Order::with('order_deliveries.order_delivery_files')->find($order_id);
+        $order = Order::with('order_deliveries.order_delivery_files')->find($order_id);
 
         //deleteOld
         foreach($order->order_deliveries as $delivery){
@@ -102,7 +129,7 @@ class UserController extends Controller
 
     public function hideShowFiles (Request $request){ 
         $order_id = $request->order_id;
-        $order = App\Order::with('order_deliveries.order_delivery_files')->find($order_id);
+        $order = Order::with('order_deliveries.order_delivery_files')->find($order_id);
         
         foreach($order->order_deliveries as $delivery){
             foreach($delivery->order_delivery_files as $file){
@@ -111,9 +138,7 @@ class UserController extends Controller
                     $showing_delivery->delete();
                 }
             }
-        }
-
-    
+        }    
     }
 
 

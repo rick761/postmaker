@@ -27,20 +27,21 @@ Vue.component('register-modal-component', require('./components/auth/registerMod
 
 //COMPONENT - order_list
 Vue.component('order-list-component', require('./components/order_list/list.vue').default);
-Vue.component('order-list-item-component', require('./components/order_list/listItem.vue').default);
-Vue.component('order-remove-list-item-component', require('./components/order_list/ListItem_remove.vue').default);
-Vue.component('order-open-list-item-component', require('./components/order_list/ListItem_open.vue').default);
-Vue.component('order-account-list-item-component', require('./components/order_list/ListItem_account.vue').default);
-Vue.component('order-messages-list-item-component', require('./components/order_list/ListItem_messages.vue').default); // not used
-Vue.component('order-state-list-item-component', require('./components/order_list/ListItem_state.vue').default);
-Vue.component('order-request-confirm-list-item-component', require('./components/order_list/ListItem_request_confirm.vue').default);
-Vue.component('order-request-apply-list-item-component', require('./components/order_list/ListItem_request_apply.vue').default);
+Vue.component('order-list-item-component', require('./components/order_list/item.vue').default);
+Vue.component('order-remove-list-item-component', require('./components/order_list/remove.vue').default);
+Vue.component('order-open-list-item-component', require('./components/order_list/open.vue').default);
+Vue.component('order-account-list-item-component', require('./components/order_list/account.vue').default);
+Vue.component('order-messages-list-item-component', require('./components/order_list/messages.vue').default); // not used
+Vue.component('order-state-list-item-component', require('./components/order_list/state.vue').default);
+Vue.component('order-request-confirm-list-item-component', require('./components/order_list/confirm.vue').default);
+Vue.component('order-request-apply-list-item-component', require('./components/order_list/apply.vue').default);
 
 /************************************************************************************************************************************************************ */
 /************************************************************************************************************************************************************ */
 //COMPONENT - order
 /************************************************************************************************************************************************************ */
 /************************************************************************************************************************************************************ */
+
 Vue.component('order-aside-component', require('./components/order/aside.vue').default);
 Vue.component('order-actions-component', require('./components/order/actions.vue').default);
 Vue.component('order-chatbox-component', require('./components/order/chatbox.vue').default);
@@ -52,24 +53,24 @@ Vue.component('order-incoming-request-component', require('./components/order/re
 Vue.component('order-accepted-request-component', require('./components/order/request/accepted_request.vue').default);
 
 //COMPONENT - order-descriptions
-Vue.component('create-order-descriptions-component', require('./components/order/description/create_descriptions').default);
+Vue.component('create-order-descriptions-component', require('./components/order/description/create').default);
 Vue.component('order-info-component', require('./components/order/description/info.vue').default);
-Vue.component('order-extra-description-component', require('./components/order/description/extra_description').default);
+Vue.component('order-extra-description-component', require('./components/order/description/extra').default);
 
 //COMPONENT - ORDER-FILES
-Vue.component('create-files-component', require('./components/order/files/create_files').default);
+Vue.component('create-files-component', require('./components/order/files/create').default);
 Vue.component('order-files-moodboard-component', require('./components/order/files/moodboard').default);
 
 //COMPONENT - ORDER-TAGS
-Vue.component('create-tags-component', require('./components/order/tags/create_tags').default);
+Vue.component('create-tags-component', require('./components/order/tags/create').default);
 
 //COMPONENT - ORDER-Delivery
-Vue.component('order-delivery-component', require('./components/order/delivery/delivery').default);
-Vue.component('order-delivery-open-component', require('./components/order/delivery/delivery_open').default);
-Vue.component('order-delivery-new-component', require('./components/order/delivery/delivery_new').default);
-Vue.component('order-delivery-final-component', require('./components/order/delivery/delivery_final').default);
+Vue.component('order-delivery-component', require('./components/order/delivery/wrapper').default);
+Vue.component('order-delivery-open-component', require('./components/order/delivery/open').default);
+Vue.component('order-delivery-new-component', require('./components/order/delivery/new').default);
+Vue.component('order-delivery-final-component', require('./components/order/delivery/final').default);
 Vue.component('order-delivery-preview-component', require('./components/order/delivery/preview').default);
-Vue.component('order-delivery-comments-component', require('./components/order/delivery/delivery_comments').default);
+Vue.component('order-delivery-comments-component', require('./components/order/delivery/comments').default);
 
 /************************************************************************************************************************************************************ */
 

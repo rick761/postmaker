@@ -1,13 +1,11 @@
 <template>
     <card v-if="deliverys && deliverys.length" >
         <v-card-subtitle>
-            Opleveringen 
-            
+            Opleveringen             
         </v-card-subtitle>
         <v-list style="max-height:400px; overflow-y:scroll;">
             <order-delivery-preview-component v-for="(item,key) in reversed_deliverys" :key="key" :last="(key == 0)"  :item="item" />
         </v-list>
-
     </card>    
 </template>
 
