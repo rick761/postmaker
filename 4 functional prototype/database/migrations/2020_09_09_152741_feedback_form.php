@@ -14,8 +14,8 @@ class FeedbackForm extends Migration
             $table->integer('version')->default(0);
             $table->string('story');    
             $table->integer('rate');  
-            $table->string('feedback')->nullable();  
-            $table->string('notation')->nullable();    
+            $table->longText('feedback')->nullable();  
+            $table->longText('notation')->nullable();    
             
             $table->timestamps();
         });
