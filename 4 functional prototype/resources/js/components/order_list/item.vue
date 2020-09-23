@@ -33,7 +33,7 @@
                                 '': dateDiffInDays(item.deliver) > 30 
                                 } ">
                              <v-icon small>mdi-calendar</v-icon>             
-                             <small>{{dateDiffInDays(item.deliver)}} dagen</small>
+                             <small>{{item.deliver}} - Verwacht in {{dateDiffInDays(item.deliver)}} dagen.   </small>
                         </span>                                                               
                     <!-- </v-btn>      -->
                 </v-list-item-content>                   
@@ -63,9 +63,11 @@ export default {
     }},  
     methods:{    
         dateDiffInDays(b) {            
+            var international_date = b.split('-')
+            
             const _MS_PER_DAY = 1000 * 60 * 60 * 24;
             const utc1 = new Date();//Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-            const utc2 = new Date(b);          
+            const utc2 = new Date(`${international_date[2]}-${international_date[1]}-${international_date[0]}`);          
             return Math.floor((utc2 - utc1) / _MS_PER_DAY);
         }
     }

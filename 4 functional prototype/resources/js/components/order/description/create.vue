@@ -4,18 +4,11 @@
 
             <v-card-subtitle>
 
-                Aanvulling
+                Aanvullende opdracht specifieke informatie                
                 
-                <v-tooltip top color="primary">
-                    <template v-slot:activator="{ on, attrs }">                    
-                        <v-btn icon v-bind="attrs" v-on="on" class="float-right">
-                            <v-icon color="accent lighten-1">mdi-comment-question-outline</v-icon>
-                        </v-btn>
-                    </template>
-                    <span>
-                        De aanvullende informatie wordt <u>alleen</u> weergegeven aan de gekoppelde postmaker.<br> Instructies kunnen hier worden aangegeven.
-                    </span>                    
-                </v-tooltip>
+                <explain>                   
+                    Deze informatie is voor de postmaker van de opdracht. Het wordt ook alleen aan de postmaker weergegeven.
+                </explain>
 
             </v-card-subtitle>
 
@@ -30,14 +23,14 @@
                         <v-text-field  
                             :value="description.title" 
                             @input="e=>updateDescription(i,'title',e)"                        
-                            :placeholder="'Titel '+(i+1)" 
+                            :placeholder="`Titel (${i+1})`" 
                         />
                         
                         <v-textarea  
                             solo                            
                             :value="description.text" 
                             @input="e=>updateDescription(i,'text',e)"                        
-                            :placeholder="'Informatie'+(i+1)" 
+                            :placeholder="`Omschrijving (${i+1})`"  
                         />
 
                     </v-flex>
@@ -63,10 +56,8 @@
                 >
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>   
-            </v-card-actions>
-        
-        </card>
-        
+            </v-card-actions>                       
+        </card>        
 </template>
 
 <script>

@@ -18,7 +18,7 @@
                             type="text"
                             name="first_name"
                             value="" 
-                            :rules="[v => !!v || 'Verplicht']"
+                            :rules="[v => !!v || 'Een voornaam is verplicht']"
                             autocomplete="name" autofocus />
                     </v-col>
                     
@@ -31,7 +31,7 @@
                             type="text"  
                             name="last_name"
                             value="" 
-                            :rules="[v => !!v || 'Verplicht']"
+                            :rules="[v => !!v || 'Een achternaam is verplicht']"
                             autocomplete="name"
                             />
                     </v-col>
@@ -40,13 +40,16 @@
 
                 <v-text-field
                     v-model="display_name"
-                    label="Publieke naam" 
-                    placeholder=" "
+                    label="Naam van profiel" 
+                    hint="Andere gebruikers kunnen dit zien"
                     id="display_name"  
                     type="text"  
                     name="display_name"
                     value="" 
-                    :rules="[v => !!v || 'Verplicht']"
+                    :rules="[
+                        v => !!v || 'Dit veld is verplicht',
+                        v => v.length > 6 || 'Moet langer zijn dan 6 tekens'
+                    ]"
                     autocomplete=""
                 />
                 
@@ -54,8 +57,8 @@
                <v-text-field 
                :rules="
                     [
-                        v => !!v || 'Verplicht',                        
-                        v => /.+@.+\..+/.test(v) || 'E-mail moet valide zijn'
+                        v => !!v || 'E-mail adres is verplicht',                        
+                        v => /.+@.+\..+/.test(v) || 'E-mail adres moet valide zijn'
                     ]"
                 v-model="email" 
                 label="E-mail" placeholder=" " 
@@ -68,7 +71,7 @@
 
                 <v-text-field 
                 :rules="        [
-                                    v => !!v || 'Verplicht',
+                                    v => !!v || 'Het wachtwoord is verplicht',
                                     v => v.length > 8 || 'Moet langer zijn dan 8 tekens'
                                 ]"
 
@@ -82,7 +85,7 @@
                 autocomplete="new-password" />
 
                 <v-text-field
-                :rules="[v => !!v || 'Verplicht']"
+                :rules="[v => !!v || 'Dit kan niet leeg zijn']"
                 v-model="password_c" 
                 label="Herhaal wachtwoord" 
                 placeholder=" " 
@@ -101,7 +104,7 @@
                     item-text="text"
                     item-value="value"
                     name="type"
-                    label="Gebruikers type"
+                    label="Ben jij een postmaker of aanvrager?"
                     :rules="[v => !!v || 'Verplicht']"
                 ></v-select>
                 <span></span>

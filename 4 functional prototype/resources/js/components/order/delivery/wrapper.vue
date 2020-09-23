@@ -1,9 +1,10 @@
 <template>
     <card v-if="deliverys && deliverys.length" >
         <v-card-subtitle>
-            Opleveringen             
+            Opleveringen        
+            <explain>Alle opgeleverde documenten, aangegeven met een kroon-icoon is de eindoplevering. </explain>     
         </v-card-subtitle>
-        <v-list style="max-height:400px; overflow-y:scroll;">
+        <v-list style="max-height:400px; overflow-y:auto;">
             <order-delivery-preview-component v-for="(item,key) in reversed_deliverys" :key="key" :last="(key == 0)"  :item="item" />
         </v-list>
     </card>    

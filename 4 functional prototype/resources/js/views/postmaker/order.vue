@@ -1,6 +1,7 @@
 <template>  
     <v-row>           
         <v-col cols=12 md=8>
+            <project-progress /> 
             <order-delivery-component />
             <order-info-component />
             <order-extra-description-component />

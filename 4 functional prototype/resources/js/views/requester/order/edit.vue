@@ -1,29 +1,26 @@
 <template>
     <v-form ref="form" v-model="valid">  
         <v-row> 
-            <v-col cols="12" md="6">                      
+            <v-col cols="12" md="8">     
+
+            <project-progress />    
+            
             <card>
-                <v-card-subtitle>Gegevens</v-card-subtitle>
+                <v-card-subtitle>
+                    Project gegevens
+                    <explain> Deze gegevens worden publiekelijk getoond </explain>
+                </v-card-subtitle>
                 <v-card-text>
 
                     <v-text-field  
                         class="mb-3"   
-                        :rules="[reqRule,least10]"
+                        :rules="[reqRule,least6]"
                         v-model="title"
-                        label="Naam"                        
+                        label="De naam van het project"
+                        hint="Via deze naam kan het project gevonden worden door postmakers."                        
                         required
                     ></v-text-field>
-                    
-                    <v-textarea solo
-                        name="input-7-1"
-                        label="Omschrijving"
-                        v-model="description"
-                        :rules="[reqRule]"
-                        value=""
-                        hint="Vul hier de omschrijving in."
-                    ></v-textarea>
-                    
-                    
+
                     <v-slider
                         v-model="payment"
                         class="align-center"
@@ -37,37 +34,44 @@
                             <v-text-field
                                 required
                                 v-model="payment"
-                                label="Euro vergoeding"
+                                label="Vergoeding"
                                 class="mt-0 pt-0"                                
                                 type="number"
-                                style="width: 60px"
-                            ></v-text-field>
+                                style="width: 100px"
+                            ></v-text-field> 
+                            <small class="mt-3 ml-1">€</small>
                         </template>
-                    </v-slider>    
+                    </v-slider>   
 
-                    <v-menu
-                        v-model="menu2"
-                        :close-on-content-click="false"
-                        :nudge-right="40"
-                        transition="scale-transition"
-                        offset-y
-                        min-width="290px"
-                    >
-
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-text-field
-                                v-model="deliver"
-                                label="Project moet klaar zijn op"
-                                append-icon="mdi-calendar"
-                                readonly
-                                v-bind="attrs"
-                                v-on="on"                                
-                            ></v-text-field>
-                        </template>
-
-                        <v-date-picker v-model="deliver" @input="menu2 = false"></v-date-picker>
-
-                    </v-menu>
+                    <v-row>
+                        <v-col>
+                            <label class="v-label">Omschrijving</label>
+                             <v-textarea solo
+                                name="input-7-1"
+                               
+                                v-model="description"
+                                :rules="[reqRule]"
+                                value=""
+                                height="255"
+                                hint="Schrijf hier alle publiekelijke informatie"
+                            ></v-textarea>
+                        </v-col>
+                        <v-col>    
+                            <v-tooltip top>
+                                <template v-slot:activator="{ on, attrs }">                                       
+                                    <span v-bind="attrs" v-on="on">
+                                        <label class="v-label">Oplever datum</label>
+                                        <v-date-picker  scrollable no-title :min="new Date().toISOString().substr(0, 10)" v-model="deliver"></v-date-picker>                            
+                                    </span>
+                                </template>
+                                <span>Deadline, wanneer moet het af? </span>
+                            </v-tooltip>                            
+                        </v-col>
+                    </v-row>
+                   
+                          
+                    <!-- datepicker -->
+                    <!-- <create-order-datepicker-component/> -->
 
                 </v-card-text>           
             </card>
@@ -75,7 +79,7 @@
             <create-order-descriptions-component />
 
             </v-col>
-            <v-col cols="12" md="6">
+            <v-col cols="12" md="4">
 
                 <card outlined class="mb-5">
                     <v-card-subtitle>Acties</v-card-subtitle>    
@@ -90,25 +94,27 @@
                         </v-card-text>
                     <!---->
 
-                    <v-card-actions>
+                    <v-card-text style="display:block;">
                         <v-spacer></v-spacer>
 
                         <!--save and create button-->
-                            <v-btn v-if="inCreation" color="primary" @click="create()" >                            
+                            <v-btn class="mr-1 mb-1" block v-if="inCreation" color="primary" @click="create()" >                            
                                 <v-icon >mdi-content-save</v-icon> 
                                 &nbsp; Aanmaken en Opslaan
                             </v-btn>                        
                         <!---->
 
                         <!--save button  -->
-                            <v-btn v-if="!inCreation" color="primary" @click="update()" >                            
+                            <v-btn class="mr-1 mb-1" v-if="!inCreation" block color="primary" @click="update()" >                            
                                 <v-icon >mdi-content-save</v-icon> 
                                 &nbsp; Opslaan
                             </v-btn>                        
                         <!---->
 
                         <!--publish button and modal-->
-                            <v-btn v-if="!inCreation" class="success" @click="publishModalCheck()" ><v-icon>mdi-file-send-outline</v-icon> &nbsp; Publiceer </v-btn>      
+                            <v-btn v-if="!inCreation" block class="mr-1 mb-1 error" @click="removeModalCheck()" ><v-icon>mdi-trash-can-outline</v-icon> &nbsp; Verwijder </v-btn>      
+
+                            <v-btn  v-if="!inCreation" block class="mr-1 mb-1 success" @click="publishModalCheck()" ><v-icon>mdi-file-send-outline</v-icon> &nbsp; Publiceer </v-btn>      
                             
                             <modal v-model="publishModal" width=500 title="Weet u het zeker?">
                                 De opdracht wordt hiermee publiekelijk gezet. <br>
@@ -123,24 +129,18 @@
                             </modal>
                         <!---->
 
-                    </v-card-actions>
+                    </v-card-text>
                 </card>
 
 
                 <card>
                     <v-card-subtitle>
-                        Type & tags
+                        Vindbaarheid instellen
 
-                    <v-tooltip color="primary" top>
-                        <template v-slot:activator="{ on, attrs }">                    
-                            <v-btn  icon v-bind="attrs" v-on="on" class="float-right">
-                                <v-icon color="accent lighten-1">mdi-comment-question-outline</v-icon>
-                            </v-btn>
-                        </template>
-                        <span>
-                            Door tags toe te voegen kunnen postmaker de opdracht beter vinden.
-                        </span>
-                    </v-tooltip>
+                        <explain> 
+                            * Het type project geeft aan wat voor opdracht het is. <br>
+                            * Door hashtags toe te voegen kunnen postmakers de opdracht beter vinden.
+                        </explain>
 
                     </v-card-subtitle>
                     <v-card-text>
@@ -152,8 +152,7 @@
                                 item-text="display"
                                 item-value="value"
                                 :rules="[reqRule]"
-                                label="Type"
-                                :append-icon="'mdi-'+icon"
+                                label="Wat voor project is het"                                
                                 required
                             ></v-select>
                         <!---->
@@ -174,6 +173,8 @@
 <script>
 import { mapState } from 'vuex';
 export default {
+
+  
     computed:{        
         ...mapState({                
             order: state => state.order.data,
@@ -191,8 +192,40 @@ export default {
             set (value) { this.$store.commit( 'order/SET_PAYMENT', value );  }
         },
         deliver: {
-            get () { return this.order.deliver },
-            set (value) { this.$store.commit( 'order/SET_DELIVER', value ); }
+            get () {     
+                if(this.order.deliver){
+                    const [unknown1,month,unknown2] = this.order.deliver.split('-');
+                    var year,day;
+                    if(unknown1.length == 4){
+                        year=unknown1;
+                        day=unknown2;
+                    }
+                    if(unknown2.length == 4){
+                        year=unknown2;
+                        day=unknown1;
+                    }
+                    return  `${year}-${month}-${day}`
+                }
+                          
+                               
+            },
+            set (value) {             
+                
+                // const [unknown1,month,unknown2] = value.split('-');
+                // var year,day;
+
+                // if(unknown1.length == 4){
+                //     year=unknown1;
+                //     day=unknown2;
+                // }
+                // if(unknown2.length == 4){
+                //     year=unknown2;
+                //     day=unknown1;
+                // }
+                
+                // this.$store.commit( 'order/SET_DELIVER', `${day}-${month}-${year}` );
+                 this.$store.commit( 'order/SET_DELIVER', value );
+            }
         },        
         type: {
             get () {  return this.order.type },
@@ -200,18 +233,19 @@ export default {
         },
         inCreation(){
             return this.$route.path == "/requester/order/new";
-        },
+        },       
+       
     },   
 
     data: () => ({
 
         publishModal: false,
         valid:true,        
-        reqRule: v => !!v || 'Is benodigd.',
-        least10: v => (v && v.length >= 10) || 'Moet langer zijn dan 10 karakters',   
+        reqRule: v => !!v || 'Dit veld is verplicht.',
+        least6: v => (v && v.length >= 6) || 'Moet meer dan 6 karakters hebben!',   
         extraDescription:[''],
         slider:100,
-        // date: new Date().toISOString().substr(0, 10),
+        date: new Date().toISOString().substr(0, 10),
         menu: false,    
         menu2: false, 
         files: [],
@@ -249,6 +283,27 @@ export default {
             if(this.$refs.form.validate()){  
                 this.publishModal = !this.publishModal;
             }
+        },
+
+        removeModalCheck(){           
+            this.$store.dispatch('modal/confirmAction',{
+                actions: [
+                    {                        
+                        action: 'api/post',
+                        parameter : { 
+                            url: 'order/update',
+                            data: {
+                                id: this.order.id, 
+                                state : 'removed'
+                            }
+                        }         
+                    },
+                    {
+                        action: 'order/get',
+                        parameter: this.order.id
+                    }
+                ]
+            })
         }
 
     },  
@@ -258,7 +313,7 @@ export default {
         }
         if(this.$route.path == "/requester/order/new"){ // In creation  
             this.$store.commit('order/CLEAR_ORDER');                
-            this.$store.commit('order/descriptions/SET_ORDER_DESCRIPTION',[]);     
+            this.$store.commit('order/descriptions/SET_ORDER_DESCRIPTION',[{}]);     
             this.$store.commit('order/files/CLEAR_ORDER_FILES');        
             this.$store.commit('order/tags/CLEAR_ORDER_TAGS');                
         }

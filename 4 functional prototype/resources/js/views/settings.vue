@@ -2,8 +2,9 @@
     <v-row>  
         <v-col cols=12>
             <card>
-                <v-card-subtitle>Instellingen</v-card-subtitle>
+                <v-card-subtitle>Instellingen (experimenteel, material thema werkt goed)</v-card-subtitle>
                 <v-card-text>
+
                     <v-row>                        
                         <v-col>
                             <p>Themas </p>

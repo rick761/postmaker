@@ -1,29 +1,32 @@
 <template> 
-        <v-row>
-            <v-col cols=12>
-                <card mb="mb-0">
-
-                    <v-breadcrumbs 
-                      v-if=" this.$route.path == '/' " 
-                      :items="[default_crumbs]" 
-                      large
-                    />                    
-
-                    <!-- <v-breadcrumbs 
-                        v-else-if="special_crumb_exists && special_crumb_route" 
-                        large
-                        :items="[default_crumbs,special_crumb, current_crumb]"
-                    /> -->
-<!--  v-else-if=" this.$route.path !== '/' "  -->
-                    <v-breadcrumbs 
-                     v-else
-                      :items="[default_crumbs, current_crumb ]" 
-                      large 
-                    />   
-
-                </card>  
-            </v-col>   
-        </v-row>
+      
+           <card mb="mb-0 pl-5 pr-5" >
+          <v-row>  
+            <v-col>       
+                   
+              <v-breadcrumbs 
+                class="d-inline-block pa-0 pt-2"
+                v-if=" this.$route.path == '/' " 
+                :items="[default_crumbs]" 
+                large
+              />     
+                
+              <v-breadcrumbs 
+              class="d-inline-block pa-0 pt-2"
+              v-else
+                :items="[default_crumbs, current_crumb ]" 
+                large 
+              /> 
+               
+              
+            </v-col> 
+            <v-col>
+              <slot/>
+            </v-col>
+          </v-row> 
+          </card>
+             
+             
 </template>
 
 <script>

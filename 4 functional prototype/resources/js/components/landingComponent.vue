@@ -11,10 +11,14 @@
                     <v-icon x-large>mdi-tree-outline</v-icon>
                     Postmaker
                 </v-toolbar-title>
-                <v-spacer></v-spacer>
+                <v-spacer></v-spacer> 
+
+                <span v-if="guest" >Nog geen account?</span> 
+
                 <v-btn  v-if="guest" @click="registerModal = !registerModal" text class="ma-5">
-                    <v-icon>mdi-login-variant</v-icon> &nbsp; Registreren
+                    <v-icon>mdi-login-variant</v-icon> &nbsp;  Registreren
                 </v-btn>
+               
                 <form v-if="!guest"  id="logout-form" :action="logoutActionUrl()" method="POST" >
                     <input type="hidden" name="_token" v-bind:value="csrf">   
                     <v-btn type="submit" text><v-icon>mdi-logout</v-icon> &nbsp; Uitloggen</v-btn> 
@@ -27,7 +31,7 @@
                     Aanvragen en produceren van content.
                     <br>
                     <v-btn v-if="guest" @click="loginModal = !loginModal" x-large tile class="ma-5 success">
-                        <v-icon>mdi-login</v-icon> &nbsp; Aanmelden
+                        <v-icon>mdi-login</v-icon> &nbsp; Inloggen
                     </v-btn>                     
                     <v-btn v-if="!guest" x-large class="ma-5  info" @click="goHome">
                         <v-icon>mdi-tree-outline</v-icon> &nbsp; Naar postmaker
@@ -41,7 +45,7 @@
                 <v-tooltip top>
                     <template v-slot:activator="{ on, attrs }">
 
-                         <v-img  v-on="on"  v-bind="attrs" id="preview_postmaker" src="./images/landing/preview.png" >  
+                         <v-img @click="loginModal = !loginModal"  v-on="on"  v-bind="attrs" id="preview_postmaker" src="./images/landing/preview.png" >  
                             <div class="v-skeleton-loader__image v-skeleton-loader__bone"></div>
                         </v-img>
 

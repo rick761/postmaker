@@ -15,11 +15,10 @@
                 <v-text-field
                     v-model="display_name"                    
                     :append-icon="'mdi-eye'"
-                    label="Publieke naam"
-                    :rules="[v => !!v || 'Verplicht', v => v.length >= 6 || 'Ten minste 6 karakters']"
-                    persistent-hint                    
+                    label="Naam van profiel"
+                    :rules="[v => !!v || 'Verplicht', v => v.length >= 6 || 'Ten minste 6 karakters']"                                      
                     required                  
-                    hint="Naam te zien voor andere personen"   
+                    hint="Deze naam wordt getoond aan andere gebruikers"   
                 ></v-text-field>
                 
                 <v-row>
@@ -43,25 +42,25 @@
 
                 <v-text-field
                     v-model="company"                     
-                    label="company"                  
+                    label="*Bedrijfsnaam"                  
                     required
                 ></v-text-field>
 
                 <v-text-field
                     v-model="website" 
-                    label="website"
+                    label="*Website"
                     required                   
                 ></v-text-field>  
 
                 <v-text-field
                     v-model="phone"  
-                    label="Tel. nummer"
+                    label="*Telefoon nummer"
                     required
                 ></v-text-field>  
                 
                 <v-row>
                     <v-col cols=6>  
-                        <v-file-input v-model="avatar" label="Avatar"></v-file-input>                         
+                        <v-file-input v-model="avatar" label="Profiel foto"></v-file-input>                         
                         <v-img v-if="auth.avatar"
                          id="preview_avatar" 
                          alt="avatar" 
@@ -71,7 +70,7 @@
                     </v-col>
                     <v-col cols=6> 
 
-                        <v-file-input counter v-model="user_images" multiple label="Slider"></v-file-input> 
+                        <v-file-input counter v-model="user_images" multiple label="Galerij afbeeldingen"></v-file-input> 
 
                         <v-chip 
                             @click:close="delNewImage(key)" 
@@ -100,7 +99,7 @@
                 <v-textarea 
                     solo
                     name="input-7-4"
-                    label="Biografie"
+                    label="Profiel beschrijving"
                     v-model="description"
                 ></v-textarea>
 

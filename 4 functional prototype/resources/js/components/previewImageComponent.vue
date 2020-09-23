@@ -5,16 +5,15 @@
       @click:outside="close"
       @keydown.esc="close"
     >           
-      <card style="overflow:hidden;">
-
+      <card mb="mb-0" style="overflow:hidden;">
         <v-card-title tile class="headline">
           {{title}}  
           <v-spacer></v-spacer>          
           <v-btn @click="close" text class="error ml-3"> <v-icon>mdi-close</v-icon></v-btn>  
-        </v-card-title>     
-       
-        <v-img  :src="url" />        
-
+        </v-card-title> 
+        <v-card-text>
+          <v-img  :src="url" />   
+        </v-card-text>            
       </card>
     </v-dialog>
   </div>

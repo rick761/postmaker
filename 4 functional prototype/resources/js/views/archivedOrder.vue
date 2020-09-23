@@ -1,7 +1,8 @@
 <template>    
     <v-row>
-        <v-col cols=12 md=8>             
-           <order-info-component />                             
+        <v-col cols=12 md=8>     
+            <project-progress />         
+            <order-info-component />                             
             <order-extra-description-component />
             <order-delivery-component />
             <order-chatbox-component />   

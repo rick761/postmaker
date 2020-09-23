@@ -35,14 +35,9 @@ export default {
         }
     },
     actions: {
-        save({ state, dispatch, rootState }, payload) {
+        save({ state, dispatch }, payload) {
             var orderId = payload;
-
-            dispatch('api/post', { url: '/order/descriptions/save', data: { descriptions: state.list, orderId: orderId } }, ROOT).then(() => {
-
-            });
-
-
+            dispatch('api/post', { url: '/order/descriptions/save', data: { descriptions: state.list, orderId: orderId } }, ROOT).then(() => {});
         }
     },
     modules: {

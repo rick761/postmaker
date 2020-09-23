@@ -13,6 +13,11 @@ class Order extends Model
     protected $guarded = ['created_at'];
     protected $hidden = ['updated_at'];
 
+    protected $casts = [
+        'created_at' => 'datetime:d-m-Y',
+        'deliver' => 'datetime:d-m-Y',
+    ];
+
     protected static function boot()
     {
         parent::boot();

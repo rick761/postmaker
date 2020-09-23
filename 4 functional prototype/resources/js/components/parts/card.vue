@@ -5,8 +5,7 @@
         :style="{
             background: $vuetify.theme.currentTheme.background_card,
             height: height
-        }"
-        
+        }"        
      > 
         <slot />        
     </v-card>    
@@ -15,7 +14,7 @@
 export default {
     props:{
         height: { default: 'auto' },
-        mb: { default: 'mb-5' },
+        mb: { default: 'mb-3' },
         noflex: {  default: 0  }
     },
     computed: {

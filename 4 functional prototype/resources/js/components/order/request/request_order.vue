@@ -6,14 +6,15 @@
     <v-card outlined class="mb-0"  >           
             
             <v-card-subtitle>
-                Aanvragen 
+                Doe een aanvraag 
+                <explain>Door een aanvraag te doen kunt u solliciteren voor de opdracht</explain>
             </v-card-subtitle>   
 
             <v-card-text >
 
-                <v-textarea solo v-model="text" />
+                <v-textarea solo v-model="text" label="Schrijf hier je motivatie" />
 
-                Andere prijs                
+                Selecteer een andere prijs?                
 
                 <v-slider
                     v-model="payment"
@@ -28,27 +29,26 @@
                         <v-text-field
                             :rules="[v =>  !!v.toString() || 'Niet leeg', ]"
                             required
-                            v-model="payment"  
-                            persistent-hint                       
-                            hint="Euro"
+                            v-model="payment"                             
                             class="mt-0 pt-0"                                
                             type="number"
                             style="width: 60px"                            
                         ></v-text-field>
+                        <small class="mt-2">€</small>
                     </template>
 
                 </v-slider> 
 
                 <v-alert dense text class="mt-3"  v-if="request.status == 'open'" type="success">
-                        Aanvraag is geplaatst
+                        Een aanvraag is reeds geplaatst
                 </v-alert>
 
                 <v-alert dense text class="mt-3"  v-if="request.status == 'withrawn'" type="warning">
-                        Aanvraag is ingetrokken
+                        De huidige aanvraag is ingetrokken
                 </v-alert>
 
                 <v-alert dense text class="mt-3"  v-if="request.status == 'denied'" type="error">
-                        Aanvraag is afgewezen
+                        Je aanvraag is afgewezen
                 </v-alert>
 
             </v-card-text>
@@ -57,9 +57,9 @@
 
                 <v-spacer></v-spacer>
 
-                <v-btn class="success" v-if="!request_exists"  @click="requestOrder" ><v-icon>mdi-alert-octagram-outline</v-icon> &nbsp; Aanvragen</v-btn>
-                <v-btn class="success" v-else @click="requestOrder" ><v-icon>mdi-alert-octagram-outline</v-icon> &nbsp; Opnieuw aanvragen</v-btn>
-                <v-btn class="error"   v-if="request_exists && !is_withrawn"  @click="withrawRequest"><v-icon>mdi-alert-octagram-outline</v-icon> &nbsp; Intrekken</v-btn>
+                <v-btn class="success" v-if="!request_exists"  @click="requestOrder" > Solliciteer </v-btn>
+                <v-btn class="secondary" v-else @click="requestOrder" > Aanpassen en opnieuw solliciteren </v-btn>
+                <v-btn class="error"   v-if="request_exists && !is_withrawn"  @click="withrawRequest"> Intrekken </v-btn>
 
             </v-card-actions>
 

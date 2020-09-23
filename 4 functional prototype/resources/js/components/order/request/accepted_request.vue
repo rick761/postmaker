@@ -1,37 +1,21 @@
 <template>
     <card>
         <v-card-subtitle>
-            Aanvraag
-
-                <v-tooltip color="primary" top>
-
-                    <template v-slot:activator="{ on, attrs }">                    
-                        <v-btn icon v-bind="attrs" v-on="on" class="float-right">
-                            <v-icon color="accent lighten-1">mdi-comment-question-outline</v-icon>
-                        </v-btn>
-                    </template>
-
-                    <span>
-                        De aanvraag is geaccepteerd door een postmaker voor het onderstaande bedrag.
-                    </span>
-
-                </v-tooltip>
-
+            Afspraak 
+            <explain>De aanvraag is geaccepteerd voor het onderstaande bedrag.</explain>
         </v-card-subtitle>
+
         <v-list>
-            <v-list-item v-for="(item,key) in acceptedRequest" :key="key" >   
-                <v-list-item-content>
+            <v-list-item v-for="(item,key) in acceptedRequest" :key="key" >                   
+                <v-list-item-content>                    
                     <v-list-item-title v-if="item" >
-                        <span v-if=" item.status == 'accepted' " class="success--text">  Geaccepteerd </span> 
-                        <span v-if=" item.status == 'denied' " class="error--text">  Geweigerd </span> 
-                        <span v-if=" item.status == 'withrawn' " class="error--text">  Ingetrokken </span>    
+                        <span v-if=" item.status == 'accepted' " class="success--text">  Geaccepteerd </span>                        
                         <v-spacer />                         
                     </v-list-item-title>
-                    <v-list-item-subtitle class="mb-1" >
-                        <span class='text--primary'>Bied {{item.payment}} euro</span>                 
-                    </v-list-item-subtitle>             
-                    <i v-if="item.text" >{{item.text}}</i>
-                    <i v-else> Heeft geen motivatie aangegeven</i>                
+                    <v-list-item-subtitle style="white-space: initial !important;" class="mb-2" >
+                        <span  class='text--primary'>Deze opdracht is geaccepteerd voor een bedrag van {{item.payment}} euro</span>                 
+                    </v-list-item-subtitle>   
+
                 </v-list-item-content>
                
             </v-list-item>
@@ -48,7 +32,8 @@ export default {
     } },
     computed:{
         ...mapState({
-            requests: state => state.order.requests.list
+            requests: state => state.order.requests.list,
+            order: state => state.order.data
         }),       
         acceptedRequest(){
             if(this.requests.length)

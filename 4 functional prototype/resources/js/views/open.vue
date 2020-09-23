@@ -85,8 +85,10 @@
                                                     'primary--text': dateDiffInDays(item.deliver) > 20 && dateDiffInDays(item.deliver) <= 30,
                                                     '': dateDiffInDays(item.deliver) > 30 
                                                     } ">mdi-calendar</v-icon>  
-                                                    {{dateDiffInDays(item.deliver)}}
                                                     &nbsp; 
+                                                    over {{dateDiffInDays(item.deliver)}} dagen
+                                                    
+
                                             </v-list-item-icon>            
 
                                             <v-list-item-content class="text-right"   >
@@ -109,6 +111,15 @@
                                             <v-list-item-content class="text-right">
                                                 <span class="float-right" :class="{ 'blue--text': sortBy === 'user.display_name' }" >{{item.user.display_name}}</span>
                                             </v-list-item-content>                                              
+                                        </v-list-item>
+
+                                        <v-list-item>
+                                            <v-list-item-icon>
+                                                <v-icon>mdi-currency-eur</v-icon>    
+                                            </v-list-item-icon>
+                                            <v-list-item-content class="text-right">
+                                                <span>{{item.payment}} Euro opbrengst</span>
+                                            </v-list-item-content>
                                         </v-list-item>
 
                                     </v-list>

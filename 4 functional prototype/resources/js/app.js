@@ -14,12 +14,17 @@ Vue.component('breadcrumbComponent', require('./components/breadCrumbComponent.v
 Vue.component('previewImageComponent', require('./components/previewImageComponent.vue').default);
 Vue.component('notificationComponent', require('./components/notificationComponent.vue').default);
 Vue.component('systemBarComponent', require('./components/systemBarComponent.vue').default);
+Vue.component('iconActionComponent', require('./components/iconActionComponent.vue').default);
+
 
 //parts
 Vue.component('card', require('./components/parts/card.vue').default);
 Vue.component('modal', require('./components/parts/modal.vue').default);
 Vue.component('global-modal', require('./components/parts/global_modal.vue').default);
 Vue.component('feedback', require('./components/parts/feedback.vue').default);
+Vue.component('explain', require('./components/parts/explain.vue').default);
+Vue.component('profileTag', require('./components/parts/profile_tag.vue').default);
+Vue.component('projectProgress', require('./components/parts/projectProgress.vue').default);
 
 //COMPONENT - auth
 Vue.component('login-modal-component', require('./components/auth/loginModal.vue').default);
@@ -45,6 +50,9 @@ Vue.component('order-request-apply-list-item-component', require('./components/o
 Vue.component('order-aside-component', require('./components/order/aside.vue').default);
 Vue.component('order-actions-component', require('./components/order/actions.vue').default);
 Vue.component('order-chatbox-component', require('./components/order/chatbox.vue').default);
+
+//datepicker
+Vue.component('create-order-datepicker-component', require('./components/order/datepicker/set_date.vue').default);
 
 
 //COMPONENT - order-requests
@@ -112,16 +120,16 @@ function getTheme() {
     };
 
     var default_values = {
-        triadic_1: '#da0000', //error
-        triadic_2: '#ff6e3d', //warning
-        analogous_1: '#00a069', //success
+        triadic_1: '#dc3545', //error
+        triadic_2: '#ffc107', //warning
+        analogous_1: '#28a745', //success
     };
 
     if ((localStorage.getItem('theme') == 'default_theme')) {
         theme = {
-            primary: '#1976D2', // menu color - primary button
-            complementary: '#82B1FF', //accent                    
-            analogous_2: '#2196F3', //link color                  
+            primary: '#007bff', // menu color - primary button
+            complementary: '#6c757d', //accent                    
+            analogous_2: '#17a2b8', //link color                  
             bg_card: '#fff',
             bg: '#E0E0E0',
             bg_menu: '#1976D2' // menu color -

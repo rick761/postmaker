@@ -7,47 +7,16 @@
         
         <v-main style="min-height: 100vh; " :style="{background: $vuetify.theme.currentTheme.background}"  >
 
-            <notification-component />            
+            <notification-component />   
+            <feedback />
             
-            <v-row>
-                
-
-                <!--icons right-->
-                <v-col cols=12 class="text-right pr-8" >    
-
-                    <v-btn :href="LandingsPageUrl()" class="float-right" color="primary" icon>
-                        <v-icon>mdi-file-move-outline</v-icon>
-                    </v-btn>
-                    
-                    <form class="float-right" id="logout-form" :action="logoutActionUrl()" method="POST" >
-                        <input type="hidden" name="_token" v-bind:value="csrf">   
-                        <!-- <v-btn type="submit" text><v-icon>mdi-logout</v-icon> &nbsp; Uitloggen</v-btn>  -->
-                        <v-btn type="submit" color="warning" icon>
-                            <v-icon>mdi-logout-variant</v-icon>
-                        </v-btn>
-                    </form>    
-
-                    <v-btn class="float-right" color="secondary" @click="$store.commit('notifications/TOGGLE_NOTIFICATION_MODAL');" icon>
-                        <v-badge 
-                                v-if="unread_notifications"
-                                :content="unread_notifications"
-                            >
-                            <v-icon>mdi-message-outline</v-icon>                        
-                        </v-badge>          
-                        <v-icon v-else>mdi-message-outline</v-icon>           
-                    </v-btn>
-                </v-col>
-
-                <feedback />
-
-                <v-col cols=12>
-                    <v-container fluid>                        
-                        <breadcrumbComponent /> 
-                        <router-view></router-view> 
-                    </v-container>    
-                </v-col>
-
-            </v-row> 
+            <v-container fluid>                        
+                <breadcrumbComponent > 
+                    <icon-action-component :csrf="csrf" />
+                </breadcrumbComponent>
+                <router-view></router-view> 
+            </v-container>    
+         
         </v-main>
         
         <v-footer style="padding: 0 300px;" > </v-footer>
@@ -64,31 +33,11 @@ export default {
         prevRoute:null,        
     }},   
 
-    computed:{       
-        ...mapGetters({           
-            unread_notifications: 'notifications/UNREAD_NOTIFICATIONS',
-        }),
-    },
-
-    methods:{
-        logoutActionUrl(){
-            return window.location.origin+'/logout'; 
-        },
-        LandingsPageUrl(){
-            return window.location.origin;
-        },
-        
-    },
-
     created(){        
         this.$store.commit('auth/SET_AUTH', JSON.parse(this.auth));       
         this.$store.dispatch('orders/init');   
-        this.$store.dispatch('notifications/init'); 
-
-        
-        
-    },    
-     
+        this.$store.dispatch('notifications/init');         
+    },         
 }
 </script>
 

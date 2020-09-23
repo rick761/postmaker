@@ -16,7 +16,6 @@ import order_edit from '../views/requester/order/edit';
 //general
 import index from '../views/index';
 import openOrder from '../views/openOrder';
-import Inspire from '../views/inspire';
 import Archive from '../views/archive';
 import Open from '../views/open';
 import profile from '../views/profile';
@@ -52,11 +51,7 @@ const routes = [
         component: Open,
     },
 
-    {
-        path: '/inspire',
-        name: 'Inspiratie',
-        component: Inspire,
-    },
+
 
     {
         path: '/order/open/:orderId',
@@ -88,12 +83,12 @@ const routes = [
     /**postmaker**/
     {
         path: '/postmaker/order/:orderId',
-        name: 'Order',
+        name: 'Opdracht',
         component: order_postmaker,
     },
     {
         path: '/postmaker/requested',
-        name: 'Aanvragen',
+        name: 'Uitgaande aangevragen',
         component: Requested_postmaker,
     },
     {
@@ -126,7 +121,7 @@ const routes = [
     },
     {
         path: '/requester/requested',
-        name: 'Aanvragen',
+        name: 'Binnenkomende aanvragen',
         component: Requested_requester,
     },
     {

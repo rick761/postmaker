@@ -1,19 +1,21 @@
 <template>
-    <card>
+    <card :class="{'description_hide': !description_show }" >
+        <v-card-subtitle>Project informatie
+            <span class="float-right">
+                <v-icon>mdi-{{order.type}}</v-icon>&nbsp; {{order.type}} opdracht
+                <v-btn icon v-if="description_show" @click="description_show = !description_show"><v-icon>mdi-chevron-up</v-icon></v-btn>
+                <v-btn icon v-if="!description_show"  @click="description_show = !description_show"><v-icon>mdi-chevron-down</v-icon></v-btn>
+             </span>
+        </v-card-subtitle>
         <v-card-title>
-            <v-icon>mdi-{{order.type}}</v-icon> &nbsp; {{order.title}}
+              {{order.title}}             
         </v-card-title>
-        <v-card-text>
+        <v-card-text v-if="tags.length">
                 <v-chip class="mr-3 mb-3" :key="key" v-for="(item,key) in tags" >#{{item.text}}</v-chip>
         </v-card-text>
-        <v-card-text style="max-height:400px; overflow-y:auto;" :class="{'description_hide': !description_show }">
+        <v-card-text style="max-height:400px; overflow-y:auto;" >
             {{order.description}}
-        </v-card-text>
-        <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn icon v-if="description_show" @click="description_show = !description_show"><v-icon>mdi-chevron-up</v-icon></v-btn>
-            <v-btn icon v-if="!description_show"  @click="description_show = !description_show"><v-icon>mdi-chevron-down</v-icon></v-btn>
-        </v-card-actions>
+        </v-card-text>       
     </card>  
 </template>
 
@@ -36,6 +38,6 @@ export default {
 
 <style scoped>
     .description_hide{
-        height:50px;overflow:hidden;
+        height: 65px !important;overflow:hidden;
     }
 </style>

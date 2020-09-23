@@ -2,7 +2,7 @@
         <v-row>
 
             <v-col cols=12 lg="12">                
-                <order-list-component title="In progressie">
+                <order-list-component title="In uitvoering">
                     <order-list-item-component v-for="(item,key) in orders_progressing" :item="item" :key="key" > 
                         <order-open-list-item-component :item="item"  />   
                         <order-account-list-item-component :item="item" />
@@ -16,7 +16,7 @@
             </v-col> 
             
             <v-col cols=12 lg="6" >     
-                <order-list-component title="In aanmaak">
+                <order-list-component title="Niet gepubliceerd">
                     <order-list-item-component v-for="(item,key) in orders_in_creation" :item="item" :key="key" >
                         <order-open-list-item-component :item="item"  />
                         <order-remove-list-item-component :item="item"  />                        

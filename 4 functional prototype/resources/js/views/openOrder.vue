@@ -1,14 +1,17 @@
 <template>    
     <v-row>
-        <v-col cols="12" md="8">           
+        <v-col cols="12" md="8">    
+            <project-progress />        
            <order-info-component />                    
             <order-request-order-component v-if="!isOwner && isPostmaker" />    
 
             <card v-if="isOwner && requests && requests.length" >
                  <v-card-subtitle>
                      Aanvragen
+                     <explain>U kunt hier kiezen of u de postmaker accepteerd, u kunt ook wachten op meer aanvragen!</explain>
                 </v-card-subtitle>                
-                <v-list>
+                
+                <v-list active> 
                     <order-incoming-request-component v-for="(request,key) in requests" :item='request' :key='key' /> 
                 </v-list>
             </card> 

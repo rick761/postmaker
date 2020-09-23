@@ -1,18 +1,17 @@
 <template>
    
-    <modal :fullscreen="true" v-model="delivery_modal_toggler" transition="dialog-bottom-transition" title="Oplevering">
+    <modal width="1024px"  v-model="delivery_modal_toggler" transition="dialog-bottom-transition" :title="delivery.title">
         
         <v-container>
-            <card>
-                <v-card-title>
-                    {{delivery.title}}
+            
+                <v-card-title>                    
                     <v-spacer />
                     <v-icon color="error" v-if="delivery.rate == 'bad'">mdi-thumb-down</v-icon> 
                     <v-icon color="warning" v-if="delivery.rate == 'normal'">mdi-thumbs-up-down</v-icon> 
                     <v-icon color="success" v-if="delivery.rate == 'good'">mdi-thumb-up</v-icon> 
                 </v-card-title>
                 <v-card-subtitle>{{delivery.text}}</v-card-subtitle>
-            </card>
+            
            <v-row>
                 <v-col>
                     <v-list>

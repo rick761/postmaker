@@ -24,6 +24,7 @@ export const SET_TYPE = 'SET_TYPE';
 export const CLEAR_ORDER = 'CLEAR_ORDER';
 export const SET_ORDER = 'SET_ORDER';
 export const SET_STATE = 'SET_STATE';
+export const FIX_FORMAT_ORDER = 'FIX_FORMAT_ORDER';
 
 // ORDER - EXTRA
 export const SET_ORDER_PAGE = 'SET_ORDER_PAGE';

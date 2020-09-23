@@ -1,7 +1,7 @@
 <template>
     <div> 
-        <card><v-card-title><v-icon>mdi-eye</v-icon> &nbsp; Preview</v-card-title></card>
-            <card 
+        <!-- <card><v-card-title><v-icon>mdi-eye</v-icon> &nbsp; Preview</v-card-title></card> -->
+        <card 
             class="mx-auto mb-5"                    
         >
             <v-list-item>
@@ -38,7 +38,7 @@
                     <v-icon :color="medalColor('silver')">mdi-podium-silver</v-icon>
                     <v-icon :color="medalColor('gold')">mdi-podium-gold</v-icon>
                     <v-icon :color="medalColor('platinum')">mdi-podium</v-icon>
-                </v-list-item-title>                           -->
+                </v-list-item-title> -->
                 <v-list-item-subtitle class="text-right mt-3" >
                     <v-icon>mdi-thumb-up-outline</v-icon>                    
                     <span>{{auth.user_likes_count}}</span>

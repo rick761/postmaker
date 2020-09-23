@@ -1,7 +1,7 @@
 <template>      
     <v-row>           
         <v-col cols=12>            
-            <order-list-component title="Aanvragen">
+            <order-list-component title="Opdrachten die ik heb aangevraagd" tooltip="Jij kan solliciteren op opdrachten, als je dit gedaan hebt kun je deze hier vinden.">
                 <order-list-item-component v-for="(item,key) in orders" :item="item" :key="key" >
                     <order-open-list-item-component :item="item"  />
                     <order-request-apply-list-item-component 
@@ -10,7 +10,7 @@
                     />                   
                 </order-list-item-component>  
                 <v-card-text v-if="orders.length == 0">
-                    Er zijn geen lopende aanvragen.
+                    Geen lopende aanvragen.
                 </v-card-text>
             </order-list-component>
         </v-col>

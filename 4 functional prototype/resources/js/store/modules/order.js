@@ -14,7 +14,8 @@ import {
     SET_ORDER_TAGS,
     SET_DELIVERYS,
     SET_ORDER_FILES,
-    SET_ORDER_MESSAGES
+    SET_ORDER_MESSAGES,
+    FIX_FORMAT_ORDER
 } from '../mutation-types'
 import { ROOT } from '../constants';
 import router from '../../router/index'
@@ -76,6 +77,23 @@ export default {
         },
         [SET_STATE](state, payload) {
             state.data.state = payload
+        },
+        [FIX_FORMAT_ORDER](state) {
+            if (state.data.deliver) {
+                const [unknown1, month, unknown2] = state.data.deliver.split('-');
+                var year, day;
+
+                if (unknown1.length == 4) {
+                    year = unknown1;
+                    day = unknown2;
+                }
+                if (unknown2.length == 4) {
+                    year = unknown2;
+                    day = unknown1;
+                }
+                state.data.deliver = `${year}-${month}-${day}`;
+            }
+
         }
     },
 
@@ -179,16 +197,17 @@ export default {
 
 
         async create({ state, commit, dispatch, rootState }) {
+            commit(FIX_FORMAT_ORDER);
             await dispatch('api/post', { url: '/order/create', data: state.data }, ROOT).then(() => {
                 var newOrder = rootState.api.response;
                 commit(SET_ORDER, newOrder);
-
                 dispatch('update');
             });
         },
 
 
-        async update({ state, dispatch, rootState }, refresh = true) {
+        async update({ state, dispatch, rootState, commit }, refresh = true) {
+            commit(FIX_FORMAT_ORDER);
 
             await dispatch('api/post', { url: '/order/update', data: state.data }, ROOT).then(() => {
                 if (rootState.api.response) {

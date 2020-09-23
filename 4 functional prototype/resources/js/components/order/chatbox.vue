@@ -1,5 +1,6 @@
 <template>
     <card >    
+        <v-card-subtitle>Chatbox</v-card-subtitle>
         <v-card-text v-if="messages.length == 0">Er zijn geen berichten </v-card-text>         
         <v-list id="chatbox" v-else style="max-height:500px; overflow-y:auto">
              <v-list-item v-for="(message,key) in messages" :key="key">
@@ -26,7 +27,7 @@
                         v-if="message.url"
                         :class="{'text-right': message.user_id == auth.id }" 
                     >
-                        <a href="#">{{message.url}}</a>
+                        <v-btn link @click="preview(message.url,message.user_id)">{{message.url}}</v-btn>
                     </v-list-item-title>
                 </v-list-item-content> 
 
@@ -49,7 +50,7 @@
         <v-card-actions>                
                   
             <v-text-field  class="ml-2"       
-                label="Message"
+                label="Verstuur een bericht"
                 required
                 v-model="textField"
             ></v-text-field>    
@@ -60,7 +61,7 @@
 
             <v-btn icon dark class="ml-2 primary"
                 @click="send"
-                @keydown.enter="send"
+                v-on:keydown.enter="send"
             >
                 <v-icon                 
                 >mdi-send</v-icon>
@@ -121,7 +122,11 @@ export default {
         textField:'',        
     }},
     methods:{
-        
+
+        preview(url,user_id){
+           this.$store.dispatch('image/preview','./storage/'+user_id+'/chatbox/'+this.order.id+'/'+url);
+        },
+
         fileUpload() {
             this.isSelecting = true
             window.addEventListener('focus', () => {
@@ -137,8 +142,16 @@ export default {
 
         send(){
             if(this.textField != '' || this.selectedFile != null ){
+
                 this.$store.dispatch('order/messages/send', 
                 { msg:this.textField, file: this.selectedFile } );
+
+                this.$store.dispatch('file/upload', {
+                    type: 'chatbox',
+                    files: this.selectedFile,
+                    folder: this.order.id
+                });
+
             }
             this.textField = '';
             this.selectedFile = null;

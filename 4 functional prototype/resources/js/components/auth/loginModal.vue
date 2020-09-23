@@ -2,7 +2,7 @@
     <v-dialog v-model="value" persistent absolute max-width="600px" @click:outside="closeDialog">       
         <form method="POST" autocomplete="off" :action="loginActionUrl()">        
             <input type="hidden" name="_token" v-bind:value="csrf">   
-            <card>
+            <card mb=0 >
                 <v-card-title>Aanmelden</v-card-title>
                 <v-card-text>                     
                       
@@ -20,39 +20,32 @@
                     <v-btn small text class="mt-3" color="secondary" :href="forgetPasswordActionUrl()">
                         Wachtwoord vergeten?
                     </v-btn>
-
-                    
-
-                    
                     
                 </v-card-text>
 
                 <v-card-actions>                
                     <v-spacer></v-spacer>
-                    <v-btn type="submit" x-large class="primary">
+                    <v-btn @click="saveCredentials" type="submit" x-large class="primary">
                         Aanmelden
                     </v-btn>        
                 </v-card-actions>
 
-                <v-card-text style="opacity: 0.3">
-                    <h3>Test gebruikers</h3>
+                <v-card-text style="opacity: 0.3">                    
                     <v-row>
                         <v-col>
-                            <p>Postmakers:</p>
-
-                            <v-btn  color="secondary" block @click="postmakerAcc(1)">Piet Pieterse</v-btn><br>
-                            <v-btn  color="secondary" block @click="postmakerAcc(2)">Henk de Jong</v-btn><br>
-                            <v-btn   color="secondary" block @click="postmakerAcc(3)">Will Smit</v-btn><br>
-                            <v-btn   color="secondary" block @click="postmakerAcc(4)">Henk de Jong</v-btn><br>
-
+                            <p>Test postmakers</p>
+                            <v-btn class="mb-1"  color="secondary"  @click="postmakerAcc(1)">1</v-btn>
+                            <v-btn class="mb-1"  color="secondary"  @click="postmakerAcc(2)">2</v-btn>
+                            <v-btn class="mb-1"   color="secondary"  @click="postmakerAcc(3)">3</v-btn>
+                            <v-btn class="mb-1"   color="secondary"  @click="postmakerAcc(4)">4</v-btn>
                         </v-col>
-                        <v-col>
-                            <p>Content aanvragers:</p>
 
-                            <v-btn   color="secondary" block @click="requesterAcc(1)">Jan Jansen</v-btn><br>
-                            <v-btn   color="secondary" block @click="requesterAcc(2)">Willem van de Berg</v-btn><br>
-                            <v-btn   color="secondary" block @click="requesterAcc(3)">Pieter Post</v-btn><br>
-                            <v-btn   color="secondary" block @click="requesterAcc(4)">Freek de Bruin</v-btn><br>
+                        <v-col>
+                            <p>Test aanvragers</p>
+                            <v-btn  class="mb-1"  color="secondary"  @click="requesterAcc(1)">5</v-btn>
+                            <v-btn  class="mb-1"  color="secondary"  @click="requesterAcc(2)">6</v-btn>
+                            <v-btn class="mb-1"  color="secondary"  @click="requesterAcc(3)">7</v-btn>
+                            <v-btn  class="mb-1"  color="secondary"  @click="requesterAcc(4)">8</v-btn>
 
                         </v-col>                        
                     </v-row>
@@ -71,12 +64,18 @@ export default {
         remember: 0
     }},
     created(){
-         this.username = localStorage.getItem('username');
+        this.username = localStorage.getItem('username');
         this.password = localStorage.getItem('password');
         this.remember = localStorage.getItem('remember');
 
     },
     methods:{
+        saveCredentials(){            
+            if(remember){
+                localStorage.setItem("username", this.username);
+                localStorage.setItem("password", this.password);                
+            }
+        },
         loginActionUrl(){
             return window.location.origin+'/login';
         },
@@ -88,15 +87,15 @@ export default {
         },
         checkRemember(isChecked){            
             if(isChecked){
-                localStorage.setItem("username", this.username);
-                localStorage.setItem("password", this.password);
+                // localStorage.setItem("username", this.username);
+                // localStorage.setItem("password", this.password);
                 localStorage.setItem("remember", 1);
             } else {
                 localStorage.setItem("username", '');
                 localStorage.setItem("password", '');
                 localStorage.setItem("remember", 0);
-            }
-        },
+             }
+         },
         postmakerAcc(nr){
             this.username = 'postmaker'+nr+'@postmaker.nl'
             this.password = 'postmaker'

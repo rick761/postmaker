@@ -1,6 +1,6 @@
 <template>
     <card >
-        <v-card-subtitle>Uit te voeren acties</v-card-subtitle>
+        <v-card-subtitle>Acties</v-card-subtitle>
         <v-card-text style="overflow-x:auto">
 
             <!--
@@ -15,22 +15,21 @@
                 canRecievePayment()
                 canContinuePostmaker()
                 canImprove()
-
-                 canOpen() // used in creation mode.. not here.
+                canOpen() // used in creation mode.. not here.
 
             -->
 
-            <v-btn v-if="canEdit" @click="editModal = !editModal"  block color="primary mb-1"> <v-icon>mdi-draw</v-icon> &nbsp; Opdracht aanpassen <v-spacer /> </v-btn>            
-            <v-btn v-if="canRemove" class="mb-1"  @click="deleteModal = !deleteModal"  block color="error"> <v-icon>mdi-trash-can-outline</v-icon> &nbsp;  Opdracht verwijderen <v-spacer /> </v-btn>                   
-            <v-btn v-if="canDeliver" @click="delivery"   block color="primary  mb-1"><v-icon>mdi-upload</v-icon> &nbsp; tijdelijke oplevering <v-spacer></v-spacer></v-btn>     
-            <v-btn v-if="canFinalDeliver" @click="final"  block color="secondary  mb-1"> <v-icon>mdi-upload</v-icon> &nbsp; Finale oplevering <v-spacer></v-spacer></v-btn>     
-            <v-btn v-if="canQuitPostmaker"  @click="wantStopModal = !wantStopModal" block color="error  mb-1"> <v-icon>mdi-close</v-icon> &nbsp; Ik wil stoppen <v-spacer></v-spacer></v-btn>   
-            <v-btn v-if="canContinuePostmaker"  @click="wantContinueModal = !wantContinueModal" block color="success  mb-1"> <v-icon>mdi-arrow-right-bold-box</v-icon> &nbsp; Ik wil doorgaan <v-spacer></v-spacer></v-btn>   
-            <v-btn v-if="canDeliveryAccept" @click="acceptModal = !acceptModal" class="success mb-1" block> <v-icon>mdi-check</v-icon> &nbsp; Oplevering is goed  <v-spacer></v-spacer></v-btn>
-            <v-btn v-if="canImprove" @click="awaitModal = !awaitModal" class="secondary mb-1 " block> <v-icon>mdi-timer-sand</v-icon> &nbsp; Ik wil een verbetering <v-spacer></v-spacer>  </v-btn>    
-            <v-btn v-if="canQuit" @click="deletePostmakerModal = !deletePostmakerModal"  class="error mb-1 " block> <v-icon>mdi-alert</v-icon> &nbsp; stop de opdracht  <v-spacer></v-spacer> </v-btn>    
-            <v-btn v-if="canRecievePayment" @click="paymentRecievedModal = !paymentRecievedModal"  class="success mb-1 " block> <v-icon>mdi-cash</v-icon> &nbsp; Bedrag heb ik ontvangen  <v-spacer></v-spacer> </v-btn>    
-            <v-btn v-if="hasPostmaker" @click="like" class="success mb-1" block> <v-icon>mdi-thumb-up</v-icon> &nbsp; Waardeer samenwerking <v-spacer></v-spacer> </v-btn>    
+            <v-btn v-if="canEdit" @click="editModal = !editModal"  block color="primary mb-1"> <v-icon>mdi-draw</v-icon> &nbsp; Opdracht aanpassen  </v-btn>            
+            <v-btn v-if="canRemove" class="mb-1"  @click="deleteModal = !deleteModal"  block color="error"> <v-icon>mdi-trash-can-outline</v-icon> &nbsp;  Opdracht verwijderen  </v-btn>                   
+            <v-btn v-if="canDeliver" @click="delivery"   block color="primary  mb-1"><v-icon>mdi-upload</v-icon> &nbsp; tijdelijke oplevering </v-btn>     
+            <v-btn v-if="canFinalDeliver" @click="final"  block color="secondary  mb-1"> <v-icon>mdi-upload</v-icon> &nbsp; Finale oplevering </v-btn>     
+            <v-btn v-if="canQuitPostmaker"  @click="wantStopModal = !wantStopModal" block color="error  mb-1"> <v-icon>mdi-close</v-icon> &nbsp; Ik wil stoppen </v-btn>   
+            <v-btn v-if="canContinuePostmaker"  @click="wantContinueModal = !wantContinueModal" block color="success  mb-1"> <v-icon>mdi-arrow-right-bold-box</v-icon> &nbsp; Ik wil doorgaan </v-btn>   
+            <v-btn v-if="canDeliveryAccept" @click="acceptModal = !acceptModal" class="success mb-1" block> <v-icon>mdi-check</v-icon> &nbsp; Eindoplevering  <explain text="white" >Hiermee  vind u de tussenoplevering goed en gaat het project over naar de eindoplevering.</explain></v-btn>
+            <v-btn v-if="canImprove" @click="awaitModal = !awaitModal" class="secondary mb-1 " block> <v-icon>mdi-timer-sand</v-icon> &nbsp; Oplevering verbeteren  <explain text="white" >De Postmaker Postmaker gaat hiermee de laatste oplevering verbeteren.</explain> </v-btn>    
+            <v-btn v-if="canQuit" @click="deletePostmakerModal = !deletePostmakerModal"  class="error mb-1 " block> <v-icon>mdi-alert</v-icon> &nbsp; stop de opdracht   <explain text="white" >Als u stopt, is dit definitief.</explain> </v-btn>    
+            <v-btn v-if="canRecievePayment" @click="paymentRecievedModal = !paymentRecievedModal"  class="success mb-1 " block> <v-icon>mdi-cash</v-icon> &nbsp; Bedrag heb ik ontvangen   </v-btn>    
+            <v-btn v-if="hasPostmaker" @click="like" class="success mb-1" block> <v-icon>mdi-thumb-up</v-icon> &nbsp; Waardeer samenwerking  </v-btn>    
             
             <modal v-model="paymentRecievedModal" width=500 title="Heeft u een betaling ontvangen?">
                 Met deze actie is de betaling ontvangen en wordt de opdracht gearchiveerd. <br>                            

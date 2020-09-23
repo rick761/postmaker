@@ -123,6 +123,7 @@ export default {
                         files: state.data.files,
                         folder: rootState.order.data.id
                     }, ROOT);
+
                     dispatch('order/delivered', '', ROOT);
                     commit(ADD_TO_DELIVERYS, res);
                     commit(CLEAR_DELIVERY);

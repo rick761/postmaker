@@ -1,7 +1,7 @@
 <template>    
     <v-row>       
         <v-col cols=12 lg="12">                
-            <order-list-component title="Bezig" >               
+            <order-list-component title="Opdachten waar ik mee bezig ben" >               
                 <order-list-item-component v-for="(item,key) in orders" :item="item" :key="key" >
                     <order-open-list-item-component :item="item"  />
                     <order-account-list-item-component :item="item" />

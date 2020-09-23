@@ -5,11 +5,11 @@
             </v-col>
 
             <v-col cols="12" md="6">
-               <preview-profile-component />               
-            </v-col>                   
-
-            <v-col v-if="auth.type == 'postmaker'" >
-                <portfolio-profile-component />
+               <preview-profile-component /> 
+               <span v-if="auth.type == 'postmaker'" >      
+                    <portfolio-profile-component />      
+               </span>  
+                            
             </v-col>
         </v-row>      
 

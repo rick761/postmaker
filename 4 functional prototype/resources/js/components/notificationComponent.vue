@@ -1,10 +1,11 @@
 <template>    
     <v-overlay     
-        opacity="0"     
+        opacity="0.5"     
         :value="open_dialog"  
         @click.native="close($event)" 
+        style="z-index:9999"
     >
-            <div class="mr-3 mt-3" style="position:absolute; right:0; top:0;" >                
+            <div class="mr-3 mt-3" style="z-index:9999; position:absolute; right:0; top:0;" >                
                 <v-slide-y-transition group>
 
                     <v-alert                         

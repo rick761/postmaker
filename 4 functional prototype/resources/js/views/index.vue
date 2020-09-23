@@ -21,7 +21,7 @@
             <v-col cols=12 sm=4 v-if="unread_notifications">
                 <v-sheet                      
                     class="justify-center align-center px-10 white--text d-flex h2"                    
-                    color="warning lighten-1"
+                    color="primary lighten-1"
                     height="200"
                 >{{unread_notifications}} Berichten</v-sheet>
 
@@ -32,7 +32,7 @@
             <v-col cols=12 sm=4 v-if="archivedProjects"> 
                      <v-sheet
                     class="justify-center align-center white--text px-10 d-flex  h2 pa-5"
-                    color="error lighten-1"
+                    color="primary lighten-1"
                     height="200"
                 >
                  <span v-if="archivedProjects==1">{{archivedProjects}} Gearchiveerd project</span>
@@ -41,8 +41,7 @@
             </v-col>   
 
             <v-col cols=12>
-                <v-btn     
-                    
+                <v-btn                         
                     :block="(this.$vuetify.breakpoint.name == 'xs')"            
                     v-if="auth.type == 'postmaker'" x-large to="/open" class="primary mr-3  mb-2"
                 >
@@ -60,7 +59,7 @@
                     :block="(this.$vuetify.breakpoint.name == 'xs')" 
                     v-if="auth.type=='requester'" x-large to="/requester/order/new" class="success mr-3 mb-2" 
                 >
-                    <v-icon>mdi-plus</v-icon> &nbsp; Nieuwe post aanmaken 
+                    <v-icon>mdi-plus</v-icon> &nbsp; Nieuwe opdracht aanmaken 
                 </v-btn>                    
             </v-col>          
 

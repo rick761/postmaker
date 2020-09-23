@@ -50,13 +50,17 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $messages=[
+            'unique' => 'Het :attribute veld is al in gebruik.'
+        ];
+
         return Validator::make($data, [
             'display_name' => ['required', 'string','min:6', 'max:255', 'unique:users'],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        ],$messages);
     }
 
     /**

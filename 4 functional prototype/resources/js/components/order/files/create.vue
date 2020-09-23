@@ -4,23 +4,14 @@
 
             <v-card-subtitle>
                 
-                Moodboard & Bestanden            
-            
-                <v-tooltip color="primary" top>
-                    <template v-slot:activator="{ on, attrs }">                    
-                        <v-btn  icon v-bind="attrs" v-on="on" class="float-right">
-                            <v-icon color="accent lighten-1">mdi-comment-question-outline</v-icon>
-                        </v-btn>
-                    </template>
-                    <span>
-                        Deze documenten worden openbaar gesteld als preview voor de postmaker.
-                    </span>
-                </v-tooltip>
+                Bestanden en afbeeldingen  
+                
+                <explain>  Deze documenten worden openbaar gesteld als instructie of voorbeeld voor alle postmakers. </explain>
 
             </v-card-subtitle> 
 
             <v-card-text>
-                <v-file-input @click:clear="removeAllTmp" v-model="_tmp_files" show-size multiple label="Afbeeldingen of bestanden"></v-file-input>                        
+                <v-file-input @click:clear="removeAllTmp" v-model="_tmp_files" show-size multiple label="Afbeeldingen en/of bestanden toevoegen"></v-file-input>                        
                 
                     
                 <v-chip 

@@ -9,9 +9,9 @@
             v-if="badge != '0'" 
             :content="badge" 
             :color="badgeColor"
-            overlap
+            overlap bottom
             >
-                <v-icon  medium>
+                <v-icon>
                     {{icon}}
                 </v-icon>
             </v-badge>
@@ -30,7 +30,7 @@
             <v-list-item-title>
                 
                 {{text}} 
-                <span class="float-right"> 
+                <span class="float-right" :class="badgeColor+'--text'" > 
                     <slot />
                 </span>
             </v-list-item-title>
