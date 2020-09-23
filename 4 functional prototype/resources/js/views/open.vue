@@ -86,7 +86,7 @@
                                                     '': dateDiffInDays(item.deliver) > 30 
                                                     } ">mdi-calendar</v-icon>  
                                                     &nbsp; 
-                                                    over {{dateDiffInDays(item.deliver)}} dagen
+                                                    Verwacht over {{dateDiffInDays(item.deliver)}} dagen
                                                     
 
                                             </v-list-item-icon>            
@@ -227,6 +227,8 @@ export default {
         },
 
         dateDiffInDays(b) {            
+            const [day,month,year] = b.split('-');
+            b = `${year}-${month}-${day}`
             const _MS_PER_DAY = 1000 * 60 * 60 * 24;
             const utc1 = new Date();//Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
             const utc2 = new Date(b);          

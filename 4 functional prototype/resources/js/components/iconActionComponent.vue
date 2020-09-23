@@ -4,17 +4,18 @@
                     <v-tooltip left>
                         <template v-slot:activator="{ on, attrs }">          
                             <v-btn 
+                            elevation="1"
                             v-bind="attrs" 
                             v-on="on"  
                             :href="LandingsPageUrl()" 
-                            class="float-right"
-                            color="primary" 
-                            icon
+                            class="float-right primary ml-2"
+                            color="white" 
+                            text small
                             >
                                 <v-icon>mdi-file-move-outline</v-icon>
                             </v-btn>
                             </template>
-                        <span>Naar de landings pagina</span>
+                        <span>Landingspagina</span>
                     </v-tooltip>
                      
 
@@ -29,12 +30,13 @@
                                 <input type="hidden" name="_token" v-bind:value="csrf">   
                                 <!-- <v-btn type="submit" text><v-icon>mdi-logout</v-icon> &nbsp; Uitloggen</v-btn>  -->
                                 <v-btn 
-                                
+                                elevation="1"
                                 type="submit" 
-                                color="warning"
+                                class="primary ml-2"
                                 v-bind="attrs"
                                 v-on="on" 
-                                icon
+                                text
+                                color="white" small
                                 >
                                     <v-icon>mdi-logout-variant</v-icon>
                                 </v-btn>
@@ -46,8 +48,8 @@
                     <v-badge 
                         v-if="unread_notifications"
                         :content="unread_notifications"
-                        overlap 
-                        style="margin-top:2px;"
+                        overlap  
+                        style="margin-top:1px;"
                         class="float-right"                                      
                     >
                         <v-tooltip left >
@@ -55,15 +57,16 @@
                                     <v-btn                                 
                                         v-bind="attrs"
                                         v-on="on" 
-                                        
-                                        color="secondary"
+                                        elevation="1"
+                                        class="secondary ml-2"
                                         @click="$store.commit('notifications/TOGGLE_NOTIFICATION_MODAL');"
-                                        icon
+                                        text
+                                        color="white" small
                                     >
                                         <v-icon >mdi-message-outline</v-icon>  
                                     </v-btn>
                             </template>
-                            <span>Open berichten</span>
+                            <span>Berichten</span>
                         </v-tooltip>
                     </v-badge>
     </div>

@@ -17,7 +17,7 @@
             </v-list-item-avatar>
             <v-list-item-content>
                 <v-list-item-title class="h2 mt-3">Postmaker</v-list-item-title>  
-                <v-list-item-subtitle>test</v-list-item-subtitle> 
+                <v-list-item-subtitle>Aanvragen en produceren</v-list-item-subtitle> 
             </v-list-item-content>
              <!-- <v-btn class="px-2 mt-2" icon @click.stop="mini = true" >
                 <v-icon x-large >mdi-chevron-left</v-icon>                
