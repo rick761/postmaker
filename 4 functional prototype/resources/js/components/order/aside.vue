@@ -11,7 +11,7 @@
                             <v-icon color="primary">mdi-calendar-arrow-left</v-icon> &nbsp; 
                         </v-list-item-icon>
                         <v-list-item-content class="text-right">
-                            <span class="float-right">{{order.created_at}}</span>
+                            <span class="float-right">van {{order.created_at}}</span>
                         </v-list-item-content>
                     </v-list-item>
 
@@ -20,7 +20,7 @@
                             <v-icon color="primary">mdi-calendar-arrow-right</v-icon> &nbsp; 
                         </v-list-item-icon>
                         <v-list-item-content class="text-right">
-                             <span class="float-right">{{order.deliver}}</span>
+                             <span class="float-right">tot {{order.deliver}}</span>
                         </v-list-item-content>
                     </v-list-item>
 

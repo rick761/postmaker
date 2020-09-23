@@ -3,40 +3,38 @@
     link 
     :to="link"
     style="color:white"
+    class="ma-0"
     >
         <v-list-item-icon>             
-            <v-badge 
-            v-if="badge != '0'" 
+            <v-badge             
             :content="badge" 
             :color="badgeColor"
-            overlap bottom
+            overlap left   
+            :value="badge!=0 && shown "         
+            
             >
                 <v-icon>
-                    {{icon}}
+                    {{icon}} 
                 </v-icon>
             </v-badge>
-
-            <v-icon 
-            v-else 
-            medium
-            >
-                {{icon}}
-            </v-icon>    
-
         </v-list-item-icon>
 
         <v-list-item-content>
-
-            <v-list-item-title>
-                
-                {{text}} 
-                <span class="float-right" :class="badgeColor+'--text'" > 
-                    <slot />
-                </span>
-            </v-list-item-title>
-
+            <v-list-item-title>{{text}}</v-list-item-title>
         </v-list-item-content>
 
+                
+        <v-list-item-action>
+            <v-chip
+                class="ma-0" small
+                :color="badgeColor"
+                text-color="white"
+                v-if="badge!=0"
+            >
+                {{badge}}                   
+            </v-chip>     
+        </v-list-item-action>
+        
     </v-list-item>
 </template>
 
@@ -47,7 +45,8 @@ export default {
         icon: {default:''},
         text: {default:''},
         badge: {default:'0'},
-        badgeColor: {default:'orange'}
+        badgeColor: {default:'accent'},
+        shown: {default:true}
     }
 }
 </script>

@@ -41,7 +41,7 @@
                             
                             <v-col v-for="(item, key) in props.items" :key="key" cols="12"  md="6" lg="4" >
 
-                                <card height="100%" >   
+                                <card height="100%" :noflex="true">   
                              
                                     <!--title-->
                                     <v-card-title class="text-truncate subheading font-weight-bold" :class="{ 'blue--text': sortBy === 'title' }" >
@@ -126,8 +126,8 @@
                                     <v-spacer></v-spacer>
                                     <v-card-actions >
                                         <v-spacer></v-spacer>
-                                        <v-btn text :to="'/order/open/'+item.id"  color="accent accent-4" >                                            
-                                            open
+                                        <v-btn text :to="'/order/open/'+item.id" block class="primary" >                                            
+                                            openen
                                         </v-btn>
                                     </v-card-actions>
 
