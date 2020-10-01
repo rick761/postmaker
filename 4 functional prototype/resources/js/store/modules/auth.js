@@ -10,7 +10,17 @@ Vue.use(Vuex);
 export default {
     namespaced: true,
     strict: true, //Alleen op false zetten als de data in deze module vanuit de component gemanipuleerd mag worden
-    state: () => ({ user: {} }),
+    state: () => ({
+        user: {
+            description: "",
+            phone: "",
+            website: "",
+            company: "",
+            first_name: "",
+            last_name: "",
+            display_name: "",
+        },
+    }),
     mutations: {
 
         [SET_AUTH](state, payload) {
@@ -44,9 +54,11 @@ export default {
             })
         },
 
-        save({ state, dispatch, rootState }) {
+        save({ state, dispatch, rootState, commit }) {
+            console.log(state.user)
+            commit('loader/TOGGLE_LOADER_BUTTONS_ON', null, ROOT);
             dispatch('api/post', { url: '/auth/update', data: state.user }, ROOT).then(() => {
-
+                commit('loader/TOGGLE_LOADER_BUTTONS_OFF', null, ROOT);
             });
             dispatch('images/save');
         },

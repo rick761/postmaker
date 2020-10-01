@@ -1,6 +1,6 @@
 <template>
     <v-main dark fluid 
-    :style="`height:100%; background: url('./images/gallery/${Math.floor(Math.random() * 14)}.jpg') no-repeat top;background-size: cover; background-color:black;`" >
+    :style="`height:100%; background: url('./images/gallery/${Math.ceil(Math.random() * 1)}.jpg') no-repeat top;background-size: cover; background-color:black;`" >
     
         <v-container fluid>
 
@@ -15,7 +15,7 @@
 
                 <span v-if="guest" >Nog geen account?</span> 
 
-                <v-btn  v-if="guest" @click="registerModal = !registerModal" text class="ma-5">
+                <v-btn  v-if="guest" @click="registerModal = !registerModal" text class="ma-5 register-button">
                     <v-icon>mdi-login-variant</v-icon> &nbsp;  Registreren
                 </v-btn>
                
@@ -30,7 +30,7 @@
                 <v-col cols=12  class="white--text h1 mx-auto text-center">
                     Aanvragen en produceren van content.
                     <br>
-                    <v-btn v-if="guest" @click="loginModal = !loginModal" x-large tile class="ma-5 success">
+                    <v-btn v-if="guest" @click="loginModal = !loginModal" x-large tile class="ma-5 success login-button">
                         <v-icon>mdi-login</v-icon> &nbsp; Inloggen
                     </v-btn>                     
                     <v-btn v-if="!guest" x-large class="ma-5  info" @click="goHome">
@@ -42,24 +42,52 @@
             </v-row>
             
             <v-card dark>  
-                <v-tooltip top>
-                    <template v-slot:activator="{ on, attrs }">
-
-                         <v-img @click="loginModal = !loginModal"  v-on="on"  v-bind="attrs" id="preview_postmaker" src="./images/landing/preview.png" >  
-                            <div class="v-skeleton-loader__image v-skeleton-loader__bone"></div>
-                        </v-img>
-
-                    </template>
-                        <v-icon>mdi-arrow-up</v-icon>
-                    </v-tooltip>
+                
+                   
 
                    
                
-                <!-- <v-card-title><v-icon x-large>mdi-tree-outline</v-icon>
-                    Postmaker</v-card-title>
-                <v-card-text>   
-                                    
-                    <v-row>
+                <v-card-title>
+                    <v-icon x-large>mdi-tree-outline</v-icon>
+                    Postmaker
+                </v-card-title>
+               <v-card-text> 
+                <!-- <v-tooltip top> -->
+                    <!-- <template v-slot:activator="{ on, attrs }"> -->
+
+                        <!-- <v-img class="rounded" @click="loginModal = !loginModal"  v-on="on"  v-bind="attrs" id="preview_postmaker" src="./images/landing/preview.png" >  
+                            <div class="v-skeleton-loader__image v-skeleton-loader__bone"></div>
+                        </v-img> -->
+
+                          <v-carousel class="rounded" :show-arrows="false" delimiter-icon="mdi-chevron-right" height="600" cycle >
+                            <v-carousel-item 
+                            
+                            v-for="(item,i) in images"
+                            :key="i"
+                            
+                            >
+                                <v-img :src="item.src">
+                                    <v-row
+                                        class="fill-height elevation-1 pa-16"
+                                        align="center"
+                                        justify="center"
+                                        elevation="1"
+                                        
+                                    >
+                                        <div class="display-2" style=" text-shadow: rgb(0, 0, 0) 0px 0px 4px;">                                
+                                            {{item.txt}}
+                                        </div>
+                                    </v-row>
+                                </v-img>
+                            </v-carousel-item>
+                        </v-carousel>
+
+                    <!-- </template>
+                        <v-icon>mdi-arrow-up</v-icon>
+                    </v-tooltip>    -->
+
+                   
+                    <!-- <v-row>
                         <v-col cols="12" md="4" >         
                             <v-skeleton-loader type="date-picker"></v-skeleton-loader>
                         </v-col>
@@ -70,8 +98,8 @@
                         <v-col cols="12" md="4" >
                             <v-skeleton-loader class="mb-6" type="list-item-avatar, divider, list-item-three-line, card-heading, image, actions" ></v-skeleton-loader>               
                         </v-col>                    
-                    </v-row>
-                </v-card-text> -->
+                    </v-row> -->
+                </v-card-text>
 
             </v-card>
         </v-container>       
@@ -89,7 +117,14 @@ export default {
     props:['csrf','guest'],
     data(){return{
         loginModal :false,
-        registerModal: false
+        registerModal: false,
+        images:[
+            {src:'./images/landing/preview_1.png',txt:"Met 'aanvragers' en 'postmakers'."},
+            {src:'./images/landing/preview_2.png',txt:"Aanvrager maakt een opdrach.t"},
+            {src:'./images/landing/preview_3.png',txt:"Postmaker zoekt naar opdrachten."},
+            {src:'./images/landing/preview_4.png',txt:"Postmaker solliciteerd."},
+            {src:'./images/landing/preview_5.png',txt:"Opdracht begint!"},
+        ]
     }},
     methods:{
         register(){

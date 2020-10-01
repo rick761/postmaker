@@ -60,7 +60,7 @@ const routes = [
     },
     {
         path: '/archive/order/:orderId',
-        name: 'Beschikbare opdracht',
+        name: 'Gearchiveerde opdracht',
         component: archivedOrder,
     },
     {
@@ -83,7 +83,7 @@ const routes = [
     /**postmaker**/
     {
         path: '/postmaker/order/:orderId',
-        name: 'Opdracht',
+        name: 'Opdracht ',
         component: order_postmaker,
     },
     {
@@ -93,7 +93,7 @@ const routes = [
     },
     {
         path: '/postmaker/orders',
-        name: 'Opdrachten',
+        name: 'Opdrachten ',
         component: Home_postmaker,
     },
 
@@ -124,11 +124,11 @@ const routes = [
         name: 'Binnenkomende aanvragen',
         component: Requested_requester,
     },
-    {
-        path: '/profile',
-        name: 'Profiel',
-        component: profile,
-    },
+    // {
+    //     path: '/profile',
+    //     name: 'Profiel',
+    //     component: profile,
+    // },
 
 
 ];

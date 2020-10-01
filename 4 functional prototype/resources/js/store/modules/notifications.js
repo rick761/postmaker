@@ -73,13 +73,20 @@ export default {
                 var orderId = data.notification.url.split('/')[data.notification.url.split('/').length - 1];
                 var isCurrentOrder = orderId == rootState.order.data.id;
                 var hasOrderInRoute = router.currentRoute.path.split('/').filter(item => item == 'order').length;
+                var isMessage = data.notification.text.split(' ')[0] == "Bericht:";
+
+                // console.log(data, isMessage, hasOrderInRoute);
 
                 if (hasOrderInRoute && isCurrentOrder) {
                     dispatch('order/messages/recieveFromNotifications', data.notification, ROOT);
                 }
 
+                if (!(isMessage && hasOrderInRoute)) {
+                    //commit(OPEN_NOTIFICATION_MODAL);
+                }
+
                 commit(SET_NOTIFICATION, data.notification);
-                commit(OPEN_NOTIFICATION_MODAL);
+
             });
 
             dispatch('api/get', 'notifications/get', ROOT).then(() => {
@@ -87,7 +94,7 @@ export default {
                 commit(SET_NOTIFICATIONS, response);
 
                 if (response[0] && response[0].read == 0) {
-                    commit(OPEN_NOTIFICATION_MODAL);
+                    //commit(OPEN_NOTIFICATION_MODAL);
                 }
             });
         },

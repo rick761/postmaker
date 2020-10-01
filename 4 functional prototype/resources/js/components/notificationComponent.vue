@@ -1,11 +1,11 @@
 <template>    
-    <v-overlay     
+    <!-- <v-overlay     
         opacity="0.5"     
         :value="open_dialog"  
         @click.native="close($event)" 
         style="z-index:9999"
-    >
-            <div class="mr-3 mt-3" style="z-index:9999; position:absolute; right:0; top:0;" >                
+    > -->
+            <v-card flat color="transparent" v-click-outside="close" v-if="open_dialog" class="mr-3 mt-3" style="z-index:9999; position:absolute; right:0; top:0;" >                
                 <v-slide-y-transition group>
 
                     <v-alert                         
@@ -27,8 +27,8 @@
                     </v-alert>
 
                 </v-slide-y-transition>
-            </div>
-     </v-overlay >
+            </v-card>
+     <!-- </v-overlay > -->
 </template>
 
 <script>
@@ -42,10 +42,14 @@ export default {
         })
     },
     methods: {
-        close (e) {
-            if(e.target.className == 'v-overlay__scrim'){
+        close () {
+            //if(e.target.className == 'v-overlay__scrim'){
+                //this.$store.commit('notifications/TOGGLE_NOTIFICATION_MODAL');
+            //}
+            if(this.open_dialog){
                 this.$store.commit('notifications/TOGGLE_NOTIFICATION_MODAL');
             }
+            // console.log('123')
         },
         remove(notification){
             this.$store.dispatch('notifications/remove',notification);

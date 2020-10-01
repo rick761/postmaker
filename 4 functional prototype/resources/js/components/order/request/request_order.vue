@@ -12,9 +12,9 @@
 
             <v-card-text >
 
-                <v-textarea solo v-model="text" label="Schrijf hier je motivatie" />
+                <v-textarea solo v-model="text" name="motivatie" label="Schrijf hier je motivatie" />
 
-                Selecteer een andere prijs?                
+                Vraag een andere prijs?                
 
                 <v-slider
                     v-model="payment"
@@ -29,7 +29,8 @@
                         <v-text-field
                             :rules="[v =>  !!v.toString() || 'Niet leeg', ]"
                             required
-                            v-model="payment"                             
+                            v-model="payment"  
+                            name="payment"                           
                             class="mt-0 pt-0"                                
                             type="number"
                             style="width: 60px"                            
@@ -57,9 +58,9 @@
 
                 <v-spacer></v-spacer>
 
-                <v-btn class="success" v-if="!request_exists"  @click="requestOrder" > Solliciteer </v-btn>
-                <v-btn class="secondary" v-else @click="requestOrder" > Aanpassen en opnieuw solliciteren </v-btn>
-                <v-btn class="error"   v-if="request_exists && !is_withrawn"  @click="withrawRequest"> Intrekken </v-btn>
+                <v-btn class="success apply-button" v-if="!request_exists"  @click="requestOrder" > Solliciteer </v-btn>
+                <v-btn class="secondary re-apply-button" v-else @click="requestOrder" > Aanpassen en opnieuw solliciteren </v-btn>
+                <v-btn class="error withraw-button"   v-if="request_exists && !is_withrawn"  @click="withrawRequest"> Intrekken </v-btn>
 
             </v-card-actions>
 

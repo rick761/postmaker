@@ -16,7 +16,12 @@
                     v-model="display_name"                    
                     :append-icon="'mdi-eye'"
                     label="Naam van profiel"
-                    :rules="[v => !!v || 'Verplicht', v => v.length >= 6 || 'Ten minste 6 karakters']"                                      
+                    :rules="[
+                        v => !!v || 'Verplicht', 
+                        v => v.length >= 6  || 'Ten minste 6 karakters',
+                        v => v.length <= 50 || 'max 50 karakters'                    
+                    ]"         
+                    counter="50"                             
                     required                  
                     hint="Deze naam wordt getoond aan andere gebruikers"   
                 ></v-text-field>
@@ -25,38 +30,67 @@
                     <v-col>
                         <v-text-field                        
                             v-model="first_name" 
-                            :rules="[v => !!v || 'Verplicht']"
-                            label="Voornaam"                            
+                            
+                            label="Voornaam"          
+                            counter="50"                   
                             required
+                            :rules="[
+                                v => !!v || 'Dit kan niet leeg zijn',
+                                v => v.length >= 3 || 'Min 3 karakters',
+                                v => v.length <= 255 || 'Max 255 karakters'
+                            ]"
                         ></v-text-field>
                     </v-col>
+            
                     <v-col>
                         <v-text-field
                             v-model="last_name" 
-                            :rules="[v => !!v || 'Verplicht']"
                             label="Achternaam"
+                            counter="50" 
                             required
-                        ></v-text-field>
+                            :rules="[
+                                v => !!v || 'Dit kan niet leeg zijn',
+                                v => v.length >= 3 || 'Min 3 karakters',
+                                v => v.length <= 255 || 'Max 255 karakters'
+                            ]"
+                        ></v-text-field>                        
                     </v-col>
                 </v-row>
 
                 <v-text-field
                     v-model="company"                     
-                    label="*Bedrijfsnaam"                  
+                    label="*Bedrijfsnaam"     
+                      :rules="[                      
+                        
+                        v => v.length <= 255 || 'Max 255 karakters'
+                    ]"
+                    counter="255" 
                     required
                 ></v-text-field>
+            
 
                 <v-text-field
                     v-model="website" 
-                    label="*Website"
-                    required                   
+                    label="*Website"                      
+                    counter="255"
+                    required      
+                    :rules="[                        
+                        v => v.length <= 255 || 'Max 255 karakters'
+                    ]"
+                                 
                 ></v-text-field>  
+               
 
                 <v-text-field
                     v-model="phone"  
-                    label="*Telefoon nummer"
+                    label="*Telefoon nummer"                   
+                    counter="255"
                     required
+                    :rules="[                        
+                        v => v.length <= 255 || 'Max 255 karakters'
+                    ]"
                 ></v-text-field>  
+                 
                 
                 <v-row>
                     <v-col cols=6>  
@@ -101,13 +135,19 @@
                     name="input-7-4"
                     label="Profiel beschrijving"
                     v-model="description"
+                    counter="255"
+                     :rules="[
+                        v => !!v || 'Dit kan niet leeg zijn',
+                        v => v.length <= 255 || 'Max 255 karakters'
+                    ]"
                 ></v-textarea>
+              
 
             </v-card-text>
             
             <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn class="success" @click="saveProfile" > &nbsp; Opslaan</v-btn>
+                <v-spacer></v-spacer>               
+                <v-btn :loading="loader_btns" class="success" @click="saveProfile" > &nbsp; Opslaan</v-btn>
             </v-card-actions>      
         </v-form>
     </card>
@@ -121,21 +161,24 @@
             valid:true,            
             _avatar_file : [],
             user_images_files : [],
+            
            // user:{}              
         }},
         computed:{
             ...mapState({                
                 auth: state => state.auth.user,
-                images : state=> state.auth.images.list
+                images : state=> state.auth.images.list,
+                loader_btns: state=>state.loader.data.buttons
+
             }),
             first_name: {
-                get () {return this.auth.first_name},               
+                get () {return this.auth.first_name==null?"":this.auth.first_name},               
                 set (value) { 
                     this.$store.commit('auth/SET_AUTH_FIELD',[ 'first_name', value])  
                 }
             },
             last_name:{
-                get () {return this.auth.last_name},
+                get () {return this.auth.last_name==null?"":this.auth.last_name},
                 set (value) { 
                     this.$store.commit('auth/SET_AUTH_FIELD',[ 'last_name', value])  
 
@@ -143,14 +186,14 @@
                 
             },
             company:{
-                get () {return this.auth.company},
+                get () {return this.auth.company==null?"":this.auth.company},
                 set (value) { 
                     this.$store.commit('auth/SET_AUTH_FIELD',[ 'company', value])  
                  }
                 
             },
             website:{
-                get () {return this.auth.website},               
+                get () {return this.auth.website==null?"":this.auth.website},               
                 set (value) { 
                     this.$store.commit('auth/SET_AUTH_FIELD',[ 'website', value])  
                 }
@@ -163,13 +206,13 @@
                 }
             },
             phone:{
-                get () {return this.auth.phone},
+                get () {return this.auth.phone==null?"":this.auth.phone},
                 set (value) {
                     this.$store.commit('auth/SET_AUTH_FIELD',[ 'phone', value])                    
                 }
             },
             display_name:{
-                get () {return this.auth.display_name;},
+                get () {return this.auth.display_name==null?"":this.auth.display_name},
                 set (value) {
                     this.$store.commit('auth/SET_AUTH_FIELD',[ 'display_name', value])  
                 }
@@ -182,7 +225,7 @@
                 }
             },
             description:{
-                get () {return this.auth.description},
+                get () {return this.auth.description==null?"":this.auth.description},
                 set (value) { 
                     this.$store.commit('auth/SET_AUTH_FIELD',[ 'description', value]); 
                 }
@@ -194,9 +237,12 @@
         methods:{
 
             saveProfile(){                
-                if(this.$refs.form.validate()){                                        
+                if(this.$refs.form.validate()){      
+                    console.log('validated')    
+
                    this.$store.commit('auth/images/ADD_USER_IMAGES',this.user_images_files);                   
-                   this.$store.dispatch('auth/save');                 
+                   this.$store.dispatch('auth/save');          
+                   this.$store.dispatch('auth/save');        
                    if(this._avatar_file)
                         this.$store.dispatch('file/upload', {type:'avatar', files:this._avatar_file}).then(()=>{
                             this.reloadProfilePicture();                            
@@ -207,8 +253,7 @@
                    }
                    this.user_images_files = [];                 
                    this.$forceUpdate();
-                }
-                
+                }                
             },       
 
             reloadProfilePicture(){                

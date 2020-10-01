@@ -5,7 +5,7 @@
         <global-modal />        
         <system-bar-component />
         
-        <v-main style="min-height: 100vh; " :style="{background: $vuetify.theme.currentTheme.background}"  >
+        <v-main style="min-height: 100vh; margin-left:56px; " :style="{background: $vuetify.theme.currentTheme.background}"  >
 
             <notification-component />   
             <feedback />
@@ -63,5 +63,8 @@ a:hover{
 }
 .bottom-0{
     bottom:0;
+}
+.v-navigation-drawer__content {
+    overflow-y:hidden;
 }
 </style>

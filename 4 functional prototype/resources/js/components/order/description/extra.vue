@@ -1,7 +1,7 @@
 <template>
-    <card v-if="descriptions.length">
+    <card v-if="descriptions.length" toggle>
         <v-card-subtitle>
-            Extra toelichting
+            Extra informatie
             <explain>Deze "exta" opdracht informatie kan belangrijk zijn bij het uitvoeren van de opdracht </explain>
         </v-card-subtitle>       
             

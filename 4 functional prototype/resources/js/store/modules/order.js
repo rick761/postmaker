@@ -198,10 +198,13 @@ export default {
 
         async create({ state, commit, dispatch, rootState }) {
             commit(FIX_FORMAT_ORDER);
+
             await dispatch('api/post', { url: '/order/create', data: state.data }, ROOT).then(() => {
                 var newOrder = rootState.api.response;
                 commit(SET_ORDER, newOrder);
                 dispatch('update');
+
+
             });
         },
 
@@ -209,10 +212,12 @@ export default {
         async update({ state, dispatch, rootState, commit }, refresh = true) {
             commit(FIX_FORMAT_ORDER);
 
+            commit('loader/TOGGLE_LOADER_BUTTONS_ON', null, ROOT);
             await dispatch('api/post', { url: '/order/update', data: state.data }, ROOT).then(() => {
                 if (rootState.api.response) {
                     router.push({ path: '/order/open/' + state.data.id });
                 }
+                commit('loader/TOGGLE_LOADER_BUTTONS_OFF', null, ROOT);
             });
 
             var orderId = state.data.id;
@@ -302,9 +307,10 @@ export default {
             dispatch('update');
         },
 
-        like({ state, dispatch, rootState }) {
+        like({ state, commit, dispatch, rootState }) {
+            commit('loader/TOGGLE_LOADER_BUTTONS_ON', null, ROOT);
             dispatch('api/get', `/order/like/${state.data.id}`, ROOT).then(() => {
-
+                commit('loader/TOGGLE_LOADER_BUTTONS_OFF', null, ROOT);
             });
         }
 

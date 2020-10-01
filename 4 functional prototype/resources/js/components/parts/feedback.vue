@@ -1,5 +1,5 @@
 <template>
-    <div style="margin: 10vh 0 5vh; position:absolute; right:0; margin-right:10px; z-index:9998;" :class="{ 'bottom-0' : (this.$vuetify.breakpoint.name == 'xs')}">
+    <div v-if="hide==0" style="margin: 10vh 0 5vh; position:absolute; right:0; margin-right:10px; z-index:9998;" :class="{ 'bottom-0' : (this.$vuetify.breakpoint.name == 'xs')}">
 
             <modal title="Te volgens instructies"  width="1024" v-model="instructions_modal">
                 
@@ -23,7 +23,13 @@
                 <template slot="actions"><v-icon>mdi-clock</v-icon>&nbsp; +- 15 minuten</template>
             </modal>
 
-                <v-card class="pa-2 mb-2">
+                <v-card class="pa-2 mb-1">
+                    <div class="text-center">
+                        <v-btn @click="hide=1" icon><v-icon>mdi-minus</v-icon></v-btn>
+                    </div>
+                </v-card>
+
+                <v-card class="pa-2 mb-1">
                     <div class="text-center">
                         <v-tooltip left>
                             <template v-slot:activator="{ on, attrs }">
@@ -33,7 +39,7 @@
                             </template>
                             <span>Wat moet ik doen?</span>
                         </v-tooltip>              
-                    </div>
+                    </div>                    
                 </v-card>
 
                 <v-card class="pa-2">
@@ -109,6 +115,7 @@ export default {
         show_feedback : false,
         satisfactionEmojis: ['😭', '😢', '☹️', '🙁', '😐', '🙂', '😊', '😁', '😄', '😍'],
         slider: 50,
+        hide:0,
         stories: [            
             '1 Aanmelden',
             '2 Nieuwe opdracht aanmaken',

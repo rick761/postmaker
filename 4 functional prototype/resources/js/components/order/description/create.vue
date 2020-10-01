@@ -1,6 +1,6 @@
 <template>
 
-        <card>                  
+        <card toggle>                  
 
             <v-card-subtitle>
 

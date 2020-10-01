@@ -18,6 +18,7 @@ class FileController extends Controller
         $folder; // empty = 'no extra folder'
         $userId = Auth::id();  
         $to_upload_path = $userId.'/'.$type.'/'.$folder.'/';
+        
         if($folder == 'no extra folder'){
             $to_upload_path = $userId.'/'.$type.'/';
         }

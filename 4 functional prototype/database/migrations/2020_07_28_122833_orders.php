@@ -16,8 +16,8 @@ class Orders extends Migration
             $table->uuid('postmaker_id')->nullable();
 
             //fields
-            $table->string('title')->default('Nieuw project');
-            $table->longText('description');
+            $table->string('title',50)->default('Nieuw project');
+            $table->string('description',2000);
             $table->string('payment')->nullable();
             $table->date('deliver')->nullable();
             $table->string('type');

@@ -1,18 +1,18 @@
 <template> 
       
-           <card mb="mb-0 pl-5 pr-5" >
+           <card mb="mb-3 pl-5 pr-5" >
           <v-row>  
             <v-col>       
                    
               <v-breadcrumbs 
-                class="d-inline-block pa-0 pt-2"
+                class="d-inline-block pa-0 pt-0"
                 v-if=" this.$route.path == '/' " 
                 :items="[default_crumbs]" 
                 large
               />     
                 
               <v-breadcrumbs 
-              class="d-inline-block pa-0 pt-2"
+              class="d-inline-block pa-0 pt-0"
               v-else
                 :items="[default_crumbs, current_crumb ]" 
                 large 

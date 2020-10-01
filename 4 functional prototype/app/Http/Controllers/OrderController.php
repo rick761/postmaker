@@ -29,7 +29,7 @@ class OrderController extends Controller
         return  $me->orders()->save($order);
     }
 
-    public function get(Request $request, $orderId = null){ 
+    public function get( $orderId = null){ 
 
         if(!$orderId) return;               
         $isOwner = App\Order::where( [ 'user_id' => auth::id(), 'id'=> $orderId ] )->count();      
@@ -66,7 +66,8 @@ class OrderController extends Controller
                 ] )->find($orderId);
             }
             return App\Order::with(['user','postmaker'])->find($orderId);
-        }       
+        }   
+        return 0;    
               
     }
 
@@ -104,15 +105,13 @@ class OrderController extends Controller
             if($request->state){
                 $currentState = $order->state; 
                 $newState = $request->state;   
-
                 if($isPostmaker){
                     if( 
                         ($newState == 'delivered'           &&  ($currentState == 'progress' || $currentState == 'delivered' )) ||                        
                         ($newState == 'progress'            &&  $currentState == 'quit_postmaker' )  ||                        
                         ($newState == 'quit_postmaker'      &&  ($currentState == 'progress' || $currentState == 'delivered' )) ||                        
                         ($newState == 'final_delivered'     &&  ($currentState == 'delivery_accepted'|| $currentState == 'final_delivered' )) || 
-                        ($newState == 'recieved_payment'    &&  ($currentState == 'final_delivered' || $currentState == 'delivery_accepted' ))                       
-
+                        ($newState == 'recieved_payment'    &&  ($currentState == 'final_delivered' || $currentState == 'delivery_accepted' )) 
                     ){
                         $update['state'] = $request->state;
                         $this->launchNotification($order, $request->state, $currentState);

@@ -4,8 +4,8 @@ import { CLEAR_API_RESPONSE, SET_API_RESPONSE } from '../mutation-types'
 // import { ROOT } from '../constants'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-Vue.use(VueAxios, axios)
 
+Vue.use(VueAxios, axios)
 Vue.use(Vuex);
 
 export default {

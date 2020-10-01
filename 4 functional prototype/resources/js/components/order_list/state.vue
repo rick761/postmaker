@@ -8,7 +8,7 @@
         <v-list-item-content v-if="auth && auth.type == 'postmaker'">                            
             <v-alert border="right" class="accent--text " :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'progress' ">          Verstuur een tijdelijke oplevering </v-alert>
             <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }"  dense colored-border   v-if=" computed_item.state == 'open' ">              Solliciteer voor de opdracht via een aanvraag</v-alert>
-            <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'delivery_accepted' ">  Verstuur de finale oplevering  </v-alert>
+            <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'delivery_accepted' ">  Verstuur de eindoplevering  </v-alert>
             <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'quit_postmaker' ">     Toch nog doorgaan? </v-alert>
             <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'quit' ">               Geen actie </v-alert>
             <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'removed' ">            Geen actie </v-alert>
@@ -20,7 +20,7 @@
         <v-list-item-content v-if="auth && auth.type == 'requester'">
             <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'open' ">               Wacht op aanvragen</v-alert>
             <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'progress' ">           Wacht voor de tijdelijke oplevering  </v-alert>
-            <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'delivery_accepted' ">  Wacht op de de finale oplevering</v-alert>
+            <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'delivery_accepted' ">  Wacht op de de eindoplevering</v-alert>
             <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'quit_postmaker' ">     Geen actie </v-alert>
             <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'quit' ">               Geen actie </v-alert>
             <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'removed' ">            Geen actie </v-alert>

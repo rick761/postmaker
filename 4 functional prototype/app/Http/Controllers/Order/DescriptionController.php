@@ -11,8 +11,7 @@ class DescriptionController extends Controller
 {
     //
     public function save(Request $request){
-        $descriptions = $request->descriptions;
-       
+        $descriptions = $request->descriptions;       
         $orderId = $request->orderId;
         $currentOrder = Auth::user()->orders()->find($orderId);
 

@@ -3,7 +3,7 @@
         <form method="POST" autocomplete="off" :action="loginActionUrl()">        
             <input type="hidden" name="_token" v-bind:value="csrf">   
             <card mb=0 >
-                <v-card-title>Aanmelden</v-card-title>
+                <v-card-title>Inloggen</v-card-title>
                 <v-card-text>                     
                       
                     <v-text-field autocomplete="off" v-model="username" placeholder="" label="E-Mail" id="email" type="email" class=" @error('email') is-invalid @enderror" name="email" value="" required autofocus />
@@ -25,8 +25,8 @@
 
                 <v-card-actions>                
                     <v-spacer></v-spacer>
-                    <v-btn @click="saveCredentials" type="submit" x-large class="primary">
-                        Aanmelden
+                    <v-btn @click="saveCredentials" type="submit" x-large class="primary login-button-confirm">
+                        Log in
                     </v-btn>        
                 </v-card-actions>
 

@@ -1,14 +1,15 @@
 
 <template>
 <!--  -->
-    <v-navigation-drawer 
+    <v-navigation-drawer  
+    style="overflow-y:hidden"
      expand-on-hover
     :mini-variant.sync="mini" 
      
     :style="{background: $vuetify.theme.currentTheme.background_menu}"
     dark permanent  
     v-if="show"
-    app fixed
+     fixed
     >
        
         <v-list-item style="height:88px" class="px-2 mt-2">
@@ -22,7 +23,6 @@
              <!-- <v-btn class="px-2 mt-2" icon @click.stop="mini = true" >
                 <v-icon x-large >mdi-chevron-left</v-icon>                
             </v-btn>         -->
-
         </v-list-item>
 
         <v-divider></v-divider>

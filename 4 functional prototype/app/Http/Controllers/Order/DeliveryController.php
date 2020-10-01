@@ -17,6 +17,7 @@ class DeliveryController extends Controller
         $order = App\Order::find($order_id);
         $isPostmaker = $order->postmaker_id == Auth::id();       
         
+        if(!$order) return;
         if($isPostmaker){
             $delivery = [
                 'title' => $delivery['title'],

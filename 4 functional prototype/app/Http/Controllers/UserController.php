@@ -13,7 +13,7 @@ use App\Order;
 class UserController extends Controller
 {
 
-    function get(Request $request, $id){
+    function get($id){
         return User::with([
                 'user_images',
                 'user_show_deliverys.order_delivery_file.order_delivery'
@@ -23,7 +23,7 @@ class UserController extends Controller
     }
 
 
-    function profile(Request $request){
+    function profile(){
         $me = User::with([
             'user_images',
             'user_show_deliverys.order_delivery_file.order_delivery'
@@ -70,6 +70,8 @@ class UserController extends Controller
         if($request->website){$me->website = $request->website;}
         if($request->phone){$me->phone = $request->phone;}
         $me->save();
+        
+        return [$request->all(),$me];
     }
 
     private function saveUserImages($list = null){   

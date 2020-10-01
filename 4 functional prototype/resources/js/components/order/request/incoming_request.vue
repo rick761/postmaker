@@ -32,7 +32,7 @@
         <!--buttons-->
         <v-list-item-content v-if="item.status == 'open' ">
             <div class="text-right">
-                <v-btn class="d-inline success" @click="acceptModal = !acceptModal"> <v-icon>mdi-check</v-icon> &nbsp; Accepteren </v-btn>
+                <v-btn class="d-inline success accept-request-button" @click="acceptModal = !acceptModal"> <v-icon>mdi-check</v-icon> &nbsp; Accepteren </v-btn>
                 <v-btn class="d-inline error" @click="deny()"><v-icon>mdi-close</v-icon> &nbsp; Weigeren</v-btn>
             </div>
 
@@ -41,7 +41,7 @@
                 Het bedrag van {{item.payment}} euro wordt afgesproken bij de oplevering.
                 <template slot="actions">
                     <v-spacer></v-spacer>                                    
-                    <v-btn class="success" @click="accept()"> <v-icon>mdi-trash-can-outline</v-icon> &nbsp; Ja, Accepteren</v-btn>
+                    <v-btn class="success publish-order-confirm" @click="accept()"> <v-icon>mdi-trash-can-outline</v-icon> &nbsp; Ja, Accepteren</v-btn>
                     <v-btn @click="acceptModal = !acceptModal" class="primary"> <v-icon>mdi-close</v-icon> &nbsp; Annuleren</v-btn>
                 </template>
             </modal> 

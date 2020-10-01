@@ -1,5 +1,5 @@
 <template>
-    <card >    
+    <card toggle>    
         <v-card-subtitle>Chatbox</v-card-subtitle>
         <v-card-text v-if="messages.length == 0">Er zijn geen berichten </v-card-text>         
         <v-list id="chatbox" v-else style="max-height:500px; overflow-y:auto">
@@ -20,7 +20,7 @@
                     >
                     <v-icon v-else >mdi-account</v-icon>
                 </v-list-item-avatar> 
-               
+            
                 <v-list-item-content>
                     <v-list-item-title :class="{'text-right': message.user_id == auth.id }" >{{message.text}}</v-list-item-title>
                     <v-list-item-title 

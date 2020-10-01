@@ -1,11 +1,9 @@
 <template>
-    <card :class="{'description_hide': !description_show }" >
+    <card toggle >
         <v-card-subtitle>Project informatie
-            <span class="float-right">
+            <span class="float-right mt-2">
                 <v-icon>mdi-{{order.type}}</v-icon>&nbsp; {{order.type}} opdracht
-                <v-btn icon v-if="description_show" @click="description_show = !description_show"><v-icon>mdi-chevron-up</v-icon></v-btn>
-                <v-btn icon v-if="!description_show"  @click="description_show = !description_show"><v-icon>mdi-chevron-down</v-icon></v-btn>
-             </span>
+              </span>
         </v-card-subtitle>
         <v-card-title>
               {{order.title}}             
@@ -35,9 +33,3 @@ export default {
 }
 </script>
 
-
-<style scoped>
-    .description_hide{
-        height: 65px !important;overflow:hidden;
-    }
-</style>

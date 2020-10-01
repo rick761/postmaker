@@ -10,7 +10,7 @@
                         <order-state-list-item-component :item="item" />
                     </order-list-item-component> 
                     <v-card-text v-if="orders_progressing.length == 0">
-                        Er zijn geen opdrachten waarmee een postmaker mee aan de slag is.
+                        Er zijn geen opdrachten waar een postmaker mee bezig is.
                     </v-card-text>
                 </order-list-component>              
             </v-col> 
@@ -22,7 +22,7 @@
                         <order-remove-list-item-component :item="item"  />                        
                     </order-list-item-component>      
                      <v-card-text v-if="orders_in_creation.length == 0">
-                        Er zijn geen nieuw aangemaakt opdrachten.
+                        Er zijn geen niet gepubliceerde opdrachten.
                     </v-card-text>
                 </order-list-component>                
             </v-col>

@@ -5,7 +5,7 @@
 
             <project-progress />    
             
-            <card>
+            <card toggle>
                 <v-card-subtitle>
                     Project gegevens
                     <explain> Deze gegevens worden publiekelijk getoond </explain>
@@ -14,11 +14,13 @@
 
                     <v-text-field  
                         class="mb-3"   
-                        :rules="[reqRule,least6]"
+                        :rules="[reqRule, least6, v => v.length <= 50 || 'Max 50 karakters']"
+                        counter="50"
                         v-model="title"
                         label="De naam van het project"
                         hint="Via deze naam kan het project gevonden worden door postmakers."                        
                         required
+                        name="name"
                     ></v-text-field>
 
                     <v-slider
@@ -35,7 +37,8 @@
                                 required
                                 v-model="payment"
                                 label="Vergoeding"
-                                class="mt-0 pt-0"                                
+                                class="mt-0 pt-0" 
+                                name="payment"                               
                                 type="number"
                                 style="width: 100px"
                             ></v-text-field> 
@@ -44,23 +47,24 @@
                     </v-slider>   
 
                     <v-row>
-                        <v-col>
+                        <v-col cols=12 lg=6>
                             <label class="v-label">Omschrijving</label>
                              <v-textarea solo
-                                name="input-7-1"
+                                name="description"
                                
                                 v-model="description"
-                                :rules="[reqRule]"
+                                :rules="[reqRule,v => v.length <= 2000 || 'Max 2000 karakters']"
+                                counter="2000"
                                 value=""
                                 height="255"
                                 hint="Schrijf hier alle publiekelijke informatie"
                             ></v-textarea>
                         </v-col>
-                        <v-col>    
+                        <v-col cols=12 lg=6>    
                             <v-tooltip top>
                                 <template v-slot:activator="{ on, attrs }">                                       
                                     <span v-bind="attrs" v-on="on">
-                                        <label class="v-label">Oplever datum</label>
+                                        <label class="v-label d-block">Oplever datum</label>
                                         <v-date-picker  scrollable no-title :min="new Date().toISOString().substr(0, 10)" v-model="deliver"></v-date-picker>                            
                                     </span>
                                 </template>
@@ -81,7 +85,7 @@
             </v-col>
             <v-col cols="12" md="4">
 
-                <card outlined class="mb-5">
+                <card outlined class="mb-5" >
                     <v-card-subtitle>Acties</v-card-subtitle>    
 
                     <!--CREATION DATE-->
@@ -98,7 +102,7 @@
                         <v-spacer></v-spacer>
 
                         <!--save and create button-->
-                            <v-btn class="mr-1 mb-1" block v-if="inCreation" color="primary" @click="create()" >                            
+                            <v-btn class="mr-1 mb-1 create-project" block v-if="inCreation" color="primary" @click="create()" >                            
                                 <v-icon >mdi-content-save</v-icon> 
                                 &nbsp; Aanmaken en Opslaan
                             </v-btn>                        
@@ -114,7 +118,7 @@
                         <!--publish button and modal-->
                             <v-btn v-if="!inCreation" block class="mr-1 mb-1 error" @click="removeModalCheck()" ><v-icon>mdi-trash-can-outline</v-icon> &nbsp; Verwijder </v-btn>      
 
-                            <v-btn  v-if="!inCreation" block class="mr-1 mb-1 success" @click="publishModalCheck()" ><v-icon>mdi-file-send-outline</v-icon> &nbsp; Publiceer </v-btn>      
+                            <v-btn  v-if="!inCreation" block class="mr-1 mb-1 success publish-order" @click="publishModalCheck()" ><v-icon>mdi-file-send-outline</v-icon> &nbsp; Publiceer </v-btn>      
                             
                             <modal v-model="publishModal" width=500 title="Weet u het zeker?">
                                 De opdracht wordt hiermee publiekelijk gezet. <br>
@@ -122,7 +126,7 @@
 
                                 <template slot="actions">
                                     <v-spacer></v-spacer>                                    
-                                    <v-btn class="success" @click="publish()"> <v-icon>mdi-file-send-outline</v-icon> &nbsp; Ja, Publiceer</v-btn>
+                                    <v-btn class="success publish-order-confirm" @click="publish()"> <v-icon>mdi-file-send-outline</v-icon> &nbsp; Ja, Publiceer</v-btn>
                                     <v-btn @click="publishModal = !publishModal" class="error"> <v-icon>mdi-close</v-icon> &nbsp; Annuleren</v-btn>
                                 </template>
 
@@ -133,7 +137,7 @@
                 </card>
 
 
-                <card>
+                <card toggle>
                     <v-card-subtitle>
                         Vindbaarheid instellen
 
@@ -180,15 +184,15 @@ export default {
             order: state => state.order.data,
         }),
         title: {
-            get () { return this.order.title },
+            get () { return this.order.title != null ? this.order.title : ""  },
             set (value) { this.$store.commit( 'order/SET_TITLE', value );  }
         },
         description: {
-            get () { return this.order.description },
+            get () { return this.order.description!= null ? this.order.description : ""  },
             set (value) { this.$store.commit( 'order/SET_DESCRIPTION', value );  }
         },
         payment: {
-            get () { return this.order.payment },
+            get () { return this.order.payment!= null ? this.order.payment : "" },
             set (value) { this.$store.commit( 'order/SET_PAYMENT', value );  }
         },
         deliver: {

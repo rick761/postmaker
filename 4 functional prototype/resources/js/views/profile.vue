@@ -7,7 +7,7 @@
             <v-col cols="12" md="6">
                <preview-profile-component /> 
                <span v-if="auth.type == 'postmaker'" >      
-                    <portfolio-profile-component />      
+                    <!-- <portfolio-profile-component />       -->
                </span>  
                             
             </v-col>
@@ -21,7 +21,7 @@ export default {
     }},
     computed:{
         ...mapState({
-            auth: state=>state.auth.user
+            auth: state=>state.auth.user,
         }),
     },
     created(){

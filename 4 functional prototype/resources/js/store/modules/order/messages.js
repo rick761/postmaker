@@ -40,6 +40,7 @@ export default {
         },
         recieveFromNotifications({ rootState, commit }, payload) {
             var text = payload.text.substr(9);
+
             if (text.includes('{{')) {
                 text = text.substr(0, text.indexOf('{{'));
             }
@@ -54,11 +55,11 @@ export default {
                 console.log('UWL', url)
             }
 
-
+            var user_id = (rootState.auth.user.id == rootState.order.user_id) ? rootState.order.postmaker_id : rootState.order.user_id;
 
             var data = {
                 order_id: rootState.order.data.id,
-                user_id: payload.user_id,
+                user_id: user_id,
                 text: text,
                 url: url
             }

@@ -1,5 +1,5 @@
 <template>
-     <card>
+     <card toggle>
         <!--MOODBOARD-->
 
             <v-card-subtitle>

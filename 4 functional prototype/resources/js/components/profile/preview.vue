@@ -68,7 +68,7 @@
                         </v-list-item-icon>
                         <v-list-item-title>website</v-list-item-title>     
                         <v-list-item-subtitle class="text-right">
-                            <a :href="auth.website">{{auth.website}}</a>
+                            {{auth.website}}
                         </v-list-item-subtitle>
                     </v-list-item>
             </v-list>
@@ -76,13 +76,13 @@
             <v-card-actions>                        
                 <v-btn color="purple" :to="'/account/'+auth.id" text>Bekijk profiel</v-btn>
                 <v-spacer></v-spacer>
-                <v-btn
+                <!-- <v-btn
                     v-if="auth.type == 'postmaker'"
                     icon
                     @click="preview_show = !preview_show"
                 >
                     <v-icon>{{ preview_show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-                </v-btn>
+                </v-btn> -->
             </v-card-actions>
 
             <v-expand-transition>

@@ -1,5 +1,5 @@
 <template>
-    <card>
+    <card toggle>
         <v-card-subtitle>
             Afspraak 
             <explain>De aanvraag is geaccepteerd voor het onderstaande bedrag.</explain>

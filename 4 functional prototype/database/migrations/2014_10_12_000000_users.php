@@ -18,18 +18,18 @@ class Users extends Migration
             $table->uuid('id')->primary();
 
             //fields
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('first_name',50);
+            $table->string('last_name',50);
             $table->enum('type',['postmaker','requester','admin']);
             $table->string('avatar')->nullable();
             $table->string('description')->nullable();           
-            $table->string('display_name')->nullable();
+            $table->string('display_name',50)->nullable();
             $table->string('company')->nullable();
             $table->string('website')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password',255);
 
             //extra
             $table->rememberToken();

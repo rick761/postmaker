@@ -1,5 +1,5 @@
 <template>
-    <card v-if="deliverys && deliverys.length" >
+    <card v-if="deliverys && deliverys.length" toggle >
         <v-card-subtitle>
             Opleveringen        
             <explain>Alle opgeleverde documenten, aangegeven met een kroon-icoon is de eindoplevering. </explain>     
