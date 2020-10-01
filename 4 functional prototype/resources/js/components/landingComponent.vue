@@ -119,11 +119,11 @@ export default {
         loginModal :false,
         registerModal: false,
         images:[
-            {src:'./images/landing/preview_1.png',txt:"Met 'aanvragers' en 'postmakers'."},
-            {src:'./images/landing/preview_2.png',txt:"Aanvrager maakt een opdrach.t"},
-            {src:'./images/landing/preview_3.png',txt:"Postmaker zoekt naar opdrachten."},
-            {src:'./images/landing/preview_4.png',txt:"Postmaker solliciteerd."},
-            {src:'./images/landing/preview_5.png',txt:"Opdracht begint!"},
+            {src:'./images/landing/preview_1.PNG',txt:"Met 'aanvragers' en 'postmakers'."},
+            {src:'./images/landing/preview_2.PNG',txt:"Aanvrager maakt een opdracht."},
+            {src:'./images/landing/preview_3.PNG',txt:"Postmaker zoekt naar opdrachten."},
+            {src:'./images/landing/preview_4.PNG',txt:"Postmaker solliciteerd."},
+            {src:'./images/landing/preview_5.PNG',txt:"Opdracht begint!"},
         ]
     }},
     methods:{
