@@ -88,7 +88,7 @@ const routes = [
     },
     {
         path: '/postmaker/requested',
-        name: 'Uitgaande aangevragen',
+        name: 'Uitgaande aanvragen',
         component: Requested_postmaker,
     },
     {

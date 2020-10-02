@@ -26,7 +26,7 @@
             </v-app-bar>
             
 
-            <v-row class="mb-5" style="min-height:40vh" align="end"  >                
+            <v-row class="mb-5" style="min-height:25vh" align="end"  >                
                 <v-col cols=12  class="white--text h1 mx-auto text-center">
                     Aanvragen en produceren van content.
                     <br>
@@ -74,8 +74,8 @@
                                         elevation="1"
                                         
                                     >
-                                        <div class="display-2" style=" text-shadow: rgb(0, 0, 0) 0px 0px 4px;">                                
-                                            {{item.txt}}
+                                        <div class="text-center display-3 rounded-pill pa-5 primary"  style=" box-shadow: rgb(0, 0, 0) 0px 0px 4px;background:#000;">                                
+                                            <v-icon x-large>mdi-{{item.icon}}</v-icon> &nbsp;{{item.txt}}
                                         </div>
                                     </v-row>
                                 </v-img>
@@ -119,11 +119,11 @@ export default {
         loginModal :false,
         registerModal: false,
         images:[
-            {src:'./images/landing/preview_1.PNG',txt:"Met 'aanvragers' en 'postmakers'."},
-            {src:'./images/landing/preview_2.PNG',txt:"Aanvrager maakt een opdracht."},
-            {src:'./images/landing/preview_3.PNG',txt:"Postmaker zoekt naar opdrachten."},
-            {src:'./images/landing/preview_4.PNG',txt:"Postmaker solliciteerd."},
-            {src:'./images/landing/preview_5.PNG',txt:"Opdracht begint!"},
+            {src:'./images/landing/preview_1.PNG',txt:"Aanmelden als 'aanvrager' of 'postmaker'!",icon:'account-group'},
+            {src:'./images/landing/preview_2.PNG',txt:"De aanvrager maakt een opdracht!",icon:'briefcase-plus-outline'},
+            {src:'./images/landing/preview_3.PNG',txt:"De postmaker zoekt naar opdrachten!",icon:'briefcase-search-outline'},
+            {src:'./images/landing/preview_4.PNG',txt:"De postmaker solliciteert!",icon:'frequently-asked-questions'},
+            {src:'./images/landing/preview_5.PNG',txt:"En de opdracht begint!",icon:'draw'},
         ]
     }},
     methods:{

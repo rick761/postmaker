@@ -32,7 +32,7 @@
         <!--buttons-->
         <v-list-item-content v-if="item.status == 'open' ">
             <div class="text-right">
-                <v-btn class="d-inline success accept-request-button" @click="acceptModal = !acceptModal"> <v-icon>mdi-check</v-icon> &nbsp; Accepteren </v-btn>
+                <v-btn class="d-inline success accept-request-button mb-1" @click="acceptModal = !acceptModal"> <v-icon>mdi-check</v-icon> &nbsp; Accepteren </v-btn>
                 <v-btn class="d-inline error" @click="deny()"><v-icon>mdi-close</v-icon> &nbsp; Weigeren</v-btn>
             </div>
 
