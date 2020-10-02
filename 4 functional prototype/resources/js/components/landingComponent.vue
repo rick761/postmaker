@@ -74,7 +74,7 @@
                                         elevation="1"
                                         
                                     >
-                                        <div class="text-center display-3 rounded-pill pa-5 primary"  style=" box-shadow: rgb(0, 0, 0) 0px 0px 4px;background:#000;">                                
+                                        <div class="text-center display-1 rounded-pill pa-5 primary"  style=" box-shadow: rgb(0, 0, 0) 0px 0px 4px;background:#000;">                                
                                             <v-icon x-large>mdi-{{item.icon}}</v-icon> &nbsp;{{item.txt}}
                                         </div>
                                     </v-row>
