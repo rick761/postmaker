@@ -126,7 +126,7 @@ export default {
             '7 De aanvrager keurt de oplevering',
             '8 De Postmaker doet een eindoplevering',
             '9 Download de oplevering',
-            '10 Presenteer je werk op je profiel',
+            '10 Presenteer je werk op je profiel ',
             '11 Extra',
 
         ],       
@@ -237,7 +237,7 @@ export default {
                     '- Geef je bevindingen door in het feedback paneel.',]
             },
             {
-                title:'Presenteer je werk op je profiel',
+                title:' (WERKT NIET) Presenteer je werk op je profiel',
                 scenario : 'Voor het opbouwen van een aantrekkelijk profiel is het mogelijk om je geleverde werk te presenteren.',
                 todos: [
                     '- Login als postmaker',
