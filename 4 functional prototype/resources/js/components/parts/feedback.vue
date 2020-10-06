@@ -1,10 +1,11 @@
 <template>
-    <div v-if="hide==0" style="margin: 10vh 0 5vh; position:absolute; right:0; margin-right:10px; z-index:9998;" :class="{ 'bottom-0' : (this.$vuetify.breakpoint.name == 'xs')}">
+    <div v-if="hide==0 " style="margin: 10vh 0 5vh; position:absolute; right:0; margin-right:10px; z-index:30000;" :class="{ 'bottom-0' : (this.$vuetify.breakpoint.name == 'xs')}">
 
-            <modal title="Te volgens instructies"  width="1024" v-model="instructions_modal">
+            <modal title="Te volgens instructies"  width="1024" v-model="show_feedback">
                 
                 <v-container>                    
                     <v-row justify="center">
+                        <v-col>
                         <v-expansion-panels v-model="modal_current_step"  dark accordion >
                             <v-expansion-panel class="primary" v-for="(task,key) in tasks" :key="key" >
                                 <v-expansion-panel-header>
@@ -18,12 +19,83 @@
                                 </v-expansion-panel-content>
                             </v-expansion-panel>
                         </v-expansion-panels>
+
+                        </v-col>
+
+                        <v-col>
+                            <v-card class="pa-2">
+
+                                <div v-if="!show_feedback">
+                                    <v-tooltip left>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-btn  icon  color="warning" dark v-bind="attrs" v-on="on" @click=" show_feedback = ! show_feedback ">
+                                                <v-icon large>mdi-comment-edit</v-icon>
+                                            </v-btn>                                         
+                                        </template>
+                                        <span>Feedback</span>
+                                    </v-tooltip>              
+                                </div>
+
+                                <div v-if="show_feedback">
+                                    <!-- <v-btn icon color="primary" class="float-right  ml-2" @click=" show_feedback = ! show_feedback " ><v-icon>mdi-close</v-icon></v-btn> -->
+                                    <v-card-subtitle>
+                                        Testen
+                                    </v-card-subtitle>
+                                    <v-card-text> 
+
+                                        <v-select     
+                                            style="clear:both;"
+                                            class="mb-3"                                                                     
+                                            append-icon="mdi-gesture-tap"
+                                            v-model="selected_story"                                
+                                            :items="stories"
+                                            label="kies een onderwerp"
+                                        ></v-select>                       
+
+                                        <v-slider
+                                            v-model="slider"
+                                            :thumb-size="24"
+                                            thumb-label="always"
+                                            v-if="selected_story!=''"
+                                            style="display:none"
+                                        >                                    
+                                            <template v-slot:thumb-label="{ value }">
+                                                {{ satisfactionEmojis[Math.min(Math.floor(value / 10), 9)] }}
+                                            </template>
+                                        </v-slider>
+
+                                        <v-textarea
+                                            v-if="selected_story!=''"
+                                            filled
+                                            name="input-7-4"
+                                            label="Commentaar"
+                                            v-model="comment"
+                                        ></v-textarea>
+
+                                        <v-textarea
+                                            v-if="selected_story!=''"
+                                            filled
+                                            name="input-7-4"
+                                            label="Notities"
+                                            v-model="notation"
+                                        ></v-textarea>
+
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-btn  v-if="selected_story!=''" class="success" block @click="submitFeedback()"> 
+                                            <v-icon>mdi-check</v-icon>
+                                        </v-btn>
+                                    </v-card-actions>
+                                </div>                        
+                            </v-card>
+
+                        </v-col>
                     </v-row>
                 </v-container>
                 <template slot="actions"><v-icon>mdi-clock</v-icon>&nbsp; +- 15 minuten</template>
             </modal>
 
-                <v-card class="pa-2 mb-1">
+                <v-card class="pa-2 mb-1 d-none" v-if="show_feedback == 0">
                     <div class="text-center">
                         <v-btn @click="hide=1" icon><v-icon>mdi-minus</v-icon></v-btn>
                     </div>
@@ -33,79 +105,17 @@
                     <div class="text-center">
                         <v-tooltip left>
                             <template v-slot:activator="{ on, attrs }">
-                                <v-btn  @click="instructions_modal = true" icon  color="primary" dark v-bind="attrs" v-on="on">
-                                    <v-icon large>mdi-crosshairs-question</v-icon>
+                                <v-btn  @click="show_feedback = true" icon  color="primary" dark v-bind="attrs" v-on="on">
+                                    <!-- <v-icon large>mdi-crosshairs-question</v-icon> -->
+                                    <v-icon large>mdi-comment-edit</v-icon>
                                 </v-btn>                                         
                             </template>
-                            <span>Wat moet ik doen?</span>
+                            <span>TESTEN</span>
                         </v-tooltip>              
                     </div>                    
                 </v-card>
 
-                <v-card class="pa-2">
-
-                    <div v-if="!show_feedback">
-                        <v-tooltip left>
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn  icon  color="warning" dark v-bind="attrs" v-on="on" @click=" show_feedback = ! show_feedback ">
-                                    <v-icon large>mdi-comment-edit</v-icon>
-                                </v-btn>                                         
-                            </template>
-                            <span>Feedback</span>
-                        </v-tooltip>              
-                    </div>
-
-                    <div style="width:350px" v-if="show_feedback">
-                        <v-btn icon color="primary" class="float-right  ml-2" @click=" show_feedback = ! show_feedback " ><v-icon>mdi-close</v-icon></v-btn>
-                        <v-card-subtitle>
-                            Feedback Formulier
-                        </v-card-subtitle>
-                        <v-card-text> 
-
-                            <v-select     
-                                style="clear:both;"
-                                class="mb-3"                                                                     
-                                append-icon="mdi-gesture-tap"
-                                v-model="selected_story"                                
-                                :items="stories"
-                                label="kies een onderwerp"
-                            ></v-select>                       
-
-                            <v-slider
-                                v-model="slider"
-                                :thumb-size="24"
-                                thumb-label="always"
-                                v-if="selected_story!=''"
-                            >                                    
-                                <template v-slot:thumb-label="{ value }">
-                                    {{ satisfactionEmojis[Math.min(Math.floor(value / 10), 9)] }}
-                                </template>
-                            </v-slider>
-
-                            <v-textarea
-                                v-if="selected_story!=''"
-                                filled
-                                name="input-7-4"
-                                label="Hoe ging het uitvoeren van deze actie?"
-                                v-model="comment"
-                            ></v-textarea>
-
-                            <v-textarea
-                                v-if="selected_story!=''"
-                                filled
-                                name="input-7-4"
-                                label="Wat viel er op?"
-                                v-model="notation"
-                            ></v-textarea>
-
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-btn  v-if="selected_story!=''" class="success" block @click="submitFeedback()"> 
-                                <v-icon>mdi-check</v-icon>
-                            </v-btn>
-                        </v-card-actions>
-                    </div>                        
-                </v-card>
+                
             </div>
 </template>
 
@@ -126,17 +136,104 @@ export default {
             '7 De aanvrager keurt de oplevering',
             '8 De Postmaker doet een eindoplevering',
             '9 Download de oplevering',
+           
+
+        ], 
+        stories_old:[
             '10 Presenteer je werk op je profiel ',
             '11 Extra',
-
-        ],       
+        ],
         selected_story : '',
-        version : 1,
+        version : 2,
         comment:'',
         instructions_modal : false,
         modal_current_step: '',
         notation : '',
         tasks:[
+            {
+                title:'Aanmelden',
+                scenario : 'In dit scenario doen we het aanmelden.',
+                todos: [
+                    'start: landingspagina',
+                    'optioneel: registreren',
+                    'eindsituatie: Het hoofdscherm (als postmaker)'
+                ]
+            },
+            {
+                title:'Nieuwe opdracht aanmaken',
+                scenario : 'Opdracht aanmaken en publiceren',
+                todos: [
+                    'start: (als aanvrager) Hoofdscherm',
+                    'optioneel: opdracht aanvulling geven',
+                    'eindsituatie: Nieuwe gepubliceerde opdracht zien'
+                ]
+            },
+            {
+                title:'Bekijk en controleer de nieuwe opdracht',
+                scenario : 'Nu een nieuwe opdracht is gemaakt. Gaan we controleren of alles goed is ingevuld.',
+                todos: [
+                    'start: De aangemaakte opdracht',
+                    'optioneel: bekijk de opdracht zelf',
+                    'eindsituatie: Zien bij mijn projecten '
+                ]
+            },
+            {
+                title:'De Postmaker in Postmaker vraagt aan',
+                scenario : 'Nu gaan we de rol van postmaker aannemen. Meld aan als postmaker en solliciteerd voor je eerder gemaakte opdracht',
+                todos: [
+                    'start:  (als postmaker) Hoofdscherm',
+                    'optioneel: Andere prijs, en commentaar toevoegen',
+                    'eindsituatie: Opdracht is aangevraagd'
+                ]
+            },
+            {
+                title:'De aanvrager accepteert de aanvraag',
+                scenario : 'Nu gaan we de sollicitatie accepteren. Log in al aanvrager en accepteer de aanvraag.',
+                todos: [
+                    'start: (als aanvrager) Hoofdscherm',
+                    'optioneel: ',
+                    'eindsituatie: Opdracht is van Start gegaan'
+                ]
+            },
+            {
+                title:'De postmaker maakt de post',
+                scenario : 'Nu gaan we een oplevering doen. log in als postmaker, ga naar de opdracht en doe een oplevering',
+                todos: [
+                    'start: (als aanvrager) Hoofdscherm',
+                    'optioneel: ',
+                    'eindsituatie: Oplevering is gedaan'
+                ]
+            },
+            {
+                title:'De aanvrager keurt de (tussen) oplevering',
+                scenario : 'Nu gaan we de opdracht keuren, login als de aanvrager, zie de oplevering en accepteer de (tussen) oplevering ',
+                todos: [
+                    'start:  (als aanvrager) Hoofdscherm',
+                    'optioneel: Oplevering een duim geven',
+                    'eindsituatie: Oplevering accepteren'
+                ]
+            },
+            {
+                title:'De Postmaker doet een eindoplevering',
+                scenario : 'Login al postmaker, doe de eindoplevering oplevering en geef aan dat er betaald is.',
+                todos: [
+                    'start: (als postmaker) Hoofdscherm',
+                    'optioneel: ',
+                    'eindsituatie: Eind oplevering is gedaan en de Betaling is ontvangen.'
+                ]
+            },
+            {
+                title:'Download de oplevering',
+                scenario : 'ga naar archief en download je opgeleverde resultaat ',
+                todos: [
+                    'start: Archief',
+                    'optioneel: als aanvrager downloaden',
+                    'eindsituatie: Klikt op download'
+                ]
+            },
+           
+        ],
+        tasks_old:[
             {
                 title:'Aanmelden',
                 scenario : 'Welkom bij Postmaker applicatie. eerst gaan we inloggen als aanvrager.  Als aanvrager kunnen we content aanvragen, postmakers kunnen dit voor ons maken.  (Binnen de test gaan we gebruik maken van meerdere accounts, onthoud ze of gebruik test accounts.)',
