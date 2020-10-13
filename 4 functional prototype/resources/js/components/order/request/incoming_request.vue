@@ -41,7 +41,7 @@
                 Het bedrag van {{item.payment}} euro wordt afgesproken bij de oplevering.
                 <template slot="actions">
                     <v-spacer></v-spacer>                                    
-                    <v-btn class="success publish-order-confirm" @click="accept()"> <v-icon>mdi-trash-can-outline</v-icon> &nbsp; Ja, Accepteren</v-btn>
+                    <v-btn class="success accept-request-confirm" @click="accept()"> <v-icon>mdi-trash-can-outline</v-icon> &nbsp; Ja, Accepteren</v-btn>
                     <v-btn @click="acceptModal = !acceptModal" class="primary"> <v-icon>mdi-close</v-icon> &nbsp; Annuleren</v-btn>
                 </template>
             </modal> 

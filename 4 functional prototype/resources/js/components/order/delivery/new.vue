@@ -8,9 +8,10 @@
             v-model="valid"
             lazy-validation
         >   
-            <v-text-field placeholder="Titel" v-model="title" :rules="[v => !!v || 'Vul een titel in!']" />
-            <v-textarea rows="2" single-line solo placeholder="Vul een omschrijving in" v-model="text" :rules="[v => !!v || 'Vul een omschrijving in!']" />        
+            <v-text-field name="temp-delivery-title" placeholder="Titel" v-model="title" :rules="[v => !!v || 'Vul een titel in!']" />
+            <v-textarea name="temp-delivery-description" rows="2" single-line solo placeholder="Vul een omschrijving in" v-model="text" :rules="[v => !!v || 'Vul een omschrijving in!']" />        
             <v-file-input 
+            name="temp-delivery-file"
             :rules="[
                 v => !!v || 'Kies een bestand om op te leveren!',
                 v => (v && v.length > 0) || 'Kies een bestand om op te leveren!'
@@ -28,6 +29,7 @@
             </v-chip>
 
             <v-checkbox 
+                name="temp-delivery-checkbox"
                 v-model="checkbox" 
                 :label="`Ik ben eigenaar van de bestanden.`"
                 :rules="[v => !!v || 'Vink aan om door te kunnen gaan!']"
@@ -48,7 +50,7 @@
                 icon="mdi-check"
                 v-if="!confirmToggle"
             >
-                <v-btn @click="preDeliver"  class="success"><v-icon>mdi-lock</v-icon> &nbsp; Opleveren </v-btn>
+                <v-btn @click="preDeliver"  class="success tmp-delivery-btn "><v-icon>mdi-lock</v-icon> &nbsp; Opleveren </v-btn>
             </v-badge>         
 
             <v-badge 
@@ -58,7 +60,7 @@
                 icon="mdi-check-all"
                 v-if="confirmToggle" 
             >
-                <v-btn @click="deliver" class="success"><v-icon>mdi-lock-open</v-icon> &nbsp; bevestigen </v-btn>
+                <v-btn @click="deliver" class="success tmp-delivery-btn-confirm"><v-icon>mdi-lock-open</v-icon> &nbsp; bevestigen </v-btn>
             </v-badge>
             
             &nbsp;

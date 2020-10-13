@@ -8,15 +8,13 @@
             v-model="valid"
             lazy-validation
         >   
-            <v-alert v-if="order.state != 'delivery_accepted'" type="error" >
-                DE TIJDELIJKE OPLEVERINGEN ZIJN NIET NOG NIET GEACCEPTEERD.
-            </v-alert>
-
+            
             <v-alert type="warning" dense>
-                Let op, dit is de eindoplevering en beeindigt de mogelijkheid verdere opleveringen te doen.
+                Let op, dit is de eindoplevering!
             </v-alert>
           
             <v-file-input 
+            name="deliveryFile"
             :rules="[
                 v => !!v || 'Kies een bestand om op te leveren!',
                 v => (v && v.length > 0) || 'Kies een bestand om op te leveren!'
@@ -34,28 +32,15 @@
             </v-chip>
 
             <v-file-input 
-            :rules="[
-                v => !!v || 'Kies een bestand om op te leveren!',               
-            ]"
-            v-model="invoice"  label="Factuur"></v-file-input>        
-            
+            name="final-delivery-invoice"            
+            v-model="invoice"  label="Factuur"></v-file-input>                    
 
             <v-checkbox 
                 v-model="checkbox" 
-                :label="`Ik ben eigenaar van de bestanden.`"
+                :label="`Ik ben eigenaar van de bestanden en bij deze draag ik ze over.`"
                 :rules="[v => !!v || 'Vink aan om door te kunnen gaan!']"
             ></v-checkbox>
-
-             <v-checkbox 
-                v-model="checkbox2" 
-                :label="`Bij deze overdraag ik de oplevering.`"
-                :rules="[v => !!v || 'Vink aan om door te kunnen gaan!']"
-            ></v-checkbox>
-
-            
-
-            
-
+             
          </v-form>
         <template slot="actions">
             
@@ -67,7 +52,7 @@
                 icon="mdi-check"
                 v-if="!confirmToggle"
             >
-                <v-btn @click="preDeliver"  class="success"><v-icon>mdi-lock</v-icon> &nbsp; Opleveren </v-btn>
+                <v-btn @click="preDeliver"  class="success final-delivery-btn"><v-icon>mdi-lock</v-icon> &nbsp; Opleveren </v-btn>
             </v-badge>         
 
             <v-badge 
@@ -77,7 +62,7 @@
                 icon="mdi-check-all"
                 v-if="confirmToggle" 
             >
-                <v-btn @click="deliver" class="success"><v-icon>mdi-lock-open</v-icon> &nbsp; bevestigen </v-btn>
+                <v-btn @click="deliver" class="success final-delivery-btn-confirm"><v-icon>mdi-lock-open</v-icon> &nbsp; bevestigen </v-btn>
             </v-badge>
             
             &nbsp;

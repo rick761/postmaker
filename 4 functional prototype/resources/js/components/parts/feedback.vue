@@ -24,7 +24,6 @@
 
                         <v-col>
                             <v-card class="pa-2">
-
                                 <div v-if="!show_feedback">
                                     <v-tooltip left>
                                         <template v-slot:activator="{ on, attrs }">

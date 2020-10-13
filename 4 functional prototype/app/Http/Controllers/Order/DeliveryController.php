@@ -64,11 +64,13 @@ class DeliveryController extends Controller
             $order->state = 'final_delivered';
             $order->save();
 
-            $createArray =[];              
-            array_push($createArray,[
-                 'url'  => $request->invoice,
-                 'is_invoice' => 1 
-            ]);
+            $createArray =[]; 
+            if($request->invoice){       
+                array_push($createArray,[
+                    'url'  => $request->invoice,
+                    'is_invoice' => 1 
+                ]);
+            }
             foreach($order_delivery_files as $order_delivery_file){
                 array_push($createArray,[ 'url'  => $order_delivery_file]);
             }  

@@ -9,6 +9,9 @@ class OrderDelivery extends Model
     protected $fillable = ['text','title','order_id','type','rate'];     
     protected $guarded = [];
     protected $table = 'order_deliveries';
+    protected $casts = [
+        'created_at' => 'datetime:d-m-Y',        
+    ];
     
     public function order()
     {

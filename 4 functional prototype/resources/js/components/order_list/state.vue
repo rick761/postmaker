@@ -25,7 +25,7 @@
             <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'quit' ">               Geen actie </v-alert>
             <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'removed' ">            Geen actie </v-alert>
             <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'recieved_payment' ">   Geen actie </v-alert>
-            <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'delivered' ">          Accepteren of verbeteren van de opleveren </v-alert>
+            <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'delivered' ">          Accepteren of verbeteren van de oplevering </v-alert>
             <v-alert border="right" class="accent--text" :class="{'text-right': !item_from_prop }" dense colored-border   v-if=" computed_item.state == 'final_delivered' ">    Betaal de factuur</v-alert>
         </v-list-item-content>
     </v-list-item> 

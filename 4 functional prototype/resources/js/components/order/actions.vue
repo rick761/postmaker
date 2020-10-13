@@ -20,21 +20,21 @@
 
             <v-btn :loading="loading_btn" v-if="canEdit" @click="editModal = !editModal"  block color="primary mb-1"> <v-icon>mdi-draw</v-icon> &nbsp; Opdracht aanpassen  </v-btn>            
             <v-btn :loading="loading_btn" v-if="canRemove" class="mb-1"  @click="deleteModal = !deleteModal"  block color="error"> <v-icon>mdi-trash-can-outline</v-icon> &nbsp;  Opdracht verwijderen  </v-btn>                   
-            <v-btn :loading="loading_btn" v-if="canDeliver" @click="delivery"   block color="primary  mb-1"><v-icon>mdi-upload</v-icon> &nbsp; tijdelijke oplevering </v-btn>     
-            <v-btn :loading="loading_btn" v-if="canFinalDeliver" @click="final"  block color="secondary  mb-1"> <v-icon>mdi-upload</v-icon> &nbsp; Finale oplevering </v-btn>     
+            <v-btn :loading="loading_btn" v-if="canDeliver" @click="delivery" class="temp-delivery"  block color="primary  mb-1"><v-icon>mdi-upload</v-icon> &nbsp; tijdelijke oplevering </v-btn>     
+            <v-btn :loading="loading_btn" v-if="canFinalDeliver" @click="final"  block color="secondary  mb-1" class="upload-final"> <v-icon>mdi-upload</v-icon> &nbsp; Finale oplevering </v-btn>     
             <v-btn :loading="loading_btn" v-if="canQuitPostmaker"  @click="wantStopModal = !wantStopModal" block color="error  mb-1"> <v-icon>mdi-close</v-icon> &nbsp; Ik wil stoppen </v-btn>   
             <v-btn :loading="loading_btn" v-if="canContinuePostmaker"  @click="wantContinueModal = !wantContinueModal" block color="success  mb-1"> <v-icon>mdi-arrow-right-bold-box</v-icon> &nbsp; Ik wil doorgaan </v-btn>   
-            <v-btn :loading="loading_btn" v-if="canDeliveryAccept" @click="acceptModal = !acceptModal" class="success mb-1" block> <v-icon>mdi-check</v-icon> &nbsp; Eindoplevering  <explain text="white" >Hiermee is de tussenoplevering goedgekeurd en gaat het project door naar de eindoplevering.</explain></v-btn>
+            <v-btn :loading="loading_btn" v-if="canDeliveryAccept" @click="acceptModal = !acceptModal" class="success mb-1 final-delivery-btn" block> <v-icon>mdi-check</v-icon> &nbsp; Eindoplevering  <explain text="white" >Hiermee is de tussenoplevering goedgekeurd en gaat het project door naar de eindoplevering.</explain></v-btn>
             <v-btn :loading="loading_btn" v-if="canImprove" @click="awaitModal = !awaitModal" class="secondary mb-1 " block> <v-icon>mdi-timer-sand</v-icon> &nbsp; Oplevering verbeteren  <explain text="white" >De Postmaker Postmaker gaat hiermee de laatste oplevering verbeteren.</explain> </v-btn>    
             <v-btn :loading="loading_btn" v-if="canQuit" @click="deletePostmakerModal = !deletePostmakerModal"  class="error mb-1 " block> <v-icon>mdi-alert</v-icon> &nbsp; stop de opdracht   <explain text="white" >Als u stopt, is dit definitief.</explain> </v-btn>    
-            <v-btn :loading="loading_btn" v-if="canRecievePayment" @click="paymentRecievedModal = !paymentRecievedModal"  class="success mb-1 " block> <v-icon>mdi-cash</v-icon> &nbsp; Bedrag heb ik ontvangen   </v-btn>    
+            <v-btn :loading="loading_btn" v-if="canRecievePayment" @click="paymentRecievedModal = !paymentRecievedModal"  class="success mb-1 archive-order-btn" block> <v-icon>mdi-cash</v-icon> &nbsp; Bedrag heb ik ontvangen   </v-btn>    
             <v-btn :loading="loading_btn" v-if="hasPostmaker" @click="like" class="success mb-1" block> <v-icon>mdi-thumb-up</v-icon> &nbsp; Waardeer </v-btn>    
             
             <modal v-model="paymentRecievedModal" width=500 title="Heeft u een betaling ontvangen?">
                 Met deze actie is de betaling ontvangen en wordt de opdracht gearchiveerd. <br>                            
                 <template slot="actions">
                     <v-spacer></v-spacer>                                    
-                    <v-btn class="error" @click="paymentRecievedOrder()"> <v-icon>mdi-arrow-right-bold-box</v-icon> &nbsp; Ja, Archiveren <v-spacer></v-spacer></v-btn>
+                    <v-btn class="error archive-order-btn-confirm" @click="paymentRecievedOrder()"> <v-icon>mdi-arrow-right-bold-box</v-icon> &nbsp; Ja, Archiveren <v-spacer></v-spacer></v-btn>
                     <v-btn @click="paymentRecievedModal = !paymentRecievedModal" class="success"> <v-icon>mdi-close</v-icon> &nbsp; Annuleren <v-spacer></v-spacer></v-btn>
                 </template>
             </modal> 
@@ -90,7 +90,7 @@
                 Met deze actie verstuurd de postmaker u de eindoplevering en de factuur.
                 <template slot="actions">
                     <v-spacer></v-spacer>                                    
-                    <v-btn class="success" @click="acceptDelivery()"> <v-icon>mdi-file-send-outline</v-icon> &nbsp; Ja, Dat is goed <v-spacer></v-spacer></v-btn>
+                    <v-btn class="success final-delivery-confirm-btn" @click="acceptDelivery()"> <v-icon>mdi-file-send-outline</v-icon> &nbsp; Ja, Dat is goed <v-spacer></v-spacer></v-btn>
                     <v-btn @click="acceptModal = !acceptModal" class="error"> <v-icon>mdi-close</v-icon> &nbsp; Annuleren <v-spacer></v-spacer></v-btn>
                 </template>
             </modal> 
